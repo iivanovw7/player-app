@@ -1,0 +1,56 @@
+/**
+ * Module contains `Profile` component.
+ * @module src/features/Profiles/Profile/Profile
+ */
+import type { TProfile } from '#/api/basic-api';
+import { Icon, Img, LinkButton, type LinkButtonProps } from '@/shared/ui/components';
+
+import { styles } from './Profile.css';
+
+export type ProfileProps = Pick<LinkButtonProps, 'onClick'> & {
+    onLoaded: () => void;
+    profile: TProfile
+};
+
+/**
+ * `Profile` component.
+ * @constructor
+ * @name src/features/Profiles/Profile/Profile
+ * @method
+ * @param {ProfileProps} props - contains component props.
+ * @return {JSXElement} React component with children.
+ */
+export const Profile = (props: ProfileProps) => {
+    const [locked, setLocked] = createSignal(false);
+
+    createEffect(() => {
+        setLocked(Boolean(props.profile.lock));
+    });
+
+    return (
+        <li class={styles.profile({ locked: locked() })}>
+            <LinkButton
+                class={styles.profileLink}
+                onClick={props.onClick}
+            >
+                <Img
+                    alt="avatar"
+                    class={styles.profileImageBox}
+                    imageClass={styles.profileImage}
+                    src={props.profile.avatar}
+                    onLoad={() => props.onLoaded()}
+                />
+                <span class={styles.profileName}>
+                    {props.profile.name}
+                </span>
+            </LinkButton>
+            {locked() && (
+                <Icon
+                    class={styles.profileIconBox}
+                    iconsClass={styles.profileIcon}
+                    name="lock"
+                />
+            )}
+        </li>
+    );
+};

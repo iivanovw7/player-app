@@ -1,0 +1,50 @@
+{
+    "name": "vite-config",
+    "version": "1.0.0",
+    "private": true,
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.mjs",
+            "require": "./dist/index.cjs"
+        }
+    },
+    "main": "./dist/index.cjs",
+    "module": "./dist/index.mjs",
+    "types": "./dist/index.d.ts",
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "clean": "pnpm rimraf .turbo node_modules dist",
+        "lint": "pnpm eslint .",
+        "stub": "pnpm unbuild --stub"
+    },
+    "dependencies": {
+        "@types/node": "18.15.11",
+        "vite": "4.2.1"
+    },
+    "devDependencies": {
+        "@types/node": "18.15.11",
+        "@vanilla-extract/vite-plugin": "3.8.0",
+        "@vitejs/plugin-basic-ssl": "1.0.1",
+        "vite-plugin-solid": "2.7.0",
+        "@vitest/coverage-istanbul": "0.29.8",
+        "autoprefixer": "10.4.14",
+        "postcss": "8.4.21",
+        "postcss-100vh-fix": "1.0.2",
+        "postcss-normalize": "10.0.1",
+        "postcss-preset-env": "7.8.3",
+        "rollup-plugin-visualizer": "5.9.0",
+        "unbuild": "1.2.0",
+        "unplugin-auto-import": "0.15.2",
+        "vite": "4.2.1",
+        "vite-imagetools": "4.0.18",
+        "vite-plugin-compression": "0.5.1",
+        "vite-plugin-dynamic-import": "1.2.7",
+        "vite-plugin-eslint": "1.8.1",
+        "vite-plugin-fonts": "0.7.0",
+        "vite-plugin-html": "3.2.0",
+        "vite-plugin-svg-icons": "2.0.1"
+    }
+}

@@ -1,0 +1,93 @@
+/**
+ * Module contains `Profiles` selector component.
+ * @module src/features/Profiles/Profiles
+ */
+import type { TProfile } from '#/api/basic-api';
+import { ProfileLock } from '@/entities';
+import {
+    isValidCode,
+    profilesStore,
+    Button,
+    type LinkButtonProps,
+} from '@/shared';
+
+import { styles } from './Profiles.css';
+import { Profile } from './ui';
+
+const MESSAGES = {
+    button: 'Manage Profiles',
+    title: "Who's watching?"
+};
+
+/**
+ * `Profiles` selector component.
+ * @constructor
+ * @name src/features/Profiles/Profiles
+ * @method
+ * @return {JSXElement} React component with children.
+ */
+export const Profiles = () => {
+    const [loaded, setLoaded] = createSignal(false);
+    const [profile, setProfile] = createSignal<Nullable<TProfile>>(null);
+
+    /**
+     * Click handler
+     * @param {TProfile} newProfile - new profile to unlock.
+     * @return {Function} profile unlock method.
+     */
+    const handleClick = (newProfile: TProfile): LinkButtonProps['onClick'] => async () => {
+        const { lock } = newProfile;
+
+        if (lock && isValidCode(lock)) {
+            setProfile(newProfile);
+        }
+        else {
+            setProfile(null);
+            await profilesStore.actions.changeUserProfile(newProfile);
+        }
+    };
+
+    /**
+     *  Unlocks user profile.
+     */
+    const handleProfileUnlock = async () => {
+        await profilesStore.actions.changeUserProfile(profile());
+    };
+
+    return (
+        <div class={styles.page}>
+            <div class={styles.pageContent}>
+                <div class={styles.pageContainer({ loaded: loaded() })}>
+                    <div class={styles.pageBox}>
+                        <h1 class={styles.pageBoxTitle}>
+                            {MESSAGES.title}
+                        </h1>
+                        <ul class={styles.pageBoxList}>
+                            <For each={profilesStore.state.options}>
+                                {(profileOption) => (
+                                    <Profile
+                                        profile={profileOption}
+                                        onClick={handleClick(profileOption)}
+                                        onLoaded={() => setLoaded(true)}
+                                    />
+                                )}
+                            </For>
+                        </ul>
+                        <div class={styles.pageBoxFooter}>
+                            <Button
+                                class={styles.pageButton}
+                                text={MESSAGES.button}
+                                textClass={styles.pageButtonText}
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ProfileLock
+                profile={profile()}
+                setProfile={setProfile}
+                onSuccess={handleProfileUnlock}
+            />
+        </div>
+    );
+};

@@ -1,0 +1,97 @@
+{
+    "name": "player-app",
+    "version": "1.0.0",
+    "description": "OTT media service website",
+    "directories": {
+        "assets": "assets",
+        "internal": "internal",
+        "types": "types",
+        "build": "build",
+        "src": "src",
+        "test": "test"
+    },
+    "main": "src/main.tsx",
+    "scripts": {
+        "bootstrap": "pnpm install",
+        "build": "NODE_ENV=production pnpm vite build",
+        "build:analyze": "pnpm vite build --mode analyze",
+        "build:view": "pnpm run build && pnpm run view",
+        "commit": "git-cz",
+        "clean": "rimraf pnpm-lock.yaml && rimraf package.lock.json && rimraf node_modules",
+        "clean:cache": "pnpm clean:cache",
+        "dev": "pnpm vite",
+        "dev:test-server": "cd apps && cd test-rest-server && pnpm start",
+        "lint": "turbo lint",
+        "lint:eslint": "eslint --cache --max-warnings 0 \"{src,test}/**/*.{ts,tsx}\" --fix",
+        "pre-commit": "turbo lint && npm run lint:eslint",
+        "preinstall": "npx only-allow pnpm",
+        "prepare": "npx simple-git-hooks",
+        "postinstall": "turbo run stub",
+        "reinstall": "pnpm run clean && pnpm run bootstrap",
+        "test": "vitest",
+        "test:coverage": "vitest run --coverage",
+        "test:watch": "vitest watch",
+        "view": "vite preview"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "config": {
+        "commitizen": {
+            "path": "node_modules/cz-git",
+            "useEmoji": true
+        }
+    },
+    "simple-git-hooks": {
+        "pre-commit": "pnpm run pre-commit"
+    },
+    "devDependencies": {
+        "@babel/core": "7.21.4",
+        "@babel/eslint-parser": "7.21.3",
+        "@babel/eslint-plugin": "7.19.1",
+        "@babel/preset-env": "7.21.4",
+        "@babel/preset-typescript": "7.21.4",
+        "@player-app/eslint-config": "workspace:*",
+        "@types/node": "18.15.11",
+        "@types/ramda": "0.29.0",
+        "browserslist": "4.21.5",
+        "cz-git": "1.6.1",
+        "eslint": "8.37.0",
+        "eslint-config-iivanovw7": "github:iivanovw7/eslint-config-iivanovw7",
+        "jsdom": "21.1.1",
+        "rimraf": "5.0.0",
+        "simple-git-hooks": "2.8.1",
+        "ts-config": "workspace:*",
+        "turbo": "1.9.1",
+        "typescript": "5.0.4",
+        "vite": "4.2.1",
+        "vite-config": "workspace:*",
+        "vitest": "0.30.1"
+    },
+    "dependencies": {
+        "@floating-ui/dom": "1.2.6",
+        "@kobalte/core": "0.8.2",
+        "@kobalte/vanilla-extract": "0.3.0",
+        "@solid-primitives/storage": "1.3.9",
+        "@solid-primitives/utils": "6.1.0",
+        "@solidjs/router": "0.8.2",
+        "@vanilla-extract/css": "1.11.0",
+        "@vanilla-extract/css-utils": "0.1.3",
+        "@vanilla-extract/dynamic": "2.0.3",
+        "@vanilla-extract/recipes": "0.4.0",
+        "axios": "1.3.5",
+        "dashjs": "4.6.0",
+        "loglevel": "1.8.1",
+        "polished": "4.2.2",
+        "ramda": "0.29.0",
+        "solid-floating-ui": "0.2.1",
+        "solid-js": "1.7.3",
+        "solidjs-use": "2.0.0",
+        "yup": "1.1.0"
+    },
+    "packageManager": "pnpm@8.1.0",
+    "engines": {
+        "node": ">=16.15.1",
+        "pnpm": ">=8.1.0"
+    }
+}
