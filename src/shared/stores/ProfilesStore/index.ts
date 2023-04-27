@@ -21,6 +21,7 @@ declare global {
 
 type ProfilesSoreState = {
     active: Nullable<TProfile>;
+    availableOptions: Array<TProfile>;
     options: Array<TProfile>;
 };
 
@@ -45,10 +46,18 @@ const getProfiles = pipe(path<TProfile[]>(['data', 'result', 'data']), defaultTo
  *  @return {ProfilesSore} store, containing state and action.
  */
 const createProfilesStore = (): ProfilesSore => {
+    let availableOptions: Accessor<TProfile[]>;
+
     const [state, setState] = createStore<ProfilesSoreState>({
         active: getLocalProfile(),
+        /** Available options getter. */
+        get availableOptions() {
+            return availableOptions();
+        },
         options: [],
     });
+
+    availableOptions = createMemo(() => state.options.filter(({ id }) => id !== state.active?.id));
 
     /**
      *  Sets new user`s profiles.
@@ -152,3 +161,4 @@ const createProfilesStore = (): ProfilesSore => {
 };
 
 export const profilesStore = createRoot(createProfilesStore);
+

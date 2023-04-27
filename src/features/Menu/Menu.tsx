@@ -48,7 +48,7 @@ export const Menu = (props: MenuProps) => {
                 toggle: styles.menuToggle,
             }}
             items={[
-                ...profilesStore.state.options.map((profile: TProfile) => ({
+                ...profilesStore.state.availableOptions.map((profile: TProfile) => ({
                     children: (
                         profile.lock && (
                             <Icon

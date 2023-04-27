@@ -4,7 +4,7 @@
  */
 import { useNavigate } from '@solidjs/router';
 
-import { getErrorCodeString, type ErrorData } from '@/shared';
+import { type ErrorData, getErrorCodeString } from '@/shared';
 import { Button } from '@/shared/ui/components';
 import { routePath } from '@/shared/ui/routes';
 

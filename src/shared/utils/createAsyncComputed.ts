@@ -1,3 +1,8 @@
+/**
+ * Module contains create async computed utility.
+ * @module src/shared/utils/createAsyncComputed
+ */
+
 import { createComputed } from 'solid-js';
 
 /**

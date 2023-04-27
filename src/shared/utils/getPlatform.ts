@@ -1,3 +1,8 @@
+/**
+ * Module contains platform utilities.
+ * @module src/shared/utils/getPlatform
+ */
+
 export type NavigatorUAData = {
     brands: Array<{brand: string; version: string}>;
     mobile: boolean;

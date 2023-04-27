@@ -2,17 +2,15 @@
  * Module contains `ProfileLock` component.
  * @module src/entities/ProfileLock/ProfileLock
  */
-import { Dialog } from '@kobalte/core';
-
 import type { TProfile } from '#/api/basic-api';
-import { Button, KeyMap } from '@/shared';
+import { KeyMap, Dialog } from '@/shared';
 
 import { PIN_LENGTH } from './constants';
 import { useProfileState, withProfileStore } from './model';
 import { styles } from './ProfileLock.css';
 import { PinField } from './ui/PinField';
 
-export type ProfileLockProps = Pick<Dialog.DialogRootProps, 'onOpenChange'> & {
+export type ProfileLockProps = {
     onSuccess: () => Promise<void>;
     profile: Nullable<TProfile>;
     setProfile: (profile: Nullable<TProfile>) => void;
@@ -89,58 +87,46 @@ export const ProfileLock = withProfileStore((props: ProfileLockProps) => {
     });
 
     return (
-        <Dialog.Root isOpen={!! props.profile} isModal>
-            <Dialog.Portal>
-                <Dialog.Content class={styles.modalPaper}>
-                    <div class={styles.modalContent}>
-                        <Button
-                            class={styles.modalClose}
-                            icon={{
-                                'class': styles.modalCloseIconBox,
-                                iconsClass: styles.modalCloseIcon,
-                                name: 'cross',
-                            }}
-                            onClick={() => props.setProfile(null)}
-                        />
-                        <p class={styles.modalStatus}>
-                            {MESSAGES.status}
-                        </p>
-                        <h3
-                            class={styles.modalTitle({
-                                error: state.isPinError
-                            })}
-                        >
-                            {MESSAGES[state.isPinError
-                                ? 'errorTitle'
-                                : 'title']}
-                        </h3>
-                        <div class={styles.pinPad}>
-                            <div
-                                class={styles.pinPadContainer({
-                                    error: state.isPinError
-                                })}
-                            >
-                                <For each={state.pin}>
-                                    {(pinNumber, pinNumberIndex) => (
-                                        <PinField
-                                            fieldRefs={fieldRefs}
-                                            setFieldsRefs={setFieldsRefs}
-                                            pinNumber={pinNumber}
-                                            pinNumberIndex={pinNumberIndex()}
-                                            onKeyDown={handleKeyDown(pinNumberIndex)}
-                                            onPinNumberChange={handlePinNumberChange}
-                                            onSetPinValidation={actions.setPinValidation}
-                                        />
-                                    )}
-                                </For>
-                            </div>
-                        </div>
-                        <p class={styles.modalValidation}>
-                            {state.pinValidation}
-                        </p>
-                    </div>
-                </Dialog.Content>
-            </Dialog.Portal>
-        </Dialog.Root>
+        <Dialog
+            classes={{
+                close: styles.dialogClose,
+                closeIcon: styles.dialogCloseIcon,
+                closeIconBox: styles.dialogCloseIconBox,
+                content: styles.dialogContent,
+                paper: styles.dialogPaper
+            }}
+            isOpen={!! props.profile}
+            onClose={() => props.setProfile(null)}
+            isModal
+        >
+            <p class={styles.dialogStatus}>
+                {MESSAGES.status}
+            </p>
+            <h3 class={styles.dialogTitle({ error: state.isPinError })}>
+                {MESSAGES[state.isPinError
+                    ? 'errorTitle'
+                    : 'title']}
+            </h3>
+            <div class={styles.pinPad}>
+                <div class={styles.pinPadContainer({ error: state.isPinError })}>
+                    <For each={state.pin}>
+                        {(pinNumber, pinNumberIndex) => (
+                            <PinField
+                                fieldRefs={fieldRefs}
+                                setFieldsRefs={setFieldsRefs}
+                                pinNumber={pinNumber}
+                                pinNumberIndex={pinNumberIndex()}
+                                onKeyDown={handleKeyDown(pinNumberIndex)}
+                                onPinNumberChange={handlePinNumberChange}
+                                onSetPinValidation={actions.setPinValidation}
+                            />
+                        )}
+                    </For>
+                </div>
+            </div>
+            <p class={styles.dialogValidation}>
+                {state.pinValidation}
+            </p>
+        </Dialog>
     );
 });

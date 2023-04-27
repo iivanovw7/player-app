@@ -3,7 +3,12 @@
  * @module src/shared/utils/http
  */
 
-/** @description: request method */
+/**
+ * Request method.
+ * @readonly
+ * @name RequestMethod
+ * @enum {Record.<string, string>}
+ */
 export const RequestMethod = {
     DELETE: 'DELETE',
     GET: 'GET',
@@ -13,7 +18,12 @@ export const RequestMethod = {
 
 export type RequestMethod = typeof RequestMethod[keyof typeof RequestMethod];
 
-/** @description: contentType */
+/**
+ * ContentType.
+ * @readonly
+ * @name ContentType
+ * @enum {Record.<string, string>}
+ */
 export const ContentType = {
     FORM_DATA: 'multipart/form-data;charset=UTF-8',
     FORM_URLENCODED: 'application/x-www-form-urlencoded;charset=UTF-8',

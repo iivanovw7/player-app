@@ -64,12 +64,7 @@ declare global {
         window?: Window
     };
 
-    export type Store<State extends object, Actions extends object> = {
-        actions: Actions;
-        state: State;
-    };
-
-    export type AnyStore = Store<any, any>;
+    export type AnyStore = { actions: object, state: object };
 
     /** Represents any function. */
     type AnyFunction = (...args: any[]) => any;

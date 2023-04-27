@@ -79,34 +79,3 @@ export const Navigation = () => {
         </Switch>
     );
 };
-
-/*
-<DropdownMenu
-                    classes={{
-                        arrowFloating: styles.menuArrowFloating,
-                        arrowToggle: styles.menuArrowToggle,
-                        item: styles.menuItem,
-                        items: styles.menuItems,
-                        menu: styles.menu,
-                        toggle: styles.menuToggle,
-                    }}
-                    items={menuItems.map(({ to, text, disabled }) => ({
-                        active: !! match(to),
-                        'class': styles.menuItemLink,
-                        disabled,
-                        text,
-                        textClass: styles.navLinkText,
-                        to,
-                        type: DropdownMenu.ItemType.navLink,
-                    }))}
-                    offset={{
-                        alignmentAxis: 6,
-                        mainAxis: 30
-                    }}
-                    placement="bottom"
-                    withArrowFloating
-                    withArrowToggle
-                >
-                    Browse
-                </DropdownMenu>
- */

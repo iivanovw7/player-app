@@ -3,38 +3,41 @@
  * @module scr/shared/style/components/Dialog/Dialog.css
  */
 import { style } from '@vanilla-extract/css';
+import { calc } from '@vanilla-extract/css-utils';
 import { recipe } from '@vanilla-extract/recipes';
-import { transitions } from 'polished';
+import { em, transitions } from 'polished';
 
 import { theme } from '../../theme.css';
 import { vars } from '../../vars.css';
+import { styles as buttonStyles } from '../Button';
 
-const modal = style({
-    display: 'contents'
-});
+const closeBtnOffset = 4;
 
-const modalDialogBackdrop = recipe({
-    base: {
-        alignItems: 'flex-start',
-        backgroundColor: theme.background['modal-backdrop-color'],
-        display: 'flex',
-        height: '100%',
-        inset: 0,
-        overflow: 'hidden scroll',
-        position: 'fixed',
-        zIndex: vars.zIndex.overlay,
+const dialogClose = style([
+    buttonStyles.button({
+        color: 'primary',
+        custom: true,
+        fill: 'none',
+    }),
+    {
+        position: 'absolute',
+        right: calc.add(vars.height.header, `${closeBtnOffset}px`),
+        top: calc.add(vars.height.header, `${closeBtnOffset}px`),
     },
-    defaultVariants: {
-        outerScroll: false
-    },
-    variants: {
-        outerScroll: {
-            'true': { maxHeight: 'none' }
-        },
-    },
-});
+]);
 
-const modalDialogPaper = recipe({
+const dialogCloseIconBox = style([
+    buttonStyles.buttonIcon(),
+]);
+
+const dialogCloseIcon = style([
+    {
+        height: 34,
+        width: 34
+    }
+]);
+
+const dialogContent = recipe({
     base: {
         backgroundColor: theme.background.global,
         borderRadius: vars.borderRadius['1x'],
@@ -85,8 +88,15 @@ const modalDialogPaper = recipe({
     },
 });
 
+const dialogPaper = style({
+    color: vars.theme.primary.text,
+    marginBottom: em(8),
+});
+
 export const styles = {
-    modal,
-    modalDialogBackdrop,
-    modalDialogPaper,
+    dialogClose,
+    dialogCloseIcon,
+    dialogCloseIconBox,
+    dialogContent,
+    dialogPaper
 };

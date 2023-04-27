@@ -14,7 +14,6 @@ export const ErrorCodeMap = {
     UNKNOWN_ERROR: 5000,
 } as const;
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
 export type ErrorCodeMap = Readonly<typeof ErrorCodeMap[keyof typeof ErrorCodeMap]>;
 
 export type ErrorData = Readonly<{

@@ -3,24 +3,16 @@
  * @module src/entities/ProfileLock/ProfileLock.css.ts
  */
 import { style } from '@vanilla-extract/css';
-import { calc } from '@vanilla-extract/css-utils';
 import { recipe } from '@vanilla-extract/recipes';
 import { animation, em, margin, position } from 'polished';
 
-import { vars, modalStyles, theme, buttonStyles, mixins } from '@/shared/ui/styles';
+import { vars, dialogStyles, theme, mixins } from '@/shared/ui/styles';
 
-const closeBtnOffset = 4;
-
-const modal = style([
-    modalStyles.modal,
+const dialogPaper = style([
+    dialogStyles.dialogPaper
 ]);
 
-const modalContent = style({
-    color: vars.theme.primary.text,
-    marginBottom: em(8),
-});
-
-const modalStatus = style([
+const dialogStatus = style([
     {
         '@media': {
             ...mixins.media(['lg-down'], {
@@ -35,8 +27,8 @@ const modalStatus = style([
     },
 ]);
 
-const modalPaper = style([
-    modalStyles.modalDialogPaper({
+const dialogContent = style([
+    dialogStyles.dialogContent({
         width: 'max'
     }),
     {
@@ -50,11 +42,7 @@ const modalPaper = style([
     position('absolute', 0, 0, 0, 0),
 ]);
 
-const modalBackdrop = style([
-    modalStyles.modalDialogBackdrop()
-]);
-
-const modalTitle = recipe({
+const dialogTitle = recipe({
     base: [
         {
             '@media': {
@@ -83,31 +71,19 @@ const modalTitle = recipe({
     },
 });
 
-const modalClose = style([
-    buttonStyles.button({
-        color: 'primary',
-        custom: true,
-        fill: 'none',
-    }),
-    {
-        position: 'absolute',
-        right: calc.add(vars.height.header, `${closeBtnOffset}px`),
-        top: calc.add(vars.height.header, `${closeBtnOffset}px`),
-    },
+const dialogClose = style([
+    dialogStyles.dialogClose
 ]);
 
-const modalCloseIconBox = style([
-    buttonStyles.buttonIcon(),
+const dialogCloseIconBox = style([
+    dialogStyles.dialogCloseIconBox
 ]);
 
-const modalCloseIcon = style([
-    {
-        height: 34,
-        width: 34
-    }
+const dialogCloseIcon = style([
+    dialogStyles.dialogCloseIcon
 ]);
 
-const modalValidation = style({
+const dialogValidation = style({
     '@media': {
         ...mixins.media(['lg-down'], {
             fontSize: '14px',
@@ -144,16 +120,14 @@ const pinPadContainer = recipe({
 });
 
 export const styles = {
-    modal,
-    modalBackdrop,
-    modalClose,
-    modalCloseIcon,
-    modalCloseIconBox,
-    modalContent,
-    modalPaper,
-    modalStatus,
-    modalTitle,
-    modalValidation,
+    dialogClose,
+    dialogCloseIcon,
+    dialogCloseIconBox,
+    dialogContent,
+    dialogPaper,
+    dialogStatus,
+    dialogTitle,
+    dialogValidation,
     pinPad,
     pinPadContainer
 };
