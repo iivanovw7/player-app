@@ -2,10 +2,15 @@
  * Module contains withLocalStore hoc.
  * @module src/shared/hoc/withLocalStore
  */
-export type UseLocalStore<T extends { actions: object, state: object }> = () => T;
+export type UseLocalStore<Store extends AnyStore> = () => Store;
 
-export type WithLocalStore = {
+export type WithLocalStoreProvider = {
     <Props>(Cmp: Component<Props>): (props: Props) => JSXElement;
+};
+
+type Result<Store extends AnyStore> = {
+    useLocalStore: UseLocalStore<Store>,
+    withLocalStoreProvider: WithLocalStoreProvider
 };
 
 /**
@@ -13,10 +18,7 @@ export type WithLocalStore = {
  * @param {Function} storeConstructor - local store constructor.
  * @return {Array} local store hook and provider.
  */
-export const withLocalStore = <Store extends { actions: object, state: object }>(storeConstructor: () => Store): [
-    UseLocalStore<Store>,
-    WithLocalStore
-] => {
+export const withLocalStore = <Store extends AnyStore>(storeConstructor: () => Store): Result<Store> => {
     const store = storeConstructor();
     const LocalStoreContext = createContext<Store>(store);
 
@@ -31,15 +33,15 @@ export const withLocalStore = <Store extends { actions: object, state: object }>
      * @param {Component} Cmp - component.
      * @return {Component} component
      */
-    const withProvider = (Cmp) => (props) => (
+    const withLocalStoreProvider = (Cmp) => (props) => (
         <LocalStoreContext.Provider value={store}>
             <Cmp {...props} />
         </LocalStoreContext.Provider>
     );
 
-    return [
+    return {
         useLocalStore,
-        withProvider
-    ];
+        withLocalStoreProvider
+    };
 };
 

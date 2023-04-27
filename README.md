@@ -1,6 +1,6 @@
 ## player-app
-
-Will OTT media service website.
+In development.
+Will contain OTT media service website.
 
 ---
 ### Table of Contents
@@ -19,6 +19,7 @@ Will OTT media service website.
 
 - [NodeJS v19.8.1](https://nodejs.org/en/)
 - [PNPM 8.x](https://pnpm.io/)
+- [nvm](https://github.com/nvm-sh/nvm) (*optional*)
 
 ---
 ### Libs
@@ -35,8 +36,7 @@ Technologies used
 ---
 ### Clone
 
-- Clone repository: <br />
-  `git clone https://github.com/iivanovw7/player-app.git` <br />
+`git clone https://github.com/iivanovw7/player-app.git` <br />
 
 ---
 ### Installation
@@ -44,15 +44,23 @@ Technologies used
 - Install pnpm. <br />
   `npm install --global pnpm`
 - Navigate into the application directory <br />
-  `cd netflix-home` <br />
+  `cd player-app` <br />
+- Setup node version manager environment <br />
+  `nvm use` (or `nvm install`)
+- Pre-install script <br />
+  `npm run preinstall` <br />
 - Installing setup modules: <br />
   `pnpm run bootstrap` <br />
+- Post-installing scripts: <br />
+  `pnpm run postinstall` <br />
 
 ---
 ### Development
 
 - Running in dev mode: <br />
   `pnpm run dev` <br />
+- Running dev rest server (required for dev & view) <br />
+  `pnpm run dev:test-server` <br />
 - Create production build: <br />
   `pnpm run build` <br />
 - Create production build with bundle analyzer report <br />
@@ -78,7 +86,7 @@ Technologies used
 - Complete reinstall <br />
   `pnpm run reinstall` <br />
 - Create ne commit via `cz-git` <br />
-  `pnpm run commit`
+  `pnpm run commit` <br />
 - Install package in a workspace <br />
   `pnpm install --save-dev -E unbuild --filter vite-config` <br />
 
@@ -87,29 +95,23 @@ Technologies used
 
 Contains information about main configuration files and folders.
 
-`./.nvmrc` -- contains current `Node.js` version.
+| Folder                      | Comment                                                               |
+|:----------------------------|:----------------------------------------------------------------------|
+| `./.nvmrc`                  | Contains current `Node.js` version.                                   |
+| `./assets`                  | Folder contains application resources (images, svg, fonts and etc...) |
+| `./apps/test-rest-server`   | Contains rest server with stubs.                                      |
+| `./internal/ts-config`      | Contains typescript configs.                                          |
+| `./internal/vite-config`    | Contains vite config files.                                           |
+| `./internal/eslint-config`  | Run ESLint and report styling error                                   |
+| `./src/**/*`                | Main application folder.                                              |
+| `./src/main.tsx`            | Entry point, renders application.                                     |
+| `./src/app`                 | Initializing the application (context, providers, etc...).            |
+| `./src/pages`               | Contains application pages.                                           |
+| `./src/entities`            | Contains business entities.                                           |
+| `./src/pages/routing`       | Contains application routing config.                                  |
+| `./src/shared`              | Reusable infrastructure code (UIKit, libs, API, ...).                 |
+| `./src/widgets`             | Complex page widgets, composing the underlying layers.                |
 
-`./assets` -- folder contains application resources (images, svg, fonts and etc...)
-
-`./internal/ts-config` -- contains typescript configs.
-
-`./internal/vite-config` -- contains vite config files.
-
-`./src/**/*` -- main application folder.
-
-`./src/main.tsx` -- entry point, renders application.
-
-`./src/app` -- initializing the application (context, providers, etc...).
-
-`./src/pages` -- contains application pages.
-
-`./src/entities` -- contains business entities.
-
-`./src/pages/routing` -- contains application routing config.
-
-`./src/shared` -- reusable infrastructure code (UIKit, libs, API, ...).
-
-`./src/widgets` -- complex page widgets, composing the underlying layers.
 
 ---
 ### ToDo
@@ -117,10 +119,13 @@ Contains information about main configuration files and folders.
 - ~~Setup vite for prod and dev, setup loaders and npm scripts.~~ <br/>
 - ~~Setup linting~~ <br/>
 - Test production view script. <br/>
+- Add graphql test server <br />
+- Restore playable banner component <br />
+- Setup components unit tests <br />
+- Setup test dedicated lint config <br />
 - ~~Configure js/ts linter.~~ <br/>
 - ~~Global spinner~~ <br/>
 - Global loader ?? <br/>
-- ~~Setup unit tests~~ <br />
 - Setup integration tests <br />
 - Setup e2e tests <br />
 - Browse page: Header controls <br/>

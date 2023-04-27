@@ -1,6 +1,6 @@
 /**
  * Module contains environment related utils.
- * @module src/shared/utils/env
+ * @module src/shared/utils/lazyImport
  */
 
 import { isString } from './lang';

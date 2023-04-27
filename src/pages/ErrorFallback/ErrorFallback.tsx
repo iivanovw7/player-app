@@ -26,7 +26,7 @@ export type ErrorFallbackProps = {
  */
 export const ErrorFallback = (props: ErrorFallbackProps) => (
     <div class={styles.page}>
-        <Header/>
+        <Header />
         <ErrorScreen
             class={styles.content}
             error={props.error}

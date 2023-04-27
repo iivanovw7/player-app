@@ -1,6 +1,6 @@
 /**
  * Module contains utility functions related to events.
- * @module src/shared/utils/object
+ * @module src/shared/utils/object/event
  */
 
 type TTarget = Window | Document | HTMLElement | EventTarget;

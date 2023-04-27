@@ -2,6 +2,7 @@
  * Module contains number round util.
  * @module src/shared/utils/math/round
  */
+
 import { bind, curryN } from 'ramda';
 
 /**

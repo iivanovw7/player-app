@@ -137,6 +137,9 @@ export const createProfileLockStore = (): CreateProfileLockStore => {
     };
 };
 
-export const [useProfileState, withProfileStore] = withLocalStore<CreateProfileLockStore>(
+export const {
+    useLocalStore: useProfileState,
+    withLocalStoreProvider: withProfileStore
+} = withLocalStore<CreateProfileLockStore>(
     createProfileLockStore
 );
