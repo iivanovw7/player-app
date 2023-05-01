@@ -3,6 +3,7 @@
     "version": "1.0.0",
     "description": "OTT media service website",
     "directories": {
+        "apps": "apps",
         "assets": "assets",
         "internal": "internal",
         "types": "types",
@@ -51,7 +52,6 @@
         "@babel/eslint-plugin": "7.19.1",
         "@babel/preset-env": "7.21.4",
         "@babel/preset-typescript": "7.21.4",
-        "@graphql-typed-document-node/core": "3.2.0",
         "@player-app/eslint-config": "workspace:*",
         "@types/node": "18.15.11",
         "@types/ramda": "0.29.0",
