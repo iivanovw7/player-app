@@ -6,7 +6,7 @@ import cors from 'koa2-cors';
 
 import routes from './routes';
 
-const PORT = 3300;
+const PORT = 3400;
 const app = new Koa();
 const router = new Router();
 

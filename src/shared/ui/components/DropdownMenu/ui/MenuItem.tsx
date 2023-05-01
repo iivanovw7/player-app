@@ -2,22 +2,21 @@
  * Module contains MenuItem element.
  * @module src/shared/ui/components/DropdownMenu/ui/MenuItem
  */
-import type { Size } from '#/styles';
+import { DropdownMenu as Dropdown } from '@kobalte/core';
+import { useNavigate } from '@solidjs/router';
 
-import { KeyMap, setEventValue } from '../../../../utils';
-import type { ButtonProps } from '../../Button';
-import { Button } from '../../Button';
-import type { LinkProps, LinkButtonProps } from '../../Link';
-import { Link, LinkButton } from '../../Link';
+import type { LinkButtonProps, LinkProps } from '../../Link';
+import { LinkButton } from '../../Link';
 import type { NavLinkProps } from '../../NavLink';
 import { NavLink } from '../../NavLink';
 import { ItemType } from '../constants';
 
 export type MenuItemBase<Type extends ItemType> = {
-    active?: boolean;
     class?: string;
-    disabled?: boolean;
-    onClick?: (eventData: Event) => void;
+    isActive?: boolean;
+    isDisabled?: boolean;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    onSelect?: (value: any) => void;
     style?: JSX.CSSProperties;
     text?: JSXElement;
     type: Type;
@@ -25,20 +24,25 @@ export type MenuItemBase<Type extends ItemType> = {
     value?: any;
 };
 
-// eslint-disable-next-line max-len
-export type MenuItemButton = MenuItemBase<'button'> & ButtonProps;
-export type MenuItemLink = MenuItemBase<'link'> & LinkProps;
-export type MenuItemLinkButton = MenuItemBase<'link-button'> & LinkButtonProps;
-export type MenuItemNavLink = MenuItemBase<'navLink'> & NavLinkProps;
-export type MenuItemDivider = Omit<MenuItemBase<'divider'>, 'onClick' | 'disabled' | 'active' | 'text'>;
-export type TMenuItem = MenuItemButton | MenuItemLink | MenuItemDivider | MenuItemNavLink | MenuItemLinkButton;
+export type MenuItemButton = MenuItemBase<'button'> & Omit<
+LinkButtonProps, 'onClick' | 'disabled' | 'dataActive'
+>;
+
+export type MenuItemDivider = Omit<
+MenuItemBase<'divider'>, 'onClick' | 'disabled' | 'active' | 'text'
+>;
+
+export type MenuItemNavLink = MenuItemBase<'navLink'> & Omit<
+LinkProps, 'onClick' | 'disabled' | 'dataActive'
+>;
+
+export type TMenuItem = MenuItemButton | MenuItemDivider | MenuItemNavLink;
 
 export type MenuItemProps = {
     class?: string;
     dataActive?: boolean;
     item: TMenuItem;
-    itemSize?: Size;
-    onItemClick?: (eventData: Event) => void;
+    onSelect?: () => void;
 };
 
 /**
@@ -50,67 +54,54 @@ export type MenuItemProps = {
  * @return {JSXElement} React component with children.
  */
 export const MenuItem = (props: MenuItemProps) => {
-    // eslint-disable-next-line require-jsdoc
-    const isDivider = () => props.item.type === ItemType.divider;
+    const navigate = useNavigate();
 
-    // eslint-disable-next-line require-jsdoc
-    const itemClass = () => (isDivider()
-        ? ''
-        : props.class);
+    /**
+     * Is `not` divider item.
+     * @return {boolean} is current item is not divider.
+     */
+    const isNotDivider = () => props.item.type !== ItemType.divider;
 
     /**
      * Item click handler.
-     * @param {MouseEvent} baseEvent - base event data.
      */
-    const handleClick = (baseEvent: MouseEvent) => {
-        const eventData = setEventValue(baseEvent, props.item.value);
+    const handleSelect = () => {
+        if (! props.item.isDisabled && ! props.item.isActive) {
+            props.item.onSelect?.(props.item.value);
 
-        (props.item as MenuItemButton).onClick?.(eventData);
-        props.onItemClick?.(eventData);
-    };
-
-    /**
-     * Keydown handler.
-     * @param {MouseEvent} baseEvent - base event data.
-     */
-    const handleKeyDown = (baseEvent: KeyboardEvent) => {
-        const eventData = setEventValue(baseEvent, props.item.value);
-
-        switch (baseEvent.key) {
-            case KeyMap.Enter: {
-                (props.item as MenuItemButton).onClick?.(eventData);
-                props.onItemClick?.(eventData);
-                break;
-            }
-            default: {
-                break;
+            if (props.item.type === ItemType.navLink) {
+                navigate((props.item as NavLinkProps).href);
             }
         }
     };
 
     return (
-        <li class={itemClass()}>
-            <Switch>
-                <Match when={isDivider()}>
-                    <li class={props.item.class}/>
-                </Match>
-                <Match when={props.item.type === ItemType.link}>
-                    <Link {...props.item as LinkProps} />
-                </Match>
-                <Match when={props.item.type === ItemType.linkButton}>
-                    <LinkButton {...props.item as LinkButtonProps} />
-                </Match>
-                <Match when={props.item.type === ItemType.navLink}>
-                    <NavLink {...props.item as NavLinkProps} />
-                </Match>
-                <Match when={props.item.type === ItemType.button}>
-                    <Button
-                        {...props.item as ButtonProps}
-                        onClick={handleClick}
-                        onKeyDown={handleKeyDown}
-                    />
-                </Match>
-            </Switch>
-        </li>
+        <Show
+            when={isNotDivider()}
+            fallback={<Dropdown.Separator class={props.item.class} />}
+        >
+            <Dropdown.Item
+                isDisabled={props.item.isDisabled}
+                onSelect={handleSelect}
+                class={props.class}
+                closeOnSelect
+            >
+                <Switch>
+                    <Match when={props.item.type === ItemType.navLink}>
+                        <NavLink
+                            {...props.item as NavLinkProps}
+                            disabled={props.item.isDisabled}
+                        />
+                    </Match>
+                    <Match when={props.item.type === ItemType.button}>
+                        <LinkButton
+                            {...props.item as LinkButtonProps}
+                            dataActive={props.item.isActive}
+                            disabled={props.item.isDisabled}
+                        />
+                    </Match>
+                </Switch>
+            </Dropdown.Item>
+        </Show>
     );
 };

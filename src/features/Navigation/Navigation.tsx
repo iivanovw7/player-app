@@ -27,7 +27,7 @@ export const Navigation = () => {
      * @param {string} path - path to be matched with.
      * @return {Accessor<PathMatch | undefined>} router match result.
      */
-    const match = (path: string) => useMatch(() => path);
+    const match = (path: string) => useMatch(() => path)();
 
     return (
         <Switch>
@@ -42,19 +42,17 @@ export const Navigation = () => {
                         toggle: styles.menuToggle,
                     }}
                     items={menuItems.map(({ to, text, disabled }) => ({
-                        active: !! match(to),
                         'class': styles.menuItemLink,
-                        disabled,
                         href: to,
+                        isActive: !! match(to),
+                        isDisabled: disabled,
                         text,
                         textClass: styles.navLinkText,
                         type: DropdownMenu.ItemType.navLink,
                     }))}
-                    offset={{
-                        alignmentAxis: 10,
-                        mainAxis: 30
-                    }}
                     placement="bottom"
+                    gutter={10}
+                    shift={30}
                     withArrowFloating
                     withArrowToggle
                 >

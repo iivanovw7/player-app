@@ -24,7 +24,9 @@ const navLinkBox = style({
 });
 
 const navLink = style([
-    navLinkStyles.link(),
+    navLinkStyles.link({
+        color: 'primary'
+    }),
     {
         fontSize: rem(20),
     }
@@ -50,6 +52,7 @@ const menuItem = style([
         fontSize: 13,
         height: 48,
         lineHeight: '24px',
+        padding: rem(8),
         textAlign: 'center',
     }
 ]);

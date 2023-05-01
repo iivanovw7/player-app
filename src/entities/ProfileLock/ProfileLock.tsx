@@ -84,6 +84,10 @@ export const ProfileLock = withProfileStore((props: ProfileLockProps) => {
 
     createEffect(() => {
         actions.setLock(props.profile?.lock || '');
+
+        if (props.profile) {
+            setTimeout(() => fieldRefs()[0]?.focus(), 100);
+        }
     });
 
     return (
@@ -97,6 +101,7 @@ export const ProfileLock = withProfileStore((props: ProfileLockProps) => {
             }}
             isOpen={!! props.profile}
             onClose={() => props.setProfile(null)}
+            withCloseButton
             isModal
         >
             <p class={styles.dialogStatus}>

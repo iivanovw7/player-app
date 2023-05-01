@@ -1,23 +1,12 @@
 /**
  * Project eslint config for `solid-js`.
- * @module internal/eslint-config/solid
+ * @module internal/eslint-config/test
  */
 
 export default {
     'extends': [
         '@player-app/eslint-config',
-        'iivanovw7/feature-sliced',
-        'iivanovw7/solid',
-    ],
-    overrides: [
-        {
-            'files': [
-                '*.css.ts'
-            ],
-            rules: {
-                '@typescript-eslint/no-magic-numbers': 'off',
-            },
-        }
+        'iivanovw7/test-vitest',
     ],
     rules: {
         'import/extensions': [

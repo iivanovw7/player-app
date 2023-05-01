@@ -134,12 +134,8 @@ const createProfilesStore = (): ProfilesSore => {
              * @param {Function} [setLoading] - set loading method.
              * @param {Function} [onRequestError] - set loading method.
              */
-            loadProfiles: async (
-                setLoading?: (isLoading: boolean) => void,
-                onRequestError?: (error: unknown) => void
-            ) => {
+            loadProfiles: async () => {
                 await makeApiRequest({
-                    onRequestError,
                     request: async () => {
                         const profiles: TProfile[] = getProfiles(
                             await profilesApi.getProfiles()
@@ -147,7 +143,6 @@ const createProfilesStore = (): ProfilesSore => {
 
                         updateOptions(profiles);
                     },
-                    setLoading
                 });
             },
             /** Removes users active profile. */

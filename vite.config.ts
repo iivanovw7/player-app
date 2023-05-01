@@ -13,7 +13,7 @@ export default getConfig({
                     changeOrigin: true,
                     rewrite: (path) => path.replace(/^\/basic-api/, ''),
                     secure: false,
-                    target: 'http://localhost:3300',
+                    target: 'http://localhost:3400',
                     ws: true,
                 }
             },

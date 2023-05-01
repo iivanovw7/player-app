@@ -101,7 +101,7 @@ export const dark = createTheme(theme, {
         );`,
         content: palette['grey-900'],
         contentAccent: palette['grey-50'],
-        dropdown: palette['grey-1200'],
+        dropdown: transparentize(0.3, palette['grey-1200']),
         'global': palette['grey-950'],
         header: `linear-gradient(
             180deg,

@@ -3,7 +3,7 @@
  * @module src/shared/style/components/DropdownMenu.css
  */
 
-import { style } from '@vanilla-extract/css';
+import { globalStyle, style } from '@vanilla-extract/css';
 import { rem, margin, padding, transitions, triangle } from 'polished';
 
 import { theme } from '../../theme.css';
@@ -19,11 +19,19 @@ const menu = style({
 });
 
 const menuArrowFloating = style({
-    backgroundColor: theme.background.contentAccent,
+    backgroundColor: 'transparent',
+    fill: 'transparent',
     pointerEvents: 'none',
-    position: 'absolute',
-    transform: 'rotate(45deg)',
+    stroke: 'none',
     zIndex: -1,
+});
+
+globalStyle(`${menuArrowFloating} path:first-of-type`, {
+    stroke: 'none',
+});
+
+globalStyle(`${menuArrowFloating} path:last-of-type`, {
+    fill: theme.background.contentAccent,
 });
 
 const menuArrowToggle = style({
@@ -45,7 +53,7 @@ const menuArrowToggle = style({
 const menuItemBox = style([
     {
         fontSize: 13,
-        minHeight: 36,
+        minHeight: 48,
     },
     padding(rem(8), rem(6)),
 ]);
@@ -68,6 +76,7 @@ const menuItemLink = style([
 const menuItemDivider = style([
     {
         backgroundColor: theme.divider,
+        border: 'none',
         display: 'block',
         height: 1,
         width: '100%',
@@ -86,7 +95,7 @@ const menuItems = style([
         transformOrigin: 'center top',
         width: '100%',
     },
-    padding(rem(4), 0),
+    padding(rem(12), 0),
     margin(0)
 ]);
 

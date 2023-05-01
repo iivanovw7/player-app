@@ -78,7 +78,7 @@ Technologies used
 - Run all tests <br />
   `pnpm run test` <br />
 - Run all tests with verbose logger mode <br />
-  `pnpm run test --verbose` <br />
+  `pnpm test -- --reporter='verbose'` <br />
 - Run all tests with coverage report <br />
   `pnpm run test:coverage` <br />
 - Run all tests in watch mode <br />

@@ -2,30 +2,12 @@
  * Module contains DropdownMenu element.
  * @module src/shared/ui/components/DropdownMenu/DropdownMenu
  */
-
-import {
-    flip,
-    offset,
-    shift,
-    arrow,
-    autoUpdate,
-    type Strategy,
-    type Placement,
-} from '@floating-ui/dom';
-import { useFloating, type UseFloatingResult } from 'solid-floating-ui';
+import { DropdownMenu as Dropdown } from '@kobalte/core';
+import type { DropdownMenuRootProps } from '@kobalte/core/dist/types/dropdown-menu';
 import { useElementHover } from 'solidjs-use';
 
-import { capitalize, EventMap, offEvent, onEvent, env, noop } from '../../../utils';
-import { Button } from '../Button';
-
-import { ARROW_SIZE, ItemType, StaticSide, CLOSE_DELAY } from './constants';
+import { CLOSE_DELAY, ItemType, OPEN_DELAY } from './constants';
 import { MenuItems, type TMenuItem } from './ui';
-
-export type DropdownMenuRef = {
-    close: () => void;
-    isOpen: boolean;
-    open: () => void;
-};
 
 export type DropdownMenuProps = {
     children?: JSXElement[] | JSXElement;
@@ -38,29 +20,11 @@ export type DropdownMenuProps = {
         toggle?: string;
     },
     items: TMenuItem[];
-    offset?: {
-        alignmentAxis?: Pixels;
-        mainAxis?: Pixels;
-    },
     onClick?: () => void;
     onClose?: () => void;
-    /** @default 'bottom' */
-    placement?: Placement;
-    /** @default 'absolute' */
-    strategy?: Strategy;
     withArrowFloating?: boolean;
     withArrowToggle?: boolean;
-};
-
-export type TDropdownMenu = DropdownMenuProps & DropdownMenuRef & {
-    ItemType: typeof ItemType;
-    StaticSides: typeof StaticSide;
-};
-
-const {
-    POINTERMOVE,
-    KEYDOWN
-} = EventMap;
+} & Pick<DropdownMenuRootProps, 'shift' | 'placement' | 'gutter'>;
 
 /**
  * Creates `DropdownMenu` component.
@@ -73,97 +37,40 @@ const {
 export const DropdownMenu = (props: DropdownMenuProps) => {
     const [toggleRef, setToggleRef] = createSignal<HTMLButtonElement>();
     const [floatingRef, setFloatingRef] = createSignal<HTMLDivElement>();
-    const [arrowRef, setArrowRef] = createSignal<HTMLSpanElement>();
 
     const [isOpen, setIsOpen] = createSignal(false);
 
-    const [position, setPosition] = createSignal<UseFloatingResult>({
-        middlewareData: {},
-        placement: 'bottom-start',
-        strategy: 'absolute',
-        update: noop,
-        x: null,
-        y: null,
-    });
-
     const isToggleHovered = useElementHover(toggleRef, {
-        delayEnter: 200,
+        delayEnter: OPEN_DELAY,
         delayLeave: CLOSE_DELAY
     });
 
     const isFloatingHovered = useElementHover(floatingRef, {
-        delayEnter: 0,
+        delayEnter: OPEN_DELAY,
         delayLeave: CLOSE_DELAY
     });
 
-    // eslint-disable-next-line require-jsdoc
-    const handlePointerMove = ({ pointerType }: PointerEvent) => {
-        if (pointerType === 'mouse') {
-            // setAllowHover(true);
+    createEffect(() => {
+        if (isToggleHovered()) {
+            setIsOpen(true);
         }
-    };
-
-    // eslint-disable-next-line require-jsdoc
-    const handleKeyDown = () => {
-        // setAllowHover(false);
-    };
-
-    onMount(() => {
-        onEvent(window, KEYDOWN, handleKeyDown, true);
-        onEvent(window, POINTERMOVE, handlePointerMove as unknown as EventListener, {
-            capture: true,
-            once: true,
-        });
+        else if (! isFloatingHovered()) {
+            setIsOpen(false);
+        }
     });
-
-    onCleanup(() => {
-        offEvent(window, KEYDOWN, handleKeyDown, true);
-        offEvent(window, POINTERMOVE, handlePointerMove as unknown as EventListener, {
-            capture: true
-        });
-    });
-
-    createEffect(() => {
-        setIsOpen(isToggleHovered() || isFloatingHovered());
-    });
-
-    createEffect(() => {
-        setPosition(useFloating(toggleRef, floatingRef, {
-            middleware: [
-                offset(props.offset),
-                flip(),
-                shift(),
-                arrow({
-                    element: arrowRef()!
-                })
-            ],
-            placement: props.placement,
-            strategy: props.strategy,
-            whileElementsMounted: autoUpdate,
-        }));
-    });
-
-    /**
-     *  Floating side getter.
-     *  @return {string} side name
-     */
-    const side = () => props.placement?.split('-')[0];
-
-    /**
-     *  Floating static side getter.
-     *  @return {StaticSide} static side name
-     */
-    const staticSide = () => StaticSide[side() as StaticSide];
 
     return (
-        <div>
-            <Button
-                setRef={setToggleRef}
+        <Dropdown.Root
+            isOpen={isOpen()}
+            shift={props.shift}
+            placement={props.placement}
+            gutter={props.gutter}
+            onOpenChange={setIsOpen}
+            isModal={false}
+        >
+            <Dropdown.Trigger
                 class={props.classes.toggle}
-                onClick={(eventData) => {
-                    eventData.stopPropagation();
-                    props.onClick?.();
-                }}
+                ref={setToggleRef}
             >
                 {props.children}
                 <Show when={props.withArrowToggle}>
@@ -176,54 +83,28 @@ export const DropdownMenu = (props: DropdownMenuProps) => {
                         }}
                     />
                 </Show>
-            </Button>
-            <Portal mount={env.portal}>
-                <Show when={isOpen()}>
-                    <div
-                        ref={setFloatingRef}
-                        class={props.classes.menu}
-                        style={{
-                            left: `${String(position().x ?? 0)}px`,
-                            position: position().strategy,
-                            top: `${String(position().y ?? 0)}px`,
-                        }}
-                    >
-                        <MenuItems
-                            class={props.classes.items}
-                            items={props.items}
-                            menuItemClass={props.classes.item}
-                            style={{
-                                ...(staticSide() && {
-                                    [`padding${capitalize(staticSide())}`]: props.withArrowFloating
-                                        ? ARROW_SIZE
-                                        : 0
-                                })
-                            }}
+            </Dropdown.Trigger>
+            <Dropdown.Portal>
+                <Dropdown.Content
+                    ref={setFloatingRef}
+                    class={props.classes.menu}
+                >
+                    <MenuItems
+                        class={props.classes.items}
+                        items={props.items}
+                        menuItemClass={props.classes.item}
+                    />
+                    <Show when={props.withArrowFloating}>
+                        <Dropdown.Arrow
+                            id="floating-arrow"
+                            class={props.classes.arrowFloating}
+                            size={18}
                         />
-                        <Show when={props.withArrowFloating}>
-                            <span
-                                id="floating-arrow"
-                                ref={setArrowRef}
-                                class={props.classes.arrowFloating}
-                                style={{
-                                    bottom: '0px',
-                                    height: `${ARROW_SIZE}px`,
-                                    left: `${position().middlewareData.arrow?.x || 0}px`,
-                                    right: '0px',
-                                    top: `${position().middlewareData.arrow?.y || 0}px`,
-                                    width: `${ARROW_SIZE}px`,
-                                    ...(staticSide() && {
-                                        [staticSide()]: `-${ARROW_SIZE / 2}px`
-                                    })
-                                }}
-                            />
-                        </Show>
-                    </div>
-                </Show>
-            </Portal>
-        </div>
+                    </Show>
+                </Dropdown.Content>
+            </Dropdown.Portal>
+        </Dropdown.Root>
     );
 };
 
 DropdownMenu.ItemType = ItemType;
-DropdownMenu.StaticSides = StaticSide;
