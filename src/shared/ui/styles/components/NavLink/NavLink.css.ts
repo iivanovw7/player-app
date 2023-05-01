@@ -19,6 +19,9 @@ import { vars } from '../../vars.css';
 const getLinkColor = (type: Color) => ({
     color: theme[type].linkText,
     selectors: {
+        '&[data-active="true"]': {
+            color: theme[type].linkTextAccent,
+        },
         '&[data-disabled="true"]': {
             color: theme[type].linkTextDisabled,
             cursor: 'default',
@@ -43,7 +46,7 @@ const link = recipe({
         display: 'flex',
         justifyContent: 'center',
         selectors: {
-            '&[data-disabled="true"]': {
+            '&[data-disabled="true"], &[data-active="true"]': {
                 pointerEvents: 'none',
             },
         },

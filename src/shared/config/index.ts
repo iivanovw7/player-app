@@ -4,7 +4,7 @@
  */
 import { getConfig } from '@/shared/config/data';
 
-import { env } from '../utils';
+import { env } from '../utils/env';
 
 /**
  *  Changes config according to application running mode.

@@ -24,7 +24,7 @@ const { browse } = basePath;
  */
 export const routePath = {
     browse,
-    genre: `${browse}/genre/:genreId`,
+    genre: `${browse}/genre`,
     home: basePath.home,
     latest: `${browse}/latest`,
     list: `${browse}/list`,

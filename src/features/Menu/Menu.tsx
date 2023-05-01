@@ -66,10 +66,10 @@ export const Menu = (props: MenuProps) => {
                         size: 30,
                         src: profile.avatar,
                     },
-                    onClick: async () => props.onProfileClick(profile),
+                    onSelect: async () => props.onProfileClick(profile),
                     text: profile.name,
                     textClass: styles.menuLinkText,
-                    type: DropdownMenu.ItemType.linkButton,
+                    type: DropdownMenu.ItemType.button,
                 })),
                 {
                     'class': styles.menuDivider,
@@ -77,15 +77,13 @@ export const Menu = (props: MenuProps) => {
                 },
                 {
                     'class': styles.menuLogout,
-                    onClick: handleLogout,
+                    onSelect: handleLogout,
                     text: 'Sign out of Netflix',
-                    type: DropdownMenu.ItemType.linkButton,
+                    type: DropdownMenu.ItemType.button,
                 }
             ]}
-            offset={{
-                alignmentAxis: 6,
-                mainAxis: 16
-            }}
+            gutter={6}
+            shift={16}
             placement="bottom-start"
             withArrowToggle={mdUp()}
             withArrowFloating
@@ -95,9 +93,7 @@ export const Menu = (props: MenuProps) => {
                 class={styles.menuAvatar}
                 imageClass={styles.menuAvatarImage}
                 size={30}
-                src={withAvatarPlaceholder(
-                    profilesStore.state.active?.avatar
-                )}
+                src={withAvatarPlaceholder(profilesStore.state.active?.avatar)}
             />
         </DropdownMenu>
     );

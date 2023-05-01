@@ -2,12 +2,10 @@
  * Module contains DropdownMenu MenuItems element.
  * @module src/shared/ui/components/DropdownMenu/ui/MenuItem
  */
-import { noop } from '../../../../utils';
-
-import type { MenuItemProps, TMenuItem } from './MenuItem';
+import type { TMenuItem } from './MenuItem';
 import { MenuItem } from './MenuItem';
 
-export type MenuItemsProps = Pick<MenuItemProps, 'onItemClick'> & {
+export type MenuItemsProps = {
     class?: string;
     items?: TMenuItem[];
     menuItemClass?: string;
@@ -23,19 +21,15 @@ export type MenuItemsProps = Pick<MenuItemProps, 'onItemClick'> & {
  *
  * @return {JSXElement} React component with children.
  */
-export const MenuItems = (props: MenuItemsProps) => {
-    return (
-        <ul class={props.class} style={props.style}>
-            <For each={props.items}>
-                {(item) => (
-                    <MenuItem
-                        dataActive={false}
-                        item={item}
-                        class={props.menuItemClass}
-                        onItemClick={noop}
-                    />
-                )}
-            </For>
-        </ul>
-    );
-};
+export const MenuItems = (props: MenuItemsProps) => (
+    <ul class={props.class} style={props.style}>
+        <For each={props.items}>
+            {(item) => (
+                <MenuItem
+                    item={item}
+                    class={props.menuItemClass}
+                />
+            )}
+        </For>
+    </ul>
+);

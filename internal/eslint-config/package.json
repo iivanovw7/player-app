@@ -12,6 +12,11 @@
             "types": "./dist/solid.d.ts",
             "import": "./dist/solid.mjs",
             "require": "./dist/solid.cjs"
+        },
+        "./test": {
+            "types": "./dist/test.d.ts",
+            "import": "./dist/test.mjs",
+            "require": "./dist/test.cjs"
         }
     },
     "main": "./dist/index.cjs",

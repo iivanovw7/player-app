@@ -5,15 +5,11 @@
 
 import type { TProfile, TBasicApiListResult } from '#/api/basic-api';
 
-import { RequestMethod } from '../../../utils';
-import { http, type RequestParams } from '../http-client';
+import { http, type RequestParams } from './lib';
 
 export const profilesApi = {
-    getProfiles: async (params: RequestParams = {}) => {
-        return http.request<TBasicApiListResult<TProfile>, unknown>({
-            method: RequestMethod.GET,
-            path: '/basic-api/getProfiles',
-            ...params,
-        });
-    },
+    getProfiles: async (params: RequestParams = {}) => http.get<TBasicApiListResult<TProfile>>({
+        url: '/getProfiles',
+        ...params
+    })
 };

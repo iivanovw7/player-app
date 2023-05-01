@@ -58,6 +58,8 @@ declare global {
 
     type Voidable<T> = T | void | undefined;
 
+    type Recordable<T = any> = Record<string, T>;
+
     type UnwrapPromise<T extends Promise<any>> = T extends Promise<infer Data> ? Data : never;
 
     type ConfigurableWindow = {

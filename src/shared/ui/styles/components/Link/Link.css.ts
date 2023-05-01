@@ -19,7 +19,10 @@ import { vars } from '../../vars.css';
 const getColor = (type: Color) => ({
     color: theme[type].linkText,
     selectors: {
-        '&:not(&[data-disabled])&:hover, &:not(&[data-disabled])&:focus-visible': {
+        '&:not(&[data-disabled="true"])&:hover, &:not(&[data-disabled="true"])&:focus-visible': {
+            color: theme[type].linkTextAccent,
+        },
+        '&[data-disabled="false"]&[data-active="true"]': {
             color: theme[type].linkTextAccent,
         },
     }
