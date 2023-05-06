@@ -4,6 +4,3 @@
  */
 
 export * from './Header';
-export * from './ErrorScreen';
-export * from './WaitScreen';
-export * from './withProfileCheck';

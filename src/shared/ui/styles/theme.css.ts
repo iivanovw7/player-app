@@ -111,7 +111,7 @@ export const dark = createTheme(theme, {
         headerSolid: transparentize(0.1, palette['grey-1200']),
         modalBackdropColor: 'rgba(13, 28, 46, 0.4)',
         overlay: transparentize(0.18, palette.black),
-        overlayDark: transparentize(0.4, palette.black),
+        overlayDark: transparentize(0.05, palette.black),
     },
     border: palette['grey-850'],
     common: {

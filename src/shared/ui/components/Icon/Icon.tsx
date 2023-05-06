@@ -12,7 +12,7 @@ import { findOr } from '../../../utils';
 export type IconProps = {
     class?: string;
     height?: number;
-    iconsClass?: string;
+    iconClass?: string;
     name: string;
     ref?: Accessor<HTMLDivElement | undefined>;
     rotate?: number;
@@ -48,7 +48,7 @@ export const Icon = (props: IconProps) => (
         ref={props.ref}
         class={props.class}
     >
-        <svg aria-hidden="true" class={props.iconsClass}>
+        <svg aria-hidden="true" class={props.iconClass}>
             <use
                 /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
                 // @ts-ignore

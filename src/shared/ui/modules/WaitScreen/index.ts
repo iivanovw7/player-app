@@ -1,6 +1,6 @@
 /**
  * Module contains WaitScreen widget public API.
- * @module src/widgets/WaitScreen
+ * @module src/shared/ui/modules/WaitScreen
  */
 
 export * from './WaitScreen';

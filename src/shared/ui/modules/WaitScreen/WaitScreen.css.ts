@@ -1,11 +1,16 @@
 /**
  * Module contains wait screen component styles.
- * @module src/widgets/WaitScreen/WaitScreen.css
+ * @module src/shared/ui/modules/WaitScreen/WaitScreen.css
  */
 
 import { style } from '@vanilla-extract/css';
 
-import { mixins, theme, imgStyles, vars, spinnerStyles } from '@/shared/ui/styles';
+import { mixins, theme, imgStyles, vars, spinnerStyles } from '../../styles';
+
+const overlay = style({
+    background: theme.background.overlayDark,
+    zIndex: vars.zIndex.overlay
+});
 
 const spinner = style([
     spinnerStyles.spinner({
@@ -41,6 +46,7 @@ const avatarImage = style([
 export const styles = {
     avatar,
     avatarImage,
+    overlay,
     spinner,
     spinnerContainer,
     spinnerPath,

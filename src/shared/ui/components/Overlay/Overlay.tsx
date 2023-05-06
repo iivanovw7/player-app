@@ -7,6 +7,7 @@ import { getPlatform, env } from '../../../utils';
 
 export type OverlayProps = {
     children?: JSXElement[] | JSXElement;
+    class?: string;
     lockScroll?: boolean;
     ref?: Accessor<HTMLDivElement | undefined>;
 };

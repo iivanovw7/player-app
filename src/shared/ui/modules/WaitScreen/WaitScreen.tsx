@@ -1,9 +1,12 @@
 /**
  * Module contains `WaitScreen` modal component.
- * @module src/widgets/WaitScreen/WaitScreen
+ * @module src/shared/ui/modules/WaitScreen/WaitScreen
  */
+import { isNumber } from 'ramda-adjunct';
+
 import type { TProfile } from '#/api/basic-api';
-import { isNumber, Img, Spinner, Overlay } from '@/shared';
+
+import { Img, Spinner, Overlay } from '../../components';
 
 import { withAvatarPlaceholder } from './lib';
 import { styles } from './WaitScreen.css';
@@ -15,14 +18,14 @@ export type WaitScreenProps = {
 /**
  * Wait screen component.
  * @method
- * @name src/WaitScreen/ErrorScreen
+ * @name src/shared/ui/modules/WaitScreen/WaitScreen
  * @constructor
  * @param {WaitScreenProps} props - component properties.
  * @return {JSXElement} component with children.
  */
 export const WaitScreen = (props: WaitScreenProps) => {
     return (
-        <Overlay lockScroll>
+        <Overlay class={styles.overlay} lockScroll>
             <Spinner
                 class={styles.spinner}
                 containerClass={styles.spinnerContainer}

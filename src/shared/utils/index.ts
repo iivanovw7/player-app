@@ -18,3 +18,4 @@ export * from './validation';
 export * from './makeApiRequest';
 export * from './getPlatform';
 export * from './http';
+export * from './date';

@@ -47,7 +47,7 @@ export const Profile = (props: ProfileProps) => {
             {locked() && (
                 <Icon
                     class={styles.profileIconBox}
-                    iconsClass={styles.profileIcon}
+                    iconClass={styles.profileIcon}
                     name="lock"
                 />
             )}

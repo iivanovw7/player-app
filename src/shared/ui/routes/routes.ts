@@ -11,11 +11,12 @@
 export const basePath = {
     browse: '/browse',
     home: '/',
+    login: '/login',
     notFound: '/404',
-    search: '/search'
+    search: '/search',
 };
 
-const { browse } = basePath;
+const { browse, login, notFound, search, home } = basePath;
 
 /**
  * Application Route paths.
@@ -25,9 +26,10 @@ const { browse } = basePath;
 export const routePath = {
     browse,
     genre: `${browse}/genre`,
-    home: basePath.home,
+    home,
     latest: `${browse}/latest`,
     list: `${browse}/list`,
-    notFound: basePath.notFound,
-    search: basePath.search,
+    login,
+    notFound,
+    search,
 };

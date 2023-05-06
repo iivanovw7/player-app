@@ -1,12 +1,12 @@
 /**
  * Module contains ErrorScreen classes.
- * @module src/widgets/ErrorScreen/ErrorScreen.css
+ * @module src/shared/ui/modules/ErrorScreen/ErrorScreen.css
  */
 
 import { style } from '@vanilla-extract/css';
 import { em, padding } from 'polished';
 
-import { theme, buttonStyles, vars } from '@/shared/ui/styles';
+import { theme, buttonStyles, vars } from '../../styles';
 
 const title = style([
     {

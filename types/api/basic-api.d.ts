@@ -19,3 +19,12 @@ export type TProfile = {
     lock: Nullable<string>;
     name: string;
 };
+
+export type TLoginData = {
+    password: string;
+    username: string;
+};
+
+export type TLoginResult = {
+    accessToken: string;
+};

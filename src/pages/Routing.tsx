@@ -7,13 +7,17 @@ import { Routes, Route, Navigate } from '@solidjs/router';
 
 import { lazyImport, routePath } from '@/shared';
 
+import { PageRoute } from './PageRoute';
+
 const { Browse } = lazyImport(() => import('./Browse'));
+const { Login } = lazyImport(() => import('./Login'));
 const { NotFound } = lazyImport(() => import('./NotFound'));
 
 const {
     browse,
     home,
-    notFound
+    notFound,
+    login
 } = routePath;
 
 /**
@@ -25,8 +29,9 @@ const {
 export const Routing = () => {
     return (
         <Routes>
-            <Route component={Browse} path={browse} />
+            <PageRoute component={Browse} path={browse} />
             <Route component={NotFound} path={notFound} />
+            <Route component={Login} path={login} />
             <Route element={<Navigate href={browse} />} path={home} />
             <Route element={<Navigate href={notFound} />} path="/*" />
         </Routes>

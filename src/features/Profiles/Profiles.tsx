@@ -52,6 +52,7 @@ export const Profiles = () => {
      */
     const handleProfileUnlock = async () => {
         await profilesStore.actions.changeUserProfile(profile());
+        setProfile(null);
     };
 
     return (

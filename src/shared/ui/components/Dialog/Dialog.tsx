@@ -39,7 +39,7 @@ export const Dialog = (props: DialogProps) => (
                             class={props.classes.close}
                             icon={{
                                 'class': props.classes.closeIconBox,
-                                iconsClass: props.classes.closeIcon,
+                                iconClass: props.classes.closeIcon,
                                 name: 'cross',
                             }}
                             onClick={props.onClose}

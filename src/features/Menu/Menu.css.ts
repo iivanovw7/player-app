@@ -3,7 +3,7 @@
  * @module src/features/Menu/Menu.css.ts
  */
 import { style } from '@vanilla-extract/css';
-import { rem, padding } from 'polished';
+import { rem, padding, em, margin } from 'polished';
 
 import {
     imgStyles,
@@ -92,6 +92,26 @@ const menuItemLinkImageBox = style([
     }
 ]);
 
+const menuItemLinkIcon = style([
+    {
+        height: 24,
+        width: 24
+    }
+]);
+
+const menuItemLinkIconBox = style([
+    linkStyles.linkImage({
+        position: 'start'
+    }),
+    imgStyles.imageBox(),
+    margin(0, em(6)),
+    {
+        borderRadius: vars.borderRadius['3x'],
+        height: 24,
+        maxWidth: 24,
+    }
+]);
+
 const menuToggle = style([
     buttonStyles.button({
         color: 'secondary',
@@ -148,6 +168,8 @@ export const styles = {
     menuDivider,
     menuItem,
     menuItemLink,
+    menuItemLinkIcon,
+    menuItemLinkIconBox,
     menuItemLinkImage,
     menuItemLinkImageBox,
     menuItems,

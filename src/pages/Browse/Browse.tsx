@@ -2,7 +2,9 @@
  * Module contains `Browse` page.
  * @module src/pages/Browse/Browse
  */
-import { Header, withProfileCheck } from '@/widgets';
+import { Header } from '@/widgets';
+
+import { withProfileCheck } from '../withProfileCheck';
 
 /**
  * `Browse` page.

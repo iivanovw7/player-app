@@ -3,4 +3,6 @@
  * @module src/shared/stores
  */
 
-export * from './stores';
+export { authStore } from './AuthStore';
+export { settingsStore } from './SettingStore';
+export { profilesStore } from './ProfilesStore';

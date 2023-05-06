@@ -3,6 +3,8 @@
  * @module src/shared/utils/ErrorCodeMap
  */
 
+import { isNumber } from './lang';
+
 /**
  * Error codes.
  * @category ErrorCodeMap
@@ -10,7 +12,10 @@
  * @enum {number}
  */
 export const ErrorCodeMap = {
+    BASIC_API_AUTHENTICATION_ERROR: 4001,
+    BASIC_API_INVALID_CREDENTIALS: 4006,
     NOT_FOUND: 404,
+    UNAUTHORIZED: 401,
     UNKNOWN_ERROR: 5000,
 } as const;
 
@@ -19,6 +24,19 @@ export type ErrorCodeMap = Readonly<typeof ErrorCodeMap[keyof typeof ErrorCodeMa
 export type ErrorData = Readonly<{
     code: ValueOf<typeof ErrorCodeMap>;
 }>;
+
+/**
+ * Returns error message code.
+ * @param {module:util/ErrorData | number} error
+ *      Объект, представляющий сведения об ошибке, или код ошибки.
+ * @return {number} error code.
+ */
+export function getErrorCode(error: ErrorData | number = ErrorCodeMap.UNKNOWN_ERROR): number {
+    return isNumber(error)
+        ? error
+        : error.code;
+}
+
 
 /**
  * Error code prefix.
@@ -36,9 +54,5 @@ export const ERROR_PREFIX: Readonly<string> = 'NSES';
  * @return {string} error code message.
  */
 export const getErrorCodeString = (error: ErrorData | number = ErrorCodeMap.UNKNOWN_ERROR) => {
-    const code = typeof error === 'number'
-        ? error
-        : error.code;
-
-    return `${ERROR_PREFIX}-${code}`;
+    return `${ERROR_PREFIX}-${getErrorCode(error)}`;
 };

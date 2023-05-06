@@ -2,11 +2,10 @@
  * Module contains `ErrorFallback` page.
  * @module src/pages/ErrorFallback/ErrorFallback
  */
-import type { ErrorData } from '@/shared/utils';
-import { ErrorScreen, Header } from '@/widgets';
+import { ErrorScreen, type ErrorData } from '@/shared';
+import { Header } from '@/widgets';
 
 import { styles } from './ErrorFallback.css';
-
 
 const MESSAGES = {
     subtitle: 'Sorry, we`re having trouble with your request.',

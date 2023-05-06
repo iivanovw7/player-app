@@ -11,5 +11,5 @@ export const ItemType = {
 
 export type ItemType = Readonly<typeof ItemType[keyof typeof ItemType]>;
 
-export const OPEN_DELAY: Milliseconds = 200;
+export const OPEN_DELAY: Milliseconds = 100;
 export const CLOSE_DELAY: Milliseconds = 600;

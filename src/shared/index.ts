@@ -9,5 +9,7 @@ export * from './log';
 export * from './utils';
 export * from './storage';
 export * from './stores';
+export * from './stores/initStores';
+export * from './ui/modules';
 export * from './ui/components';
 export * from './ui/routes';

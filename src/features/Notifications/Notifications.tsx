@@ -18,7 +18,7 @@ export const Notifications = () => {
             class={styles.toggle}
             icon={{
                 'class': styles.toggleIconBox,
-                iconsClass: styles.toggleIcon,
+                iconClass: styles.toggleIcon,
                 name: 'bell',
                 size: 24,
             }}

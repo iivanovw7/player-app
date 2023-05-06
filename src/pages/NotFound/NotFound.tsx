@@ -2,8 +2,8 @@
  * Module contains `not found` page.
  * @module src/pages/NotFound/NotFound
  */
-import { ErrorCodeMap } from '@/shared';
-import { ErrorScreen, Header } from '@/widgets';
+import { ErrorCodeMap, ErrorScreen } from '@/shared';
+import { Header } from '@/widgets';
 
 import { styles } from './NotFound.css';
 

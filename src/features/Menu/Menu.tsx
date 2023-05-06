@@ -10,6 +10,7 @@ import {
     Icon,
     Img,
     profilesStore,
+    authStore,
     type LinkButtonProps,
 } from '@/shared';
 
@@ -34,7 +35,15 @@ export const Menu = (props: MenuProps) => {
      * Logout current user profile.
      */
     const handleLogout: LinkButtonProps['onClick'] = () => {
-        profilesStore.actions.resetProfile();
+        authStore.actions.logout();
+        profilesStore.actions.resetActiveProfile();
+    };
+
+    /**
+     * Profile editor imitation.
+     */
+    const handleProfilesEdit = () => {
+        profilesStore.actions.resetActiveProfile();
     };
 
     return (
@@ -53,7 +62,7 @@ export const Menu = (props: MenuProps) => {
                         profile.lock && (
                             <Icon
                                 class={styles.menuLinkIconBox}
-                                iconsClass={styles.menuLinkIcon}
+                                iconClass={styles.menuLinkIcon}
                                 name="lock"
                             />
                         )
@@ -71,6 +80,17 @@ export const Menu = (props: MenuProps) => {
                     textClass: styles.menuLinkText,
                     type: DropdownMenu.ItemType.button,
                 })),
+                {
+                    'class': styles.menuItemLink,
+                    icon: {
+                        'class': styles.menuItemLinkIconBox,
+                        iconClass: styles.menuItemLinkIcon,
+                        name: 'edit',
+                    },
+                    onSelect: handleProfilesEdit,
+                    text: 'Manage Profiles',
+                    type: DropdownMenu.ItemType.button,
+                },
                 {
                     'class': styles.menuDivider,
                     type: DropdownMenu.ItemType.divider

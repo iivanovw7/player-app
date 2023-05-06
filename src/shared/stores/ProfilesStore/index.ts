@@ -3,11 +3,9 @@
  * @module src/shared/stores/ProfileStore
  */
 
-import { defaultTo, path, pipe } from 'ramda';
-
 import type { TProfile } from '#/api/basic-api';
-import { profilesApi } from '@/shared/api';
 
+import { profilesApi } from '../../api/http/basic-api';
 import { getLogger } from '../../log';
 import { getLocalProfile, setLocalProfile } from '../../storage';
 import { makeApiRequest, wait } from '../../utils';
@@ -28,8 +26,9 @@ type ProfilesSoreState = {
 type ProfilesSoreActions = {
     changeUserProfile: (profile: Nullable<TProfile>) => Promise<void>;
     loadLocalProfile: () => void;
-    loadProfiles: () => Promise<void>;
-    resetProfile: () => void;
+    loadProfiles: () => Promise<Voidable<true>>;
+    resetActiveProfile: () => void;
+    resetProfiles: () => void;
 };
 
 type ProfilesSore = {
@@ -39,10 +38,8 @@ type ProfilesSore = {
 
 const logger = getLogger('ProfilesStore');
 
-const getProfiles = pipe(path<TProfile[]>(['data', 'result', 'data']), defaultTo([]));
-
 /**
- *  Creates settings store instance.
+ *  Creates profiles store instance.
  *  @return {ProfilesSore} store, containing state and action.
  */
 const createProfilesStore = (): ProfilesSore => {
@@ -115,7 +112,7 @@ const createProfilesStore = (): ProfilesSore => {
             changeUserProfile: async (profile: Nullable<TProfile>) => {
                 await makeApiRequest({
                     onRequestError: () => {
-                        logger.error('Failed to load profiles ');
+                        logger.error('Failed to change profile');
                     },
                     request: async () => {
                         await wait();
@@ -135,20 +132,28 @@ const createProfilesStore = (): ProfilesSore => {
              * @param {Function} [onRequestError] - set loading method.
              */
             loadProfiles: async () => {
-                await makeApiRequest({
-                    request: async () => {
-                        const profiles: TProfile[] = getProfiles(
-                            await profilesApi.getProfiles()
-                        );
+                return makeApiRequest({
+                    onRequestError: (errorData) => {
+                        logger.error('Failed to load profiles list');
 
-                        updateOptions(profiles);
+                        throw errorData;
                     },
+                    request: async () => {
+                        const { result: { data } } = await profilesApi.getProfiles();
+
+                        updateOptions(data);
+                    },
+                    setLoading: setProfileLoader(null)
                 });
             },
             /** Removes users active profile. */
-            resetProfile: (): void => {
-                setLocalProfile(null);
-                updateProfile(null);
+            resetActiveProfile: (): void => {
+                setProfile(null);
+            },
+            /** Removes users active profile with all options. */
+            resetProfiles: () => {
+                setProfile(null);
+                updateOptions([]);
             }
         },
         state

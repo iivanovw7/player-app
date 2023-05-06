@@ -1,12 +1,12 @@
 /**
  * Module contains `ErrorScreen` component.
- * @module src/widgets/ErrorScreen/ErrorScreen
+ * @module src/shared/ui/modules/ErrorScreen/ErrorScreen
  */
 import { useNavigate } from '@solidjs/router';
 
-import { type ErrorData, getErrorCodeString } from '@/shared';
-import { Button } from '@/shared/ui/components';
-import { routePath } from '@/shared/ui/routes';
+import { type ErrorData, getErrorCodeString } from '../../../utils/ErrorCodeMap';
+import { Button } from '../../components';
+import { routePath } from '../../routes';
 
 import { styles } from './ErrorScreen.css';
 
@@ -26,7 +26,7 @@ const MESSAGES = {
 /**
  * Error screen component.
  * @method
- * @name src/widgets/ErrorScreen
+ * @name src/shared/ui/modules/ErrorScreen/ErrorScreen
  * @param {ErrorScreenProps} props - represents component properties.
  * @constructor
  * @return {JSXElement} React component with children.

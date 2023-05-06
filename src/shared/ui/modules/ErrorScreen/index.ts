@@ -1,6 +1,6 @@
 /**
  * Module contains ErrorScreen widget public API.
- * @module src/widgets/ErrorScreen
+ * @module src/shared/ui/modules/ErrorScreen
  */
 
 export * from './ErrorScreen';

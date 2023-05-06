@@ -15,7 +15,7 @@ export const lazyImport = <T extends AnyObject, U extends keyof T>(loader: (comp
         // eslint-disable-next-line consistent-return
         get: (_target, componentName: string | symbol) => {
             if (isString(componentName)) {
-                return lazy<Component<unknown>>(() => loader(componentName as string).then((ctx) => ({
+                return lazy<Component<unknown>>(() => loader(componentName).then((ctx) => ({
                     'default': ctx[componentName as U] as Component<unknown>,
                 })));
             }

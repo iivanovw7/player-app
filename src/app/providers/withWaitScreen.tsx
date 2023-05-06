@@ -3,8 +3,7 @@
  * @module src/app/providers/withWaitScreen
  */
 
-import { settingsStore } from '@/shared';
-import { WaitScreen } from '@/widgets';
+import { settingsStore, WaitScreen } from '@/shared';
 
 /**
  * Application wait screen HOC component.
@@ -13,7 +12,10 @@ import { WaitScreen } from '@/widgets';
  * @return {Component} component with children.
  */
 export const withWaitScreen = (Cmp: Component) => (props) => (
-    <Show when={settingsStore.state.waitQueue} fallback={<Cmp {...props} />}>
-        <WaitScreen profile={settingsStore.state.waitProfile}/>
-    </Show>
+    <>
+        <Cmp {...props} />
+        <Show when={settingsStore.state.waitQueue}>
+            <WaitScreen profile={settingsStore.state.waitProfile}/>
+        </Show>
+    </>
 );
