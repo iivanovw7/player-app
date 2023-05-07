@@ -2,10 +2,8 @@
  * Module contains `not found` page.
  * @module src/pages/NotFound/NotFound
  */
-import { ErrorCodeMap, ErrorScreen } from '@/shared';
+import { Page, ErrorCodeMap, ErrorScreen } from '@/shared';
 import { Header } from '@/widgets';
-
-import { styles } from './NotFound.css';
 
 const { NOT_FOUND } = ErrorCodeMap;
 
@@ -21,13 +19,14 @@ const MESSAGES = {
  * @return {JSXElement} React component with children.
  */
 export const NotFound = () => (
-    <div class={styles.page}>
+    <Page>
         <Header/>
-        <ErrorScreen
-            class={styles.content}
-            error={NOT_FOUND}
-            subtitle={MESSAGES.subtitle}
-            title={MESSAGES.title}
-        />
-    </div>
+        <Page.Content type={Page.ContentType.NOT_FOUND}>
+            <ErrorScreen
+                error={NOT_FOUND}
+                subtitle={MESSAGES.subtitle}
+                title={MESSAGES.title}
+            />
+        </Page.Content>
+    </Page>
 );

@@ -1,9 +1,9 @@
 /**
  * Module contains `Profile` component.
- * @module src/features/Profiles/Profile/Profile
+ * @module src/features/Profiles/ui/Profile/Profile
  */
 import type { TProfile } from '#/api/basic-api';
-import { Icon, Img, LinkButton, type LinkButtonProps } from '@/shared/ui/components';
+import { Icon, Img, LinkButton, type LinkButtonProps } from '@/shared';
 
 import { styles } from './Profile.css';
 
@@ -15,7 +15,7 @@ export type ProfileProps = Pick<LinkButtonProps, 'onClick'> & {
 /**
  * `Profile` component.
  * @constructor
- * @name src/features/Profiles/Profile/Profile
+ * @name src/features/Profiles/ui/Profile/Profile
  * @method
  * @param {ProfileProps} props - contains component props.
  * @return {JSXElement} React component with children.

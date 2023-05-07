@@ -24,6 +24,7 @@ export type MenuProps = {
 /**
  * Header Menu component.
  * @method
+ * @name src/features/Menu/Menu
  * @param {ProfileProps} props - contains component props.
  * @return {JSXElement} React component with children.
  * @constructor

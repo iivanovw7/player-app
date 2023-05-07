@@ -1,6 +1,6 @@
 /**
  * Module contains profile styles.
- * @module src/features/Profiles/Profile/Profile.css
+ * @module src/features/Profiles/ui/Profile/Profile.css
  */
 import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';

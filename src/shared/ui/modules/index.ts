@@ -4,3 +4,4 @@
  */
 export * from './WaitScreen';
 export * from './ErrorScreen';
+export * from './Page';

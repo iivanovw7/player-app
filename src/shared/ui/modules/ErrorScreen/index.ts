@@ -1,5 +1,5 @@
 /**
- * Module contains ErrorScreen widget public API.
+ * Module contains ErrorScreen module public API.
  * @module src/shared/ui/modules/ErrorScreen
  */
 

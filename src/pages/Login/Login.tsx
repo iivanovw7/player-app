@@ -4,8 +4,8 @@
  */
 import { useNavigate } from '@solidjs/router';
 
-import { Button, authStore, routePath } from '@/shared';
-import { Header } from '@/widgets';
+import { Login as LoginForm } from '@/features';
+import { authStore, routePath } from '@/shared';
 
 /**
  * `Login` page.
@@ -22,29 +22,5 @@ export const Login = () => {
         }
     });
 
-    // TODO: Login scene
-    return (
-        <div>
-            <Header />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <Button
-                text="Login"
-                onClick={() => {
-                    // eslint-disable-next-line no-void
-                    void authStore.actions.login({
-                        password: 'User',
-                        username: 'User',
-                    });
-                }}
-            />
-        </div>
-    );
+    return <LoginForm />;
 };

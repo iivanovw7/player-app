@@ -61,25 +61,24 @@ const createAuthStore = (): AuthStore => {
      * Updates short term access token.
      */
     const refreshToken = async () => {
-        await makeApiRequest({
-            onRequestError: () => {
-                logger.error('Refresh auth token error.');
+        if (state.accessToken) {
+            await makeApiRequest({
+                onRequestError: () => {
+                    logger.error('Refresh auth token error.');
 
-                updateAccessToken(null);
-            },
-            request: async () => {
-                const { result: { accessToken } } = await authApi.refresh();
+                    updateAccessToken(null);
+                },
+                request: async () => {
+                    const { result: { accessToken } } = await authApi.refresh();
 
-                updateAccessToken(accessToken);
-            }
-        });
+                    updateAccessToken(accessToken);
+                }
+            });
+        }
     };
 
     useIntervalFn(
-        () => {
-            // eslint-disable-next-line no-void
-            void refreshToken();
-        },
+        refreshToken as AnyFunction,
         MILLISECONDS_IN_MINUTE,
         { immediate: true }
     );

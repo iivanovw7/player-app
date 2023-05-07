@@ -47,7 +47,7 @@ export const ErrorScreen = (props: ErrorScreenProps) => {
     };
 
     return (
-        <div class={props.class}>
+        <>
             <h1 class={styles.title}>
                 {props.title}
             </h1>
@@ -70,6 +70,6 @@ export const ErrorScreen = (props: ErrorScreenProps) => {
                     </strong>
                 </span>
             </div>
-        </div>
+        </>
     );
 };

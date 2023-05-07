@@ -16,7 +16,7 @@ import { ErrorFallback } from './ErrorFallback';
  * @return {Component} component with children.
  */
 export const withProfileCheck = (Cmp: Component) => (props) => {
-    const { error, execute } = useAsyncState(
+    const { error, execute: loadProfiles } = useAsyncState(
         profilesStore.actions.loadProfiles,
         null,
         {
@@ -26,7 +26,7 @@ export const withProfileCheck = (Cmp: Component) => (props) => {
 
     createEffect(async () => {
         if (! profilesStore.state.options.length) {
-            await execute();
+            await loadProfiles();
         }
     });
 

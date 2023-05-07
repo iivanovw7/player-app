@@ -2,10 +2,8 @@
  * Module contains `ErrorFallback` page.
  * @module src/pages/ErrorFallback/ErrorFallback
  */
-import { ErrorScreen, type ErrorData } from '@/shared';
+import { Page, ErrorScreen, type ErrorData } from '@/shared';
 import { Header } from '@/widgets';
-
-import { styles } from './ErrorFallback.css';
 
 const MESSAGES = {
     subtitle: 'Sorry, we`re having trouble with your request.',
@@ -24,14 +22,15 @@ export type ErrorFallbackProps = {
  * @return {JSXElement} component with children.
  */
 export const ErrorFallback = (props: ErrorFallbackProps) => (
-    <div class={styles.page}>
+    <Page>
         <Header />
-        <ErrorScreen
-            class={styles.content}
-            error={props.error}
-            subtitle={MESSAGES.subtitle}
-            title={MESSAGES.title}
-            onClick={() => location.reload()}
-        />
-    </div>
+        <Page.Content type={Page.ContentType.ERROR}>
+            <ErrorScreen
+                error={props.error}
+                subtitle={MESSAGES.subtitle}
+                title={MESSAGES.title}
+                onClick={() => location.reload()}
+            />
+        </Page.Content>
+    </Page>
 );

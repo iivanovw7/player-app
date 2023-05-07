@@ -1,6 +1,6 @@
 /**
  * Module contains application header notifications.
- * @module widgets/Header/Notifications/Notifications
+ * @module src/features/Notifications/Notifications
  */
 import { Button } from '@/shared';
 
@@ -9,19 +9,18 @@ import { styles } from './Notifications.css';
 /**
  * Header Notifications component.
  * @method
+ * @name src/features/Notifications/Notifications
  * @return {JSXElement} React component with children.
  * @constructor
  */
-export const Notifications = () => {
-    return (
-        <Button
-            class={styles.toggle}
-            icon={{
-                'class': styles.toggleIconBox,
-                iconClass: styles.toggleIcon,
-                name: 'bell',
-                size: 24,
-            }}
-        />
-    );
-};
+export const Notifications = () => (
+    <Button
+        class={styles.toggle}
+        icon={{
+            'class': styles.toggleIconBox,
+            iconClass: styles.toggleIcon,
+            name: 'bell',
+            size: 24,
+        }}
+    />
+);
