@@ -5,9 +5,9 @@
 import { style } from '@vanilla-extract/css';
 import { em, margin, padding, position } from 'polished';
 
-import { imgStyles, mixins, theme, vars } from '@/shared/ui/styles';
+import { imgStyles, mixins, theme, vars, linkStyles } from '@/shared/ui/styles';
 
-const loginPage = style([
+const page = style([
     {
         backgroundColor: vars.palette.black,
         margin: 0,
@@ -18,12 +18,11 @@ const loginPage = style([
     }
 ]);
 
-const loginBackground = style([
+const background = style([
     {
         '@media': {
             ...mixins.media(['md-up'], {
                 backgroundImage: 'url("../../../assets/img/bg_alpha.jpg")',
-                backgroundSize: 'cover',
                 display: 'block',
                 height: '100%',
                 minHeight: '100vh',
@@ -37,7 +36,7 @@ const loginBackground = style([
     }
 ]);
 
-const loginHeader = style([
+const header = style([
     {
         '@media': {
             ...mixins.media(['md-up'], {
@@ -52,7 +51,7 @@ const loginHeader = style([
     }
 ]);
 
-const loginBody = style([
+const body = style([
     {
         '@media': {
             ...mixins.media(['md-up'], {
@@ -73,45 +72,80 @@ const loginBody = style([
                 minHeight: '100vh',
             }),
         },
+        boxSizing: 'content-box',
         padding: '0 5%',
     }
 ]);
 
-const loginContent = style([
+const divider = style([
     {
         '@media': {
             ...mixins.media(['md-up'], {
-                ...padding(60, 68, 40),
-                marginBottom: 90,
-                minHeight: 660,
-                minWidth: 450,
-            }),
+                display: 'none'
+            })
         },
-        backgroundColor: theme.background.overlay,
-        borderRadius: vars.borderRadius['3x'],
-        display: 'flex',
-        flexDirection: 'column',
-        margin: 0,
-        minWidth: '100%',
+        borderColor: theme.border,
+        borderTop: '1px solid',
+        display: 'block',
+        height: 1,
+        width: '100%'
     }
 ]);
 
-const loginFooter = style([
+const footer = style([
     padding(30, 0),
     {
         '@media': {
             ...mixins.media(['md-up'], {
-                margin: '0 auto',
                 maxWidth: 1000
             })
         },
         display: 'block',
         fontSize: '16px',
+        margin: '0 auto',
         width: '90%'
     }
 ]);
 
-const loginFooterTop = style([
+const footerLinks = style([
+    {
+        display: 'block',
+        listStyleType: 'none',
+        margin: 0,
+        maxWidth: 1000,
+        padding: 0,
+    }
+]);
+
+const footerLink = style([
+    linkStyles.link({
+        color: 'tertiary',
+        noHoverAccent: false,
+        underline: 'hover',
+    })
+]);
+
+const footerLinkItem = style([
+    padding(0, 12, 0, 0),
+    {
+        display: 'inline-block',
+        listStyle: 'none',
+        marginBottom: em(16),
+        marginLeft: 0,
+        minWidth: 100,
+        verticalAlign: 'top',
+        width: '50%'
+    }
+]);
+
+const footerLinkText = style([
+    linkStyles.linkText(),
+    {
+        fontSize: em(13)
+    }
+]);
+
+const footerTop = style([
     margin(0, 0, 30),
     {
         fontSize: em(16),
@@ -119,7 +153,7 @@ const loginFooterTop = style([
     }
 ]);
 
-const loginFooterWrapper = style([
+const footerWrapper = style([
     {
         backgroundColor: theme.background.overlay,
         color: theme.tertiary.text,
@@ -133,7 +167,7 @@ const loginFooterWrapper = style([
     }
 ]);
 
-const loginTitle = style([
+const title = style([
     {
         color: theme.primary.text,
         fontFamily: vars.fontFamily.medium,
@@ -155,15 +189,19 @@ const logoImage = style([
 ]);
 
 export const styles = {
-    loginBackground,
-    loginBody,
-    loginContent,
-    loginFooter,
-    loginFooterTop,
-    loginFooterWrapper,
-    loginHeader,
-    loginPage,
-    loginTitle,
+    background,
+    body,
+    divider,
+    footer,
+    footerLink,
+    footerLinkItem,
+    footerLinks,
+    footerLinkText,
+    footerTop,
+    footerWrapper,
+    header,
     logo,
     logoImage,
+    page,
+    title,
 };

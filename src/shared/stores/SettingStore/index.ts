@@ -4,6 +4,8 @@
  */
 import type { TProfile } from '#/api/basic-api';
 
+import { getUserLocale, type Locale } from '../../translations';
+
 declare global {
     interface IGlobalStore {
         settings: SettingsStore;
@@ -11,6 +13,7 @@ declare global {
 }
 
 type SettingsSoreState = {
+    locale: Locale;
     theme: string;
     waitProfile: Nullable<TProfile>;
     waitQueue: number;
@@ -34,6 +37,7 @@ export type SettingsStore = {
  */
 const createSettingsStore = (): SettingsStore => {
     const [state, setState] = createStore<SettingsSoreState>({
+        locale: getUserLocale(),
         theme: 'dark',
         waitProfile: null,
         waitQueue: 0,

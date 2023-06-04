@@ -61,7 +61,7 @@ export const PinField = (props: PinFieldProps) => {
             value={props.pinNumber === ''
                 ? props.pinNumber
                 : '•'}
-            onValueChange={handleInput as AnyFunction}
+            onChange={handleInput as AnyFunction}
             onKeyDown={(e) => props.onKeyDown?.(e)}
         >
             <TextField.Input

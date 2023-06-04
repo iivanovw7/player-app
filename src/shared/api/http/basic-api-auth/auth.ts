@@ -3,7 +3,7 @@
  * @module src/shared/api/http/basic-api-auth/auth
  */
 
-import type { AxiosRequestConfig } from 'axios/index';
+import type { AxiosRequestConfig } from 'axios';
 
 import type { TLoginData, TBasicApiResult, TLoginResult } from '#/api/basic-api';
 

@@ -28,12 +28,22 @@ export class Result {
     }
 
     /**
-     * Authorization server error.
+     * Not found Error.
      * @return {Object} response - response data.
      */
-    static authenticationError(): TBasicApiResult<null> {
-        return resultError(4006, {
-            message: 'Invalid credentials'
+    static notFoundError(message = 'Not Found'): TBasicApiResult<null> {
+        return resultError(4004, {
+            message
+        });
+    }
+
+    /**
+     * Forbidden server error.
+     * @return {Object} response - response data.
+     */
+    static forbiddenError(message = 'Forbidden'): TBasicApiResult<null> {
+        return resultError(4003, {
+            message
         });
     }
 

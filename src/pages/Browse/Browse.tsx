@@ -4,7 +4,7 @@
  */
 import { Header } from '@/widgets';
 
-import { withProfileCheck } from '../withProfileCheck';
+import { withProfile } from '../withProfile';
 
 /**
  * `Browse` page.
@@ -12,7 +12,7 @@ import { withProfileCheck } from '../withProfileCheck';
  * @constructor
  * @return {JSXElement} component with children.
  */
-export const Browse = withProfileCheck(() => {
+export const Browse = withProfile(() => {
     return (
         <div>
             <Header withMenu withNavigation />

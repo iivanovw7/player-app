@@ -123,8 +123,10 @@ Contains information about main configuration files and folders.
 ---
 ### ToDo
 - ~~Base application structure.~~ <br/>
+- Add locale switcher <br />
 - ~~Setup vite for prod and dev, setup loaders and npm scripts.~~ <br/>
 - ~~Setup linting~~ <br/>
+- Add locale support <br />
 - Remove <Img /> `size` property <br />
 - Test production view script. <br/>
 - Add graphql test server <br />

@@ -77,7 +77,7 @@ globalStyle('html', {
     },
     fontFamily: vars.fontFamily.regular,
     fontWeight: vars.fontWeight.normal,
-    scrollbarColor: `${theme.background.content} ${theme.primary.button}`,
+    scrollbarColor: `${theme.background.content} ${theme.tertiary.button}`,
 });
 
 globalKeyframes('profile-gate', {

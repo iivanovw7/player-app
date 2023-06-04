@@ -2,16 +2,15 @@
  * Module login form.
  * @module src/features/Login/Login
  */
-import { authStore, Button, Img } from '@/shared';
+import { Img, Link, useLocale } from '@/shared';
 
 import Logo from '../../../assets/img/logo-v7.png?w=200&png&imagetools';
 
+import { FOOTER_LINKS } from './constants';
+import { messages } from './lib';
 import { styles } from './Login.css';
-
-const MESSAGES = {
-    footerTop: 'Questions? Call 800 855 855',
-    title: 'Sign In',
-};
+import { withLoginStore } from './model';
+import { Form } from './ui';
 
 /**
  * Login form component.
@@ -21,11 +20,13 @@ const MESSAGES = {
  * @return {JSXElement} React component with children.
  * @constructor
  */
-export const Login = () => {
+export const Login = withLoginStore(() => {
+    const { getText } = useLocale();
+
     return (
-        <div class={styles.loginPage}>
-            <div class={styles.loginBackground} />
-            <div class={styles.loginHeader}>
+        <div class={styles.page}>
+            <div class={styles.background} />
+            <div class={styles.header}>
                 <Img
                     alt="Netflix"
                     class={styles.logo}
@@ -33,30 +34,31 @@ export const Login = () => {
                     src={Logo}
                 />
             </div>
-            <div class={styles.loginBody}>
-                <div class={styles.loginContent}>
-                    <h1 class={styles.loginTitle}>
-                        {MESSAGES.title}
-                    </h1>
-                    <Button
-                        text="Login"
-                        onClick={() => {
-                            // eslint-disable-next-line no-void
-                            void authStore.actions.login({
-                                password: 'User',
-                                username: 'User',
-                            });
-                        }}
-                    />
-                </div>
+            <div class={styles.body}>
+                <Form />
             </div>
-            <div class={styles.loginFooterWrapper}>
-                <div class={styles.loginFooter}>
-                    <p class={styles.loginFooterTop}>
-                        {MESSAGES.footerTop}
+            <div class={styles.footerWrapper}>
+                <div class={styles.divider} />
+                <div class={styles.footer}>
+                    <p class={styles.footerTop}>
+                        {getText(messages.footerCall)}
                     </p>
+                    <ul class={styles.footerLinks}>
+                        <For each={FOOTER_LINKS}>
+                            {(linkItem) => (
+                                <li class={styles.footerLinkItem}>
+                                    <Link
+                                        class={styles.footerLink}
+                                        textClass={styles.footerLinkText}
+                                        text={linkItem.label}
+                                        target="_blank"
+                                    />
+                                </li>
+                            )}
+                        </For>
+                    </ul>
                 </div>
             </div>
         </div>
     );
-};
+});

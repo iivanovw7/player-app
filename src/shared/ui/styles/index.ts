@@ -7,4 +7,4 @@ export * from './palette.css';
 export * from './theme.css';
 export * from './vars.css';
 export * from './mixins';
-export * from './components';
+export * from './elements';

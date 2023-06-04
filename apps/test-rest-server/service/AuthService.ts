@@ -3,40 +3,50 @@ import jsonwebtoken from 'jsonwebtoken';
 import { Result } from '../utils';
 
 const USER = {
-    username: 'User',
-    password: 'User'
+    username: 'user@email.com',
+    password: 'user'
 };
 
 export default class AuthService {
     login(ctx) {
         const { username, password } = ctx.request.body;
 
-        if (username === USER.username && password === USER.password) {
-            const accessToken = jsonwebtoken.sign({
-                username: USER.username,
-            }, process.env.ACCESS_TOKEN_SECRET, {
-                expiresIn: '10m'
-            });
+        switch (true) {
+            case username === USER.username && password === USER.password: {
+                const accessToken = jsonwebtoken.sign({
+                    username: USER.username,
+                }, process.env.ACCESS_TOKEN_SECRET, {
+                    expiresIn: '10m'
+                });
 
-            const refreshToken = jsonwebtoken.sign({
-                username: USER.username,
-            }, process.env.REFRESH_TOKEN_SECRET, {
-                expiresIn: '1d'
-            });
+                const refreshToken = jsonwebtoken.sign({
+                    username: USER.username,
+                }, process.env.REFRESH_TOKEN_SECRET, {
+                    expiresIn: '1d'
+                });
 
-            ctx.status = 200;
-            ctx.cookies.set('basic-api-token', refreshToken, {
-                httpOnly: true,
-                sameSite: 'None',
-                secure: process.env.NODE_ENV === 'production',
-                maxAge: 24 * 60 * 60 * 1000
-            });
+                ctx.status = 200;
+                ctx.cookies.set('basic-api-token', refreshToken, {
+                    httpOnly: true,
+                    sameSite: 'None',
+                    secure: process.env.NODE_ENV === 'production',
+                    maxAge: 24 * 60 * 60 * 1000
+                });
 
-            ctx.body = Result.success({ accessToken });
-        }
-        else {
-            ctx.status = ctx.status = 406;
-            ctx.body = Result.authenticationError();
+                ctx.body = Result.success({ accessToken });
+
+                break;
+            }
+            case username !== USER.username: {
+                ctx.status = ctx.status = 404;
+                ctx.body = Result.notFoundError('User nor found');
+
+                break;
+            }
+            default: {
+                ctx.status = ctx.status = 403;
+                ctx.body = Result.forbiddenError('Wrong password');
+            }
         }
     }
 

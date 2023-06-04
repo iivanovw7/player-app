@@ -8,10 +8,7 @@ import { controller } from './controller';
 import { profilesStore } from './ProfilesStore';
 import { settingsStore } from './SettingStore';
 
-controller.onInit(() => {
-    // eslint-disable-next-line no-void
-    void authStore.actions.refreshToken();
-});
+controller.onInit(authStore.actions.refreshToken as AnyFunction);
 
 export const initStores = controller.init({
     auth: authStore,

@@ -87,10 +87,12 @@ const createAuthStore = (): AuthStore => {
         actions: {
             login: async ({ password, username }) => {
                 await makeApiRequest({
-                    onRequestError: () => {
+                    onRequestError: (error) => {
                         logger.error('Failed to login user');
 
                         updateAccessToken(null);
+
+                        throw error;
                     },
                     request: async () => {
                         const { result: { accessToken } } = await authApi.login({

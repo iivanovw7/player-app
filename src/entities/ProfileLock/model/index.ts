@@ -30,7 +30,7 @@ type CreateProfileLockStore = {
     state: ProfileLockState
 };
 
-const logger = getLogger('UnlockModal store');
+const logger = getLogger('Profile lock store');
 
 /**
  *  Profile lock store constructor.
@@ -137,9 +137,6 @@ export const createProfileLockStore = (): CreateProfileLockStore => {
     };
 };
 
-export const {
-    useLocalStore: useProfileState,
-    withLocalStoreProvider: withProfileStore
-} = withLocalStore<CreateProfileLockStore>(
+export const [useProfileState, withProfileStore] = withLocalStore<CreateProfileLockStore>(
     createProfileLockStore
 );

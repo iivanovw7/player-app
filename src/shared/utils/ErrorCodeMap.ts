@@ -13,7 +13,8 @@ import { isNumber } from './lang';
  */
 export const ErrorCodeMap = {
     BASIC_API_AUTHENTICATION_ERROR: 4001,
-    BASIC_API_INVALID_CREDENTIALS: 4006,
+    BASIC_API_FORBIDDEN: 4003,
+    BASIC_API_NOT_FOUND: 4004,
     NOT_FOUND: 404,
     UNAUTHORIZED: 401,
     UNKNOWN_ERROR: 5000,
@@ -21,9 +22,9 @@ export const ErrorCodeMap = {
 
 export type ErrorCodeMap = Readonly<typeof ErrorCodeMap[keyof typeof ErrorCodeMap]>;
 
-export type ErrorData = Readonly<{
+export type ErrorData = Partial<Readonly<{
     code: ValueOf<typeof ErrorCodeMap>;
-}>;
+}>>;
 
 /**
  * Returns error message code.
@@ -31,12 +32,11 @@ export type ErrorData = Readonly<{
  *      Объект, представляющий сведения об ошибке, или код ошибки.
  * @return {number} error code.
  */
-export function getErrorCode(error: ErrorData | number = ErrorCodeMap.UNKNOWN_ERROR): number {
+export const getErrorCode = (error: ErrorData | number = ErrorCodeMap.UNKNOWN_ERROR) => {
     return isNumber(error)
         ? error
-        : error.code;
-}
-
+        : error.code || ErrorCodeMap.UNKNOWN_ERROR;
+};
 
 /**
  * Error code prefix.
@@ -54,5 +54,5 @@ export const ERROR_PREFIX: Readonly<string> = 'NSES';
  * @return {string} error code message.
  */
 export const getErrorCodeString = (error: ErrorData | number = ErrorCodeMap.UNKNOWN_ERROR) => {
-    return `${ERROR_PREFIX}-${getErrorCode(error)}`;
+    return `${ERROR_PREFIX}-${getErrorCode(error as ErrorData)}`;
 };

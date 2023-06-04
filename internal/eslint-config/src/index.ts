@@ -10,7 +10,6 @@ export default {
     },
     'extends': [
         'iivanovw7',
-        'iivanovw7/jsdoc',
         'iivanovw7/typescript',
     ],
     globals: { defineOptions: 'readonly' },

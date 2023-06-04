@@ -51,9 +51,11 @@ export const makeApiRequest = async <Req extends () => Promise<unknown>, Res = A
             logger.error('[ValidationError]:', errorData.path, errorData.errors);
             onValidationError?.(errorData);
         }
+        else if (onRequestError) {
+            onRequestError(errorData);
+        }
         else {
             logger.error(errorData);
-            onRequestError?.(errorData);
         }
     }
     finally {

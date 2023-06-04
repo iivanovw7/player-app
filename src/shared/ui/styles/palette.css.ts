@@ -51,6 +51,7 @@ export const palette = {
     'lime-a700': '#aeea00',
     'orange-500': '#ff9800',
     'orange-700': '#f57c00',
+    'orange-800': '#e87C03',
     'purple-100': '#e1bee7',
     'purple-200': '#ce93d8',
     'purple-300': '#ba68c8',
