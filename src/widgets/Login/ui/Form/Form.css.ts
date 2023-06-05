@@ -5,7 +5,7 @@
 import { style } from '@vanilla-extract/css';
 import { em, margin, padding } from 'polished';
 
-import { imgStyles, mixins, theme, vars, buttonStyles } from '@/shared/ui/styles';
+import { imgStyles, mixins, theme, vars, buttonStyles, linkStyles } from '@/shared/ui/styles';
 
 const form = style([
     padding(20, 0, 30),
@@ -28,6 +28,7 @@ const form = style([
 ]);
 
 const title = style([
+    margin(0, 0, 10),
     {
         color: theme.primary.text,
         fontFamily: vars.fontFamily.medium,
@@ -48,6 +49,15 @@ const logoImage = style([
     imgStyles.image
 ]);
 
+const passwordShowButton = style([
+    linkStyles.link({
+        color: 'primary',
+    }),
+    {
+        fontSize: 14
+    }
+]);
+
 const submit = style([
     margin(24, 0, 12),
     buttonStyles.button({
@@ -56,6 +66,14 @@ const submit = style([
         fluid: true,
         rounded: true
     }),
+]);
+
+const submitLoader = style([
+    buttonStyles.buttonLoader,
+    {
+        height: 28,
+        width: 28,
+    }
 ]);
 
 const submitText = style([
@@ -83,7 +101,9 @@ export const styles = {
     formWarningText,
     logo,
     logoImage,
+    passwordShowButton,
     submit,
+    submitLoader,
     submitText,
     title,
 };

@@ -2,17 +2,24 @@
  * Module contains `Login` store model.
  * @module src/features/Login/model
  */
-import type { AxiosError } from 'axios';
 
-import type { TBasicApiResult } from '#/api/basic-api';
-import type { ErrorData } from '@/shared';
-import { authStore, ErrorCodeMap, getErrorCode, getLogger, makeApiRequest, noop2, withLocalStore } from '@/shared';
+import type { TBasicApiError } from '#/api/basic-api';
+import type { ErrorData, Validate } from '@/shared';
+import {
+    authStore,
+    ErrorCodeMap,
+    getErrorCode,
+    getLogger,
+    makeApiRequest,
+    noop,
+    withLocalStore
+} from '@/shared';
 
-import { validateFormField } from '../lib/validation';
+import { validateFormField, validateFormData } from '../lib/validation';
 
-type Validation = {
-    isEnabled: boolean;
-    validateFormField: typeof validateFormField;
+type LoginFormValidation = {
+    password: Validate<'password'>;
+    username: Validate<'username'>;
 };
 
 export type LoginForm = {
@@ -26,10 +33,11 @@ export type LoginState = {
     errors: LoginFormErrors;
     form: LoginForm;
     isLoading: boolean;
-    validation: Validation;
+    validation: LoginFormValidation;
 };
 
 export type LoginActions = {
+    enableFieldValidation: (key: keyof LoginForm) => void;
     enableValidation: () => void;
     setFormValue: <Key extends keyof LoginForm>(
         key: Key,
@@ -55,6 +63,11 @@ const INITIAL_FORM_ERRORS: LoginFormErrors = {
     username: false
 };
 
+const INITIAL_VALIDATION: LoginFormValidation = {
+    password: noop,
+    username: noop
+};
+
 /**
  *  Login store constructor.
  *  @return {Store} returns store instance.
@@ -64,10 +77,7 @@ export const createLoginStore = (): CreateLoginStore => {
         errors: INITIAL_FORM_ERRORS,
         form: EMPTY_FORM,
         isLoading: false,
-        validation: {
-            isEnabled: false,
-            validateFormField: noop2,
-        }
+        validation: INITIAL_VALIDATION
     });
 
     const setLoading = (isLoading: boolean) => {
@@ -91,24 +101,36 @@ export const createLoginStore = (): CreateLoginStore => {
         });
     };
 
+    const enableValidation = () => {
+        setState({
+            validation: {
+                password: validateFormField('password'),
+                username: validateFormField('username'),
+            }
+        });
+    };
+
+    const setFormValue = (key, value) => {
+        setState(produce((s) => {
+            s.form[key] = value;
+        }));
+    };
+
     const actions: LoginActions = {
-        enableValidation: () => {
+        enableFieldValidation: (key: keyof LoginForm) => {
             setState({
                 validation: {
-                    isEnabled: true,
-                    validateFormField
+                    ...state.validation,
+                    [key]: validateFormField(key),
                 }
             });
         },
-        setFormValue: (key, value) => {
-            setState(produce((s) => {
-                s.form[key] = value;
-            }));
-        },
+        enableValidation,
+        setFormValue,
         submitForm: async () => {
             await makeApiRequest({
                 onRequestError: (error) => {
-                    const data = (error as AxiosError<TBasicApiResult<null>>)?.response?.data;
+                    const data = (error as TBasicApiError<null>)?.response?.data;
                     const code = getErrorCode(data as ErrorData);
 
                     if (code === ErrorCodeMap.BASIC_API_NOT_FOUND) {
@@ -120,12 +142,17 @@ export const createLoginStore = (): CreateLoginStore => {
                     }
 
                     logger.error(data);
+
+                    setFormValue('password', '');
                 },
                 request: async () => {
-                    // TODO: Block request if has validation errors
+                    enableValidation();
+
+                    const { validatedData: { username, password } } = validateFormData(state.form);
+
                     await authStore.actions.login({
-                        password: state.form.password,
-                        username: state.form.username,
+                        password,
+                        username
                     });
 
                     resetFormErrors();

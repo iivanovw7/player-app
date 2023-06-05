@@ -2,12 +2,10 @@
  * Module contains `Login` validation helpers.
  * @module src/features/Login/lib/validation
  */
-
-import type { AnySchema } from 'yup';
-
-import type { LoginForm } from '@/features/Login/model';
 import type { CurriedValidate } from '@/shared';
 import { validateField, validateForm, VALIDATION_SCHEMAS, yup } from '@/shared';
+
+import type { LoginForm } from '../model';
 
 type FormSchema = Record<keyof LoginForm, yup.AnySchema>;
 
@@ -32,7 +30,7 @@ export const validateFormData = (data: LoginForm) => {
  */
 export const validateFormField: CurriedValidate<keyof FormSchema> = (field) => (value) => {
     return validateField({
-        schema: yup.reach(formSchema, field) as AnySchema,
+        schema: yup.reach(formSchema, field) as yup.AnySchema,
         value,
     });
 };

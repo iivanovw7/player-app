@@ -4,8 +4,8 @@
  */
 import { useNavigate } from '@solidjs/router';
 
-import { Login as LoginForm } from '@/features';
 import { authStore, routePath } from '@/shared';
+import { Login as LoginForm } from '@/widgets';
 
 /**
  * `Login` page.

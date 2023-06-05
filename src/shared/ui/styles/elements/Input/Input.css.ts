@@ -35,7 +35,7 @@ const input = recipe({
             lineHeight: '36px',
             outline: 'none',
             selectors: {
-                '&:focus, &:focus-visible': {
+                [`${container}:focus-within &`]: {
                     backgroundColor: theme.primary.textFieldAccent,
                 },
                 '&[data-invalid], &[data-warning="true"]': {
@@ -59,7 +59,7 @@ const input = recipe({
         focusOutline: {
             'true': {
                 selectors: {
-                    '&:focus, &:focus-visible': {
+                    [`${container}:focus-within &`]: {
                         outline: '2px solid',
                         outlineColor: theme.primary.textFieldAccentOutlined,
                         outlineOffset: 2,
@@ -107,6 +107,13 @@ const inputBox = style([
     }
 ]);
 
+const inputControl = style([
+    mixins.centerAbsolute('Y'),
+    {
+        right: 8
+    }
+]);
+
 globalStyle(`${container}:focus-within ${label}`, {
     fontSize: 11,
     top: 12,
@@ -117,5 +124,6 @@ export const styles = {
     helper,
     input,
     inputBox,
+    inputControl,
     label,
 };

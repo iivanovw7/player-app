@@ -61,12 +61,12 @@ export const DropdownMenu = (props: DropdownMenuProps) => {
 
     return (
         <Dropdown.Root
-            isOpen={isOpen()}
+            open={isOpen()}
             shift={props.shift}
             placement={props.placement}
             gutter={props.gutter}
             onOpenChange={setIsOpen}
-            isModal={false}
+            modal={false}
         >
             <Dropdown.Trigger
                 class={props.classes?.toggle}

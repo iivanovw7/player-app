@@ -2,11 +2,19 @@
  * Module contains login FormFooter field.
  * @module src/features/Login/ui/FormFooter/FormField
  */
-import { messages } from '@/features/Login/lib';
 import { Link, LinkButton, useLocale } from '@/shared';
+
+import { messages } from '../../lib';
 
 import { styles } from './FormFooter.css';
 
+/**
+ * FormFooter component.
+ * @method
+ * @name src/features/Login/ui/FormFooter/FormFooter
+ * @return {JSXElement} React component with children.
+ * @constructor
+ */
 export const FormFooter = () => {
     const { getText } = useLocale();
 

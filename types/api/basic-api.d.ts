@@ -1,3 +1,5 @@
+import type { AxiosError } from 'axios';
+
 export type TBasicApiList<Data> = {
     count: number;
     data: Data[];
@@ -11,6 +13,8 @@ export type TBasicApiResult<Data> = {
     result: Data;
     success: boolean;
 };
+
+export type TBasicApiError<Data> = AxiosError<TBasicApiResult<Data>>;
 
 export type TProfile = {
     avatar: string;

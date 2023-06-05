@@ -7,4 +7,3 @@ export * from './Notifications';
 export * from './Search';
 export * from './Profiles';
 export * from './Menu';
-export * from './Login';

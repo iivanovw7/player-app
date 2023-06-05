@@ -2,6 +2,7 @@
  * Module contains styled button elements.
  * @module scr/shared/style/elements/Button/Button.css
  */
+import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 import { ellipsis, rem, padding, transitions } from 'polished';
 
@@ -252,6 +253,17 @@ const buttonIcon = recipe({
     },
 });
 
+const buttonLoader = style({
+    animation: 'rotation 1s linear infinite',
+    borderRadius: '50%',
+    borderRight: '1px solid transparent',
+    borderTop: `1px solid ${theme.primary.buttonTextAccent}`,
+    boxSizing: 'border-box',
+    display: 'inline-block',
+    height: 24,
+    width: 24,
+});
+
 const buttonText = recipe({
     base: {
         ...ellipsis(),
@@ -291,5 +303,6 @@ const buttonText = recipe({
 export const styles = {
     button,
     buttonIcon,
+    buttonLoader,
     buttonText,
 };

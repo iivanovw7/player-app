@@ -2,7 +2,7 @@
  * Module login FormField styles.
  * @module src/features/Login/ui/FormField/FormField.css.ts
  */
-import { style } from '@vanilla-extract/css';
+import { globalStyle, style } from '@vanilla-extract/css';
 
 import { inputStyles } from '@/shared/ui/styles';
 
@@ -20,6 +20,13 @@ const inputBox = style([
     inputStyles.inputBox,
 ]);
 
+const inputControl = style([
+    inputStyles.inputControl,
+    {
+        visibility: 'hidden',
+    }
+]);
+
 const formElement = style({
     paddingBottom: 16,
     position: 'relative'
@@ -33,11 +40,16 @@ const helper = style([
     inputStyles.helper
 ]);
 
+globalStyle(`${container}:focus-within ${inputControl}`, {
+    visibility: 'visible'
+});
+
 export const styles = {
     container,
     formElement,
     helper,
     input,
     inputBox,
+    inputControl,
     label,
 };

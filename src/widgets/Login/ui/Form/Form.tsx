@@ -2,20 +2,30 @@
  * Module contains login form.
  * @module src/features/Login/ui/Form/Form
  */
-import { Button, type InputProps, useLocale } from '@/shared';
+import { useActiveElement } from 'solidjs-use';
+
+import {
+    Button,
+    type InputProps,
+    type LinkButtonProps,
+    LinkButton,
+    useLocale
+} from '@/shared';
 
 import { messages } from '../../lib';
+import type { LoginForm } from '../../model';
 import { useLoginState } from '../../model';
 import { FormField } from '../FormField';
 import { FormFooter } from '../FormFooter';
 
 import { styles } from './Form.css';
 
+type PasswordInputType = 'password' | 'text';
+
 /**
  * Form component.
  * @method
  * @name src/features/Login/ui/Form/Form
- * @param {ProfileProps} props - contains component props.
  * @return {JSXElement} React component with children.
  * @constructor
  */
@@ -23,13 +33,25 @@ export const Form = () => {
     const { getText } = useLocale();
     const { actions, state } = useLoginState();
 
+    const activeElement = useActiveElement();
+    const [passwordInputRef, setPasswordInputRef] = createSignal<HTMLInputElement>();
+    const [passwordType, setPasswordType] = createSignal<PasswordInputType>('password');
+
+    const handlePasswordChange: LinkButtonProps['onClick'] = (eventData) => {
+        eventData.preventDefault();
+
+        setPasswordType(passwordType() === 'password'
+            ? 'text'
+            : 'password');
+    };
+
     const handleChange = (key): InputProps['onChange'] => (value: string) => {
         actions.setFormValue(key, value);
     };
 
-    const handleFocusOut: InputProps['onFocusOut'] = () => {
-        if (! state.validation.isEnabled) {
-            actions.enableValidation();
+    const handleFocusOut = (key: keyof LoginForm): InputProps['onFocusOut'] => () => {
+        if (activeElement() !== passwordInputRef()) {
+            actions.enableFieldValidation(key);
         }
     };
 
@@ -61,30 +83,42 @@ export const Form = () => {
             </Switch>
             <FormField
                 value={state.form.username}
-                validate={state.validation.validateFormField('username')}
+                validate={state.validation.username}
                 label={getText(messages.formUsernamePlaceholder)}
                 inputProps={{
                     autocomplete: 'username',
                     type: 'email',
                 }}
                 hasWarning={state.errors.username}
-                onFocusOut={handleFocusOut}
+                onFocusOut={handleFocusOut('username')}
                 onChange={handleChange('username')}
             />
             <FormField
                 value={state.form.password}
-                validate={state.validation.validateFormField('password')}
+                validate={state.validation.password}
                 label={getText(messages.formPasswordPlaceholder)}
                 inputProps={{
                     autocomplete: 'current-password',
-                    type: 'password',
+                    ref: setPasswordInputRef,
+                    type: passwordType(),
                 }}
                 hasWarning={state.errors.password}
-                onFocusOut={handleFocusOut}
+                control={
+                    <LinkButton
+                        dataId="password-show"
+                        class={styles.passwordShowButton}
+                        text={passwordType() === 'password'
+                            ? 'SHOW'
+                            : 'HIDE'}
+                        onClick={handlePasswordChange}
+                    />
+                }
+                onFocusOut={handleFocusOut('password')}
                 onChange={handleChange('password')}
             />
             <Button
                 class={styles.submit}
+                loaderClass={styles.submitLoader}
                 textClass={styles.submitText}
                 text={getText(messages.formSignIn)}
                 isLoading={state.isLoading}

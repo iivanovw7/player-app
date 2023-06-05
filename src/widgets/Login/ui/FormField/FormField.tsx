@@ -12,8 +12,8 @@ export type FormFieldProps = InputProps;
 /**
  * FormField component.
  * @method
- * @name src/features/Login/ui/FormField
- * @param {ProfileProps} props - contains component props.
+ * @name src/features/Login/ui/FormField/FormField
+ * @param {FormFieldProps} props - contains component props.
  * @return {JSXElement} React component with children.
  * @constructor
  */
@@ -26,8 +26,11 @@ export const FormField = (props: FormFieldProps) => {
                     helper: styles.helper,
                     input: styles.input,
                     inputBox: styles.inputBox,
+                    inputControl: styles.inputControl,
                     label: styles.label,
                 }}
+                control={props.control}
+                inputProps={props.inputProps}
                 label={props.label}
                 value={props.value}
                 validate={props.validate}

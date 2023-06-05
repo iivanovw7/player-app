@@ -18,7 +18,7 @@ const footer = style([
 
 const footerSignup = style([
     {
-        marginTop: em(16)
+        marginTop: em(12)
     }
 ]);
 
@@ -68,7 +68,7 @@ const footerTermsOfUse = style([
     {
         color: theme.tertiary.text,
         fontSize: 14,
-        marginTop: em(16),
+        marginTop: em(8),
     }
 ]);
 
@@ -79,9 +79,11 @@ const footerTermsOfUseMore = recipe({
             vars.transition.callback
         ),
         {
-            fontSize: 14,
+            fontSize: 13,
+            letterSpacing: 0,
             marginTop: em(8),
             opacity: 0,
+            textAlign: 'left',
             visibility: 'hidden',
         }
     ],

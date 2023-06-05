@@ -9,6 +9,7 @@ export type LinkProps = {
     children?: JSXElement[] | JSXElement;
     class?: string;
     dataActive?: boolean;
+    dataId?: string;
     /** @default "false" */
     disabled?: boolean;
     icon?: IconProps,
@@ -34,6 +35,7 @@ export const Link = (props: LinkProps) => (
         class={props.class}
         ref={props.setRef}
         href={props.href}
+        data-id={props.dataId}
         data-active={props.dataActive || false}
         data-disabled={props.disabled || false}
         title={props.title}
@@ -70,6 +72,7 @@ export const LinkButton = (props: LinkButtonProps) => (
     <button
         class={props.class}
         ref={props.setRef}
+        data-id={props.dataId}
         data-active={props.dataActive || false}
         data-disabled={props.disabled || false}
         title={props.title}

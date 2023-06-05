@@ -23,6 +23,7 @@ export type ButtonProps = {
     icon?: IconProps;
     iconClass?: string;
     isLoading?: boolean;
+    loaderClass?: string;
     onClick?: (eventData: MouseEvent) => void;
     setRef?: Accessor<Maybe<HTMLButtonElement>>,
     style?: JSX.CSSProperties;
@@ -60,12 +61,14 @@ export const Button = (props: ButtonProps) => {
             style={props.style}
             onClick={(eventData) => props.onClick?.(eventData)}
         >
-            {props.children}
-            {hasText() && (
-                <div class={props.textClass}>
-                    {props.text}
-                </div>
-            )}
+            <Show when={! props.isLoading} fallback={<span class={props.loaderClass} />}>
+                {props.children}
+                {hasText() && (
+                    <div class={props.textClass}>
+                        {props.text}
+                    </div>
+                )}
+            </Show>
             {props?.customIcon || (props.icon && <Icon {...props.icon} />)}
         </button>
     );

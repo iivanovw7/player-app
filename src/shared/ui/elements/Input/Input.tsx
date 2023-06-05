@@ -16,6 +16,7 @@ export type InputProps = {
         helper?: string;
         input?: string;
         inputBox?: string;
+        inputControl?: string;
         label?: string;
     },
     control?: JSXElement;
@@ -80,13 +81,12 @@ export const Input = (props: InputProps) => {
                     data-warning={props.hasWarning}
                     class={props.classes?.input}
                     {...props.inputProps}
-                >
-                    {props.control && (
-                        <div class={props.classes?.control}>
-                            {props.control}
-                        </div>
-                    )}
-                </TextField.Input>
+                />
+                {props.control && (
+                    <div class={props.classes?.inputControl}>
+                        {props.control}
+                    </div>
+                )}
             </div>
             <TextField.ErrorMessage
                 class={props.classes?.helper}

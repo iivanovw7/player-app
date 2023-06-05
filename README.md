@@ -68,6 +68,13 @@ Technologies used
   `pnpm run dev` <br />
 - Running dev rest server (required for dev & view) <br />
   `pnpm run dev:test-server` <br />
+
+  test user credentials
+  ```typescript
+    username: 'user@email.com'
+    password: 'user'
+  ```
+
 - Create production build: <br />
   `pnpm run build` <br />
 - Create production build with bundle analyzer report <br />
