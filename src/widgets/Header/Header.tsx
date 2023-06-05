@@ -62,6 +62,7 @@ export const Header = (props: HeaderProps) => {
      */
     const handleProfileUnlock = async () => {
         await profilesStore.actions.changeUserProfile(profile());
+        setProfile(null);
     };
 
     return (

@@ -8,10 +8,10 @@ export type WithLocalStoreProvider = {
     <Props>(Cmp: Component<Props>): (props: Props) => JSXElement;
 };
 
-type Result<Store extends AnyStore> = {
+type Result<Store extends AnyStore> = [
     useLocalStore: UseLocalStore<Store>,
     withLocalStoreProvider: WithLocalStoreProvider
-};
+];
 
 /**
  * Creates local store hook and provider.
@@ -39,9 +39,9 @@ export const withLocalStore = <Store extends AnyStore>(storeConstructor: () => S
         </LocalStoreContext.Provider>
     );
 
-    return {
+    return [
         useLocalStore,
         withLocalStoreProvider
-    };
+    ];
 };
 

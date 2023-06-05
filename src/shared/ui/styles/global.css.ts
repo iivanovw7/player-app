@@ -77,7 +77,7 @@ globalStyle('html', {
     },
     fontFamily: vars.fontFamily.regular,
     fontWeight: vars.fontWeight.normal,
-    scrollbarColor: `${theme.background.content} ${theme.primary.button}`,
+    scrollbarColor: `${theme.background.content} ${theme.tertiary.button}`,
 });
 
 globalKeyframes('profile-gate', {
@@ -121,5 +121,14 @@ globalKeyframes('shake-it', {
     },
     '100%': {
         transform: 'translateX(0)'
+    },
+});
+
+globalKeyframes('rotation', {
+    '0%': {
+        transform: 'rotate(0deg)'
+    },
+    '100%': {
+        transform: 'rotate(360deg)'
     },
 });

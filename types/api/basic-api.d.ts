@@ -1,3 +1,5 @@
+import type { AxiosError } from 'axios';
+
 export type TBasicApiList<Data> = {
     count: number;
     data: Data[];
@@ -12,10 +14,21 @@ export type TBasicApiResult<Data> = {
     success: boolean;
 };
 
+export type TBasicApiError<Data> = AxiosError<TBasicApiResult<Data>>;
+
 export type TProfile = {
     avatar: string;
     id: string;
     index: number;
     lock: Nullable<string>;
     name: string;
+};
+
+export type TLoginData = {
+    password: string;
+    username: string;
+};
+
+export type TLoginResult = {
+    accessToken: string;
 };

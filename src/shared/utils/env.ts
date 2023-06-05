@@ -5,6 +5,7 @@
 import { LogLevel } from '../log';
 
 export type Env = {
+    browserLocale: string;
     defaultWindow?: Window | undefined;
     html: HTMLElement;
     isBrowser: boolean;
@@ -38,6 +39,7 @@ const isClient = typeof window !== 'undefined';
 const runningMode: RunningMode = import.meta.env.MODE as RunningMode;
 
 export const env: Env = {
+    browserLocale: (navigator as AnyObject).browserLocale,
     defaultWindow: isClient
         ? window
         : undefined,

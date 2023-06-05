@@ -21,6 +21,13 @@ Will contain OTT media service website.
 - [PNPM 8.x](https://pnpm.io/)
 - [nvm](https://github.com/nvm-sh/nvm) (*optional*)
 
+#### Secrets
+
+Should have `.env` file in root folder with [TMDB](https://www.themoviedb.org/) access token.
+```bash
+TMDB_TOKEN='TMDB_TOKEN'
+```
+
 ---
 ### Libs
 
@@ -61,6 +68,13 @@ Technologies used
   `pnpm run dev` <br />
 - Running dev rest server (required for dev & view) <br />
   `pnpm run dev:test-server` <br />
+
+  test user credentials
+  ```typescript
+    username: 'user@email.com'
+    password: 'user'
+  ```
+
 - Create production build: <br />
   `pnpm run build` <br />
 - Create production build with bundle analyzer report <br />
@@ -95,29 +109,32 @@ Technologies used
 
 Contains information about main configuration files and folders.
 
-| Folder                      | Comment                                                               |
-|:----------------------------|:----------------------------------------------------------------------|
-| `./.nvmrc`                  | Contains current `Node.js` version.                                   |
-| `./assets`                  | Folder contains application resources (images, svg, fonts and etc...) |
-| `./apps/test-rest-server`   | Contains rest server with stubs.                                      |
-| `./internal/ts-config`      | Contains typescript configs.                                          |
-| `./internal/vite-config`    | Contains vite config files.                                           |
-| `./internal/eslint-config`  | Run ESLint and report styling error                                   |
-| `./src/**/*`                | Main application folder.                                              |
-| `./src/main.tsx`            | Entry point, renders application.                                     |
-| `./src/app`                 | Initializing the application (context, providers, etc...).            |
-| `./src/pages`               | Contains application pages.                                           |
-| `./src/entities`            | Contains business entities.                                           |
-| `./src/pages/routing`       | Contains application routing config.                                  |
-| `./src/shared`              | Reusable infrastructure code (UIKit, libs, API, ...).                 |
-| `./src/widgets`             | Complex page widgets, composing the underlying layers.                |
-
+| Folder                     | Comment                                                               |
+|:---------------------------|:----------------------------------------------------------------------|
+| `./.nvmrc`                 | Contains current `Node.js` version.                                   |
+| `./assets`                 | Folder contains application resources (images, svg, fonts and etc...) |
+| `./apps/test-rest-server`  | Contains rest server with stubs.                                      |
+| `./internal/ts-config`     | Contains typescript configs.                                          |
+| `./internal/vite-config`   | Contains vite config files.                                           |
+| `./internal/eslint-config` | Run ESLint and report styling error                                   |
+| `./src/**/*`               | Main application folder.                                              |
+| `./src/main.tsx`           | Entry point, renders application.                                     |
+| `./src/app`                | Initializing the application (context, providers, etc...).            |
+| `./src/pages`              | Contains application pages.                                           |
+| `./src/entities`           | Contains business entities.                                           |
+| `./src/pages/routing`      | Contains application routing config.                                  |
+| `./src/shared`             | Reusable infrastructure code (UIKit, libs, API, ...).                 |
+| `./src/widgets`            | Complex page widgets, composition of Entities and Features.           |                        |
+| `./src/features`           | Elements that enable users to use this feature.                       |
 
 ---
 ### ToDo
 - ~~Base application structure.~~ <br/>
+- Add locale switcher <br />
 - ~~Setup vite for prod and dev, setup loaders and npm scripts.~~ <br/>
 - ~~Setup linting~~ <br/>
+- Add locale support <br />
+- Remove <Img /> `size` property <br />
 - Test production view script. <br/>
 - Add graphql test server <br />
 - Restore playable banner component <br />

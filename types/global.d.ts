@@ -8,6 +8,8 @@
     @typescript-eslint/no-magic-numbers
 */
 
+import type { MessageValues } from '@/shared';
+
 type WidenLiteral<T> = T extends string
     ? string
     : T extends number
@@ -22,8 +24,6 @@ type WidenLiteral<T> = T extends string
 
 
 declare global {
-    namespace JSX {}
-
     interface IGlobalStore {}
 
     interface ImportMetaEnv {
@@ -34,9 +34,11 @@ declare global {
         readonly env: ImportMetaEnv
     }
 
-    type RunningMode = 'development' | 'test' | 'production' | 'analyze';
+    type PrimitiveType = string | number | boolean | null | undefined | Date;
 
-    type JSX = {};
+    type FormatXMLElementFn<T, R = string | T | Array<string | T>> = (parts: Array<string | T>) => R;
+
+    type RunningMode = 'development' | 'test' | 'production' | 'analyze';
 
     type Pixels = number;
 
@@ -115,11 +117,12 @@ declare global {
             : ''
     ) extends infer D ? Extract<D, string> : never;
 
-    type FalsyJSX = false | null | undefined | '' | 0;
-
     type MappableItems<T extends AnyObject> = ReadonlyArray<FalsyJSX | (T & { key?: Key })>;
 
-    type FieldValidationResult = Maybe<ErrorMessage>;
+    type FieldValidationResult = {
+        messageDescriptor: ErrorMessage;
+        values?: MessageValues;
+    };
 
     type Mutable<T> = {
         -readonly [P in keyof T]: T[P] extends ReadonlyArray<infer U>
@@ -155,6 +158,8 @@ declare global {
             fromIndex?: number,
         ): boolean;
     };
+
+    type FieldValidationResult = Maybe<ErrorMessage>;
 }
 
 export {};

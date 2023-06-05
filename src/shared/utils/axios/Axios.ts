@@ -1,3 +1,8 @@
+/**
+ * Module contains axios client class.
+ * @module src/shared/utils/axios/Axios
+ */
+
 import type {
     AxiosError,
     AxiosInstance,
@@ -11,11 +16,11 @@ import { clone } from 'ramda';
 import type { RequestOptions, Result, UploadFileParams } from '#/api/http';
 
 import { ContentType, RequestMethod } from '../http';
-import { isString } from '../lang';
+import { isFunction } from '../lang';
 
-export type CreateAxiosOptions = AxiosRequestConfig & {
-    requestOptions?: RequestOptions;
-};
+import type { CreateAxiosOptions } from './axiosTransform';
+
+export * from './axiosTransform';
 
 /*
     eslint-disable
@@ -24,6 +29,11 @@ export type CreateAxiosOptions = AxiosRequestConfig & {
     require-jsdoc
 */
 
+/**
+ * Axios client class.
+ * @constructor
+ * @category Axios
+ */
 export class AxiosClient {
     private axiosInstance: AxiosInstance;
 
@@ -35,22 +45,59 @@ export class AxiosClient {
         this.setupInterceptors();
     }
 
+    private getTransform() {
+        return this.options.transform;
+    }
+
     private createAxios(config: CreateAxiosOptions): void {
         this.axiosInstance = axios.create(config);
     }
 
     private setupInterceptors() {
-        this.axiosInstance.interceptors.request.use((config: InternalAxiosRequestConfig) => {
-            // If cancel repeat request is turned on, then cancel repeat request is prohibited
-            const { requestOptions } = this.options;
-            const apiUrl = requestOptions?.apiUrl;
+        const {
+            axiosInstance,
+            options: { transform },
+        } = this;
 
-            if (apiUrl && isString(apiUrl)) {
-                config.url = `${apiUrl}${config.url as string}`;
+        if (transform) {
+            const {
+                requestInterceptors,
+                requestInterceptorsCatch,
+                responseInterceptors,
+                responseInterceptorsCatch,
+            } = transform;
+
+            this.axiosInstance.interceptors.request.use((config: InternalAxiosRequestConfig) => {
+                // If cancel repeat request is turned on, then cancel repeat request is prohibited
+                if (requestInterceptors && isFunction(requestInterceptors)) {
+                    config = requestInterceptors(config, this.options);
+                }
+
+                return config;
+            }, undefined);
+
+            if (requestInterceptorsCatch && isFunction(requestInterceptorsCatch)) {
+                this.axiosInstance.interceptors.request.use(
+                    undefined,
+                    requestInterceptorsCatch
+                );
             }
 
-            return config;
-        }, undefined);
+            if (responseInterceptorsCatch && isFunction(responseInterceptorsCatch)) {
+                this.axiosInstance.interceptors.response.use(undefined, (error) => {
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+                    return responseInterceptorsCatch(axiosInstance, error);
+                });
+            }
+
+            this.axiosInstance.interceptors.response.use((res: AxiosResponse<any>) => {
+                if (responseInterceptors && isFunction(responseInterceptors)) {
+                    res = responseInterceptors(res);
+                }
+
+                return res;
+            }, undefined);
+        }
     }
 
     public getAxios(): AxiosInstance {
@@ -126,13 +173,25 @@ export class AxiosClient {
     }
 
     public request<T = any>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
-        const conf: CreateAxiosOptions = clone(config);
+        let conf: CreateAxiosOptions = clone(config);
 
         if (config.cancelToken) {
             conf.cancelToken = config.cancelToken;
         }
 
+        const transform = this.getTransform();
+
         const { requestOptions } = this.options;
+        const { beforeRequestHook, requestCatchHook, transformResponseHook } = transform || {};
+
+        const opt: RequestOptions = {
+            ...requestOptions,
+            ...options
+        };
+
+        if (beforeRequestHook && isFunction(beforeRequestHook)) {
+            conf = beforeRequestHook(conf, opt);
+        }
 
         conf.requestOptions = { ...requestOptions, ...options };
 
@@ -140,14 +199,29 @@ export class AxiosClient {
             this.axiosInstance
                 .request<any, AxiosResponse<Result>>(conf)
                 .then((res: AxiosResponse<Result>) => {
-                    resolve(res as unknown as Promise<T>);
-                })
-                .catch((e: Error | AxiosError) => {
-                    if (axios.isAxiosError(e)) {
-                        // rewrite error message from axios in here
+                    if (transformResponseHook && isFunction(transformResponseHook)) {
+                        try {
+                            resolve(transformResponseHook(res, opt));
+                        }
+                        catch (err) {
+                            reject(err || new Error('Request error!'));
+                        }
                     }
+                    else {
+                        resolve(res as unknown as Promise<T>);
+                    }
+                })
+                .catch((errorData: Error | AxiosError) => {
+                    if (requestCatchHook && isFunction(requestCatchHook)) {
+                        reject(requestCatchHook(errorData as AxiosError, opt));
+                    }
+                    else {
+                        if (axios.isAxiosError(errorData)) {
+                            // rewrite error message from axios in here
+                        }
 
-                    reject(e);
+                        reject(errorData);
+                    }
                 });
         });
     }

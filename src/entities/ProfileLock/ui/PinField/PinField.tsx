@@ -33,10 +33,9 @@ export const PinField = (props: PinFieldProps) => {
      * Input type handler
      * @param {string} value - new input value.
      */
-    const handleInput = (value: string) => {
+    const handleInput = async (value: string) => {
         if (isNumeric(value)) {
-            // eslint-disable-next-line @typescript-eslint/no-floating-promises
-            props.onPinNumberChange(props.pinNumberIndex, value);
+            await props.onPinNumberChange(props.pinNumberIndex, value);
         }
         else {
             props.onSetPinValidation(PIN_VALIDATION_ERROR);
@@ -62,7 +61,7 @@ export const PinField = (props: PinFieldProps) => {
             value={props.pinNumber === ''
                 ? props.pinNumber
                 : '•'}
-            onValueChange={handleInput}
+            onChange={handleInput as AnyFunction}
             onKeyDown={(e) => props.onKeyDown?.(e)}
         >
             <TextField.Input

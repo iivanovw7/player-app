@@ -15,6 +15,10 @@ const logger = getLogger('LocalStorage');
  * @enum {StorageKey}
  */
 export const StorageKey = {
+    /** Basic API access token. */
+    accessToken: 'accessToken',
+    /** Use locale. */
+    locale: 'locale',
     /** User profile id. */
     profile: 'profile',
 } as const;

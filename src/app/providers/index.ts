@@ -6,6 +6,7 @@
 import { compose } from 'ramda';
 
 import { withErrorBoundary } from './withErrorBoundary';
+import { withIntl } from './withIntl';
 import { withRouter } from './withRouter';
 import { withTheme } from './withTheme';
 import { withWaitScreen } from './withWaitScreen';
@@ -17,6 +18,7 @@ import { withWaitScreen } from './withWaitScreen';
  * @return {Component} all HOC`s combined.
  */
 export const withProviders = compose(
+    withIntl,
     withTheme,
     withRouter,
     withErrorBoundary,

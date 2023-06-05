@@ -16,6 +16,7 @@ import { styles } from './Navigation.css';
 /**
  * Navigation component.
  * @method
+ * @name src/features/Navigation/Navigation
  * @return {JSXElement} React component with children.
  * @constructor
  */

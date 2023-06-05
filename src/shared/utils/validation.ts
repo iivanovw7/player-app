@@ -2,20 +2,23 @@
  * Module contains validation helpers.
  * @module shared/utils/validation
  */
+import { inRange, isString } from 'ramda-adjunct';
 import * as yup from 'yup';
-import type { ValidateOptions, ValidationError, AnySchema } from 'yup';
+import type { ValidateOptions, ValidationError } from 'yup';
+
+import { messages as commonMessages } from '../translations/common';
 
 export { yup };
 
-export type CurriedValidate<T> = (
-    parameter: T,
-    options?: ValidateOptions<never>
-) => (value: never) => FieldValidationResult;
+export type Validate<T> = (value?: T, options?: ValidateOptions<never>) => Nullable<FieldValidationResult>;
+
+export type CurriedValidate<T> = (parameter: T, options?: ValidateOptions<never>) => Validate<T>;
 
 export type ValidateFieldParams<Value = unknown, Context = AnyObject> = {
     options?: ValidateOptions<Context>;
-    schema: AnySchema;
+    schema: yup.AnySchema,
     value: Value;
+    values?: AnyObject;
 };
 
 /**
@@ -34,7 +37,7 @@ export const validateField = (params: ValidateFieldParams) => {
         schema.validateSync(value, options as ValidateOptions);
     }
     catch (error: unknown) {
-        const { message } = error as ValidationError;
+        const { message } = error as { message: FieldValidationResult };
 
         return message;
     }
@@ -74,20 +77,64 @@ export const isValidationError = (error: unknown): error is ValidationError => {
 };
 
 export const VALIDATION_ERRORS = {
-    EMPTY: 'Field is required',
-    STRING: 'Field has to be a string',
+    EMAIL: {
+        messageDescriptor: commonMessages.validationEmail
+    },
+    EMPTY: {
+        messageDescriptor: commonMessages.validationEmpty
+    },
+    STRING: {
+        messageDescriptor: commonMessages.validationString
+    },
 } as const;
 
 export const VALIDATION_SCHEMAS = {
     /**
+     * Required email string.
+     * @type {yup.StringSchema}
+     */
+    EMAIL_REQUIRED: yup
+        .string()
+        .trim()
+        .required(VALIDATION_ERRORS.EMPTY)
+        .email(VALIDATION_ERRORS.EMAIL),
+    /**
      * Option string.
      * @type {yup.StringSchema}
      */
-    STRING: yup.string().trim(),
+    STRING: yup
+        .string()
+        .trim(),
+    /**
+     * Creates string length validation schema with `min` and `max` length.
+     * @function
+     * @return {yup.StringSchema} validation schema.
+     */
+    STRING_LENGTH_BETWEEN: (min: number, max: number) => {
+        return yup
+            .string()
+            .trim()
+            .test(
+                'STRING_LENGTH_BETWEEN',
+                {
+                    messageDescriptor: commonMessages.validationBetweenLength,
+                    values: {
+                        max,
+                        min,
+                    }
+                },
+                (value?: string) => {
+                    return isString(value) && inRange(min, max, value.length);
+                }
+            );
+    },
     /**
      * Required string.
      * @type {yup.StringSchema}
      */
-    STRING_REQUIRED: yup.string().trim().required(VALIDATION_ERRORS.EMPTY)
-};
+    STRING_REQUIRED: yup
+        .string()
+        .trim()
+        .required(VALIDATION_ERRORS.EMPTY),
+} as const;
 
