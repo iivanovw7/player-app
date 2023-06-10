@@ -8,6 +8,7 @@ module.exports = {
     'extends': ['@player-app/eslint-config'],
     ignorePatterns: [
         '.eslintrc.js',
+        'release.config.js'
     ],
     'parserOptions': {
         'project': ['./tsconfig.json'],
