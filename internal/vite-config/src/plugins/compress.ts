@@ -14,7 +14,7 @@ export type ConfigureCompressPluginParams = {
 /**
  * Creates compress plugin instance.
  * @param {ConfigureCompressPluginParams} params - compress params.
- * @return {Array.<PluginOption>} compress plugin config.
+ * @returns {Array.<PluginOption>} compress plugin config.
  */
 export const configCompressPlugin = (params: ConfigureCompressPluginParams): PluginOption[] => {
     const {

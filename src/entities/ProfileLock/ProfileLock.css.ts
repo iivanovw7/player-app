@@ -6,7 +6,7 @@ import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 import { animation, em, margin, position } from 'polished';
 
-import { vars, dialogStyles, theme, mixins } from '@/shared/ui/styles';
+import { dialogStyles, mixins, theme, vars } from '@/shared/ui/styles';
 
 const dialogPaper = style([
     dialogStyles.dialogPaper

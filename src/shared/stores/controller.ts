@@ -9,7 +9,7 @@ export const controller = {
     /**
      * Initializes the root store.
      * @param {IGlobalStore} stores - root stores instances.
-     * @return {Function} init method.
+     * @returns init method.
      */
     init(stores: IGlobalStore) {
         Object.assign(this.stores, stores);

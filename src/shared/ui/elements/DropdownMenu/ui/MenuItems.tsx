@@ -19,15 +19,15 @@ export type MenuItemsProps = {
  * @method
  * @param {object} props - contains component props.
  *
- * @return {JSXElement} React component with children.
+ * @returns Component with children.
  */
 export const MenuItems = (props: MenuItemsProps) => (
     <ul class={props.class} style={props.style}>
         <For each={props.items}>
             {(item) => (
                 <MenuItem
-                    item={item}
                     class={props.menuItemClass}
+                    item={item}
                 />
             )}
         </For>

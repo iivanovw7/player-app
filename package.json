@@ -19,13 +19,13 @@
         "build:view": "pnpm run build && pnpm run view",
         "commit": "git-cz",
         "clean": "rimraf pnpm-lock.yaml && rimraf package.lock.json && rimraf node_modules",
-        "clean:cache": "pnpm clean:cache",
         "dev": "pnpm vite",
         "dev:test-server": "cd apps && cd test-rest-server && pnpm start",
+        "docs": "typedoc",
         "extract-messages": "formatjs extract 'src/**/*.ts' --ignore='**/*.d.ts' --ignore='**/*.css.ts' --out-file src/shared/translations/lang.json",
         "compile-messages": "formatjs compile 'src/shared/translations/lang.json' --out-file src/shared/translations/en.json",
         "create-translations": "npm run extract-messages && npm run compile-messages && rimraf src/shared/translations/lang.json",
-        "lint": "turbo lint",
+        "lint": "turbo lint -- --fix",
         "lint:eslint": "eslint --cache --max-warnings 0 \"{src,test}/**/*.{ts,tsx}\" --fix",
         "pre-commit": "turbo lint && pnpm lint:eslint && pnpm test",
         "preinstall": "npx only-allow pnpm",
@@ -63,25 +63,26 @@
         "@semantic-release/commit-analyzer": "10.0.1",
         "@semantic-release/git": "10.0.1",
         "@semantic-release/release-notes-generator": "11.0.3",
-        "@types/node": "18.15.11",
-        "@types/ramda": "0.29.1",
-        "browserslist": "4.21.5",
+        "@types/jsdom": "21.1.1",
+        "@types/node": "18.16.16",
+        "@types/ramda": "0.29.2",
+        "browserslist": "4.21.7",
         "commitizen": "4.3.0",
-        "cz-conventional-changelog": "3.3.0",
         "cz-git": "1.6.1",
-        "eslint": "8.40.0",
-        "eslint-config-iivanovw7": "github:iivanovw7/eslint-config-iivanovw7",
-        "jsdom": "22.0.0",
+        "eslint": "8.42.0",
+        "jsdom": "22.1.0",
         "msw": "1.2.1",
-        "rimraf": "5.0.0",
+        "rimraf": "5.0.1",
         "semantic-release": "21.0.5",
         "simple-git-hooks": "2.8.1",
         "ts-config": "workspace:*",
-        "turbo": "1.9.4",
+        "turbo": "1.10.2",
+        "typedoc": "0.24.8",
+        "typedoc-theme-hierarchy": "3.2.0",
         "typescript": "5.0.4",
-        "vite": "4.3.5",
+        "vite": "4.3.9",
         "vite-config": "workspace:*",
-        "vitest": "0.31.0"
+        "vitest": "0.32.0"
     },
     "dependencies": {
         "@cookbook/solid-intl": "0.1.2",
@@ -108,6 +109,26 @@
     "engines": {
         "node": ">=16.15.1",
         "pnpm": ">=8.1.0"
+    },
+    "release": {
+        "branches": ["main"],
+        "plugins": [
+            "@semantic-release/commit-analyzer",
+            "@semantic-release/release-notes-generator",
+            "@semantic-release/changelog",
+            [
+                "@semantic-release/changelog",
+                {
+                    "changelogFile": "docs/CHANGELOG.md"
+                }
+            ],
+            [
+                "@semantic-release/git",
+                {
+                    "assets": ["docs/CHANGELOG.md"]
+                }
+            ]
+        ]
     },
     "repository": {
         "type": "git",

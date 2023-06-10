@@ -53,6 +53,6 @@ export const menuItemSet: Record<string, MenuItem> = {
 
 /**
  * Creates a list of navigation options.
- * @return {Array.<module:~/shared/ui/routes/menu~menuItems>} menu items list.
+ * @returns {Array.<module:~/shared/ui/routes/menu~menuItems>} menu items list.
  */
 export const menuItems: Array<MenuItem> = Object.values(menuItemSet);

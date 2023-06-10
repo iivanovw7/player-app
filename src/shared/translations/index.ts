@@ -15,7 +15,7 @@ export { messages as commonMessages } from './common';
 /**
  * Imports translations file.
  * @param {string} locale - locale string.
- * @return {Promise<LocaleMessages>} - dynamically imported messages file.
+ * @returns {Promise<LocaleMessages>} - dynamically imported messages file.
  */
 export const importMessages = (locale: Locale): Promise<LocaleMessages> => {
     switch (locale) {
@@ -39,7 +39,7 @@ export type Locale = typeof LOCALES[number];
 /**
  * Returns user or browser locale.
  * @param {Locale} [defaultLocale = 'ru'] - fallback value.
- * @return {Locale} current user locale.
+ * @returns {Locale} current user locale.
  */
 export const getUserLocale = (defaultLocale: Locale = 'ru'): Locale => {
     let userLocale = (getLocale() || env.browserLocale) as Locale;

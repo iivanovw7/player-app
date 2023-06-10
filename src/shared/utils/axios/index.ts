@@ -27,7 +27,7 @@ const transform: AxiosTransform = {
 /**
  * Create new axios client instance.
  * @param {CreateAxiosOptions} [opt] - client options.
- * @return {AxiosClient} axis client.
+ * @returns {AxiosClient} axis client.
  */
 export const createAxios = (opt: Partial<CreateAxiosOptions> = {}) => {
     return new AxiosClient(

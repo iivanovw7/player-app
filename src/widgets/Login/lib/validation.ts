@@ -3,7 +3,7 @@
  * @module src/features/Login/lib/validation
  */
 import type { CurriedValidate } from '@/shared';
-import { validateField, validateForm, VALIDATION_SCHEMAS, yup } from '@/shared';
+import { VALIDATION_SCHEMAS, validateField, validateForm, yup } from '@/shared';
 
 import type { LoginForm } from '../model';
 
@@ -17,7 +17,7 @@ export const formSchema = yup.object<FormSchema>({
 /**
  * Validate the login form.
  * @param {LoginForm} data - form data.
- * @return {{validatedData: LoginForm}} validated form data.
+ * @returns {{validatedData: LoginForm}} validated form data.
  */
 export const validateFormData = (data: LoginForm) => {
     return validateForm(formSchema, data);
@@ -26,7 +26,7 @@ export const validateFormData = (data: LoginForm) => {
 /**
  * Validate the login form field.
  * @param {'password' | 'username'} field - form field.
- * @return {Validate<'password' | 'username'>} validation function.
+ * @returns {Validate<'password' | 'username'>} validation function.
  */
 export const validateFormField: CurriedValidate<keyof FormSchema> = (field) => (value) => {
     return validateField({

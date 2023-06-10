@@ -13,7 +13,7 @@
  * No operation curried function.
  * @function
  * @category Stub
- * @return {Function} empty function.
+ * @returns {Function} empty function.
  */
 export const noop2: (...args: any[]) => AnyFunction = () => () => {
 };

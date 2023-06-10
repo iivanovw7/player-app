@@ -6,9 +6,7 @@ import { useMediaQuery } from 'solidjs-use';
 
 import { BREAKPOINTS, screenSizes } from '../ui/styles';
 
-/* eslint-disable sort-keys */
-
-type TDirectionString = 'Up' | 'Down';
+type TDirectionString = 'Down' | 'Up';
 type TBreakpoint = typeof BREAKPOINTS[number];
 
 type TDirectionResult<Breakpoints extends Array<TBreakpoint>, Direction extends TDirectionString> = {
@@ -27,11 +25,11 @@ type MatchRule = keyof BreakpointsMap;
  * @type {Object.<module:src/shared/hooks/useBreakpoints.BREAKPOINTS, { down: MatchRule; up: MatchRule; }>}
  */
 const breakpointMatchesMap: Record<TBreakpoint, { down: MatchRule; up: MatchRule; }> = {
-    xs: { down: 'xsDown', up: 'xsUp' },
-    sm: { down: 'smDown', up: 'smUp' },
-    md: { down: 'mdDown', up: 'mdUp' },
     lg: { down: 'lgDown', up: 'lgUp' },
+    md: { down: 'mdDown', up: 'mdUp' },
+    sm: { down: 'smDown', up: 'smUp' },
     xl: { down: 'xlDown', up: 'xlUp' },
+    xs: { down: 'xsDown', up: 'xsUp' },
     xxl: { down: 'xxlDown', up: 'xxlUp' },
 };
 
@@ -41,7 +39,7 @@ const breakpointMatchesMap: Record<TBreakpoint, { down: MatchRule; up: MatchRule
  * @see {@link https://developer.mozilla.org/en-US/docs/web/api/window/matchmedia matchmedia}
  * @function
  * @category hooks
- * @return {TUseBreakPointsResult<Array<TBreakpoint>>}
+ * @returns {TUseBreakPointsResult<Array<TBreakpoint>>}
  *      object, containing breakpoint conditions for different change directions.
  */
 export const useBreakpoints = (): TUseBreakPointsResult<Array<TBreakpoint>> => {
@@ -54,5 +52,3 @@ export const useBreakpoints = (): TUseBreakPointsResult<Array<TBreakpoint>> => {
         return acc;
     }, {} as TUseBreakPointsResult<Array<TBreakpoint>>);
 };
-
-/* eslint-enable sort-keys */

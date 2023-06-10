@@ -13,7 +13,7 @@ import { breakpoints } from './breakpoint';
  * Wraps received style rules in media query.
  * @param {Array.<BreakpointKey>} keys - breakpoints.
  * @param {StyleRule} content - mixin content.
- * @return {StyleRule} mixin - returns mixin content.
+ * @returns {StyleRule} mixin - returns mixin content.
  */
 const media = (keys: Array<BreakpointKey>, content: StyleRule): { [Key: string]: StyleRule } => ({
     [join(' and ', ['screen', ...values(pick(keys, breakpoints))])]: content
@@ -23,7 +23,7 @@ const media = (keys: Array<BreakpointKey>, content: StyleRule): { [Key: string]:
  * Centers both horizontally and vertically or in one direction,
  *      assuming parent element has `position: relative;` property.
  * @param {"X" | "Y"} [axis] - string represents `axis`, if nothing passed - centers in both directions.
- * @return {StyleRule} mixin - returns mixin content.
+ * @returns {StyleRule} mixin - returns mixin content.
  */
 const centerAbsolute = (axis?: 'X' | 'Y'): StyleRule => ({
     position: 'absolute',

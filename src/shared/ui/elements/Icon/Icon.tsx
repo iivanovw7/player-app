@@ -25,7 +25,7 @@ const PREFIX: Readonly<string> = 'icon';
 /**
  * Gets icon file extension string.
  * @param {string} id - string representing file path.
- * @return {string} string representing image file type.
+ * @returns {string} string representing image file type.
  */
 const getIcon = (id: string): string => {
     return findOr(
@@ -40,7 +40,7 @@ const getIcon = (id: string): string => {
  * @name src/shared/ui/elements/Icon
  * @method
  * @param {object} props - contains component props.
- * @return {JSXElement} React component with children.
+ * @returns Component with children.
  * @constructor
  */
 export const Icon = (props: IconProps) => (

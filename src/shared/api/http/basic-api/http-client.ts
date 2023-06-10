@@ -3,12 +3,12 @@
  * @module src/shared/api/http/basic-api/http-client
  */
 import type { AxiosError } from 'axios';
-import type { AxiosResponse, AxiosInstance } from 'axios/index';
+import type { AxiosInstance, AxiosResponse } from 'axios/index';
 
 import type { TBasicApiResult } from '#/api/basic-api';
 
 import { authStore } from '../../../stores/AuthStore';
-import { createAxios, ErrorCodeMap, getErrorCode } from '../../../utils';
+import { ErrorCodeMap, createAxios, getErrorCode } from '../../../utils';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 

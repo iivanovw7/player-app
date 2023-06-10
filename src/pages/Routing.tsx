@@ -3,7 +3,7 @@
  * @module src/pages/Routing
  */
 
-import { Routes, Navigate } from '@solidjs/router';
+import { Navigate, Routes } from '@solidjs/router';
 
 import { lazyImport, routePath } from '@/shared';
 
@@ -24,12 +24,12 @@ const {
  * Contains application routing.
  * @method
  * @constructor
- * @return {JSXElement} component with children.
+ * @returns Component with children.
  */
 export const Routing = () => {
     return (
         <Routes>
-            <Route component={Browse} path={browse} protected />
+            <Route protected component={Browse} path={browse} />
             <Route component={NotFound} path={notFound} />
             <Route component={Login} path={login} />
             <Route element={<Navigate href={browse} />} path={home} />

@@ -2,7 +2,7 @@
  * Module contains locale local storage.
  * @module src/shared/storage/locale
  */
-import { storage, setStorage, StorageKey } from './storage';
+import { StorageKey, setStorage, storage } from './storage';
 
 /**
  * Saves new user locale.
@@ -14,7 +14,7 @@ export const setLocale = (locale?: Maybe<string>): void => {
 
 /**
  * Retrieves locale out of local storage.
- * @return {string | null} - locale - browser locale.
+ * @returns {string | null} - locale - browser locale.
  */
 export const getLocale = (): string => {
     return (storage[StorageKey.locale] || null) as string;

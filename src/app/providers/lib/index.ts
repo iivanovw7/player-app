@@ -6,7 +6,7 @@ import { dark } from '@/shared/ui/styles';
 
 /**
  * Sets active theme class.
- * @param {string} theme - theme class name.
+ * @param theme - theme class name.
  */
 export const setThemeClassName = (theme: string) => {
     document.documentElement.className = theme === 'dark'

@@ -10,7 +10,7 @@ import { pathResolve } from '../utils';
 /**
  * Creates svg icons plugin instance.
  * @param {boolean} isBuild - if running in build mode.
- * @return {Object} svg icons plugin.
+ * @returns {Object} svg icons plugin.
  */
 export const configSvgIconsPlugin = (isBuild: boolean) => {
     return createSvgIconsPlugin({

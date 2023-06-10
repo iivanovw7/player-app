@@ -5,7 +5,7 @@
 
 import type { AxiosRequestConfig } from 'axios/index';
 
-import type { TProfile, TBasicApiListResult } from '#/api/basic-api';
+import type { TBasicApiListResult, TProfile } from '#/api/basic-api';
 
 import { http } from './http-client';
 

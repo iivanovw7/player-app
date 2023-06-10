@@ -6,7 +6,7 @@ import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 import { em, transitions } from 'polished';
 
-import { theme, linkStyles, vars } from '@/shared/ui/styles';
+import { linkStyles, theme, vars } from '@/shared/ui/styles';
 
 const footer = style([
     {

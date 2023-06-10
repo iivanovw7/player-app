@@ -7,8 +7,8 @@ import { ErrorFallback } from '@/pages';
 /**
  * Application error fallback HOC.
  * @constructor
- * @param {Component} Cmp - represents child component.
- * @return {Component} component with children.
+ * @param Cmp - represents child component.
+ * @returns component with children.
  */
 export const withErrorBoundary = (Cmp: Component) => (props) => (
     <ErrorBoundary fallback={<ErrorFallback />}>

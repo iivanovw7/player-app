@@ -7,8 +7,8 @@ import { useActiveElement } from 'solidjs-use';
 import {
     Button,
     type InputProps,
-    type LinkButtonProps,
     LinkButton,
+    type LinkButtonProps,
     useLocale
 } from '@/shared';
 
@@ -26,7 +26,7 @@ type PasswordInputType = 'password' | 'text';
  * Form component.
  * @method
  * @name src/features/Login/ui/Form/Form
- * @return {JSXElement} React component with children.
+ * @returns Component with children.
  * @constructor
  */
 export const Form = () => {
@@ -82,46 +82,46 @@ export const Form = () => {
                 </Match>
             </Switch>
             <FormField
-                value={state.form.username}
-                validate={state.validation.username}
-                label={getText(messages.formUsernamePlaceholder)}
+                hasWarning={state.errors.username}
                 inputProps={{
                     autocomplete: 'username',
                     type: 'email',
                 }}
-                hasWarning={state.errors.username}
-                onFocusOut={handleFocusOut('username')}
+                label={getText(messages.formUsernamePlaceholder)}
+                validate={state.validation.username}
+                value={state.form.username}
                 onChange={handleChange('username')}
+                onFocusOut={handleFocusOut('username')}
             />
             <FormField
-                value={state.form.password}
-                validate={state.validation.password}
-                label={getText(messages.formPasswordPlaceholder)}
-                inputProps={{
-                    autocomplete: 'current-password',
-                    ref: setPasswordInputRef,
-                    type: passwordType(),
-                }}
-                hasWarning={state.errors.password}
                 control={
                     <LinkButton
-                        dataId="password-show"
                         class={styles.passwordShowButton}
+                        dataId="password-show"
                         text={passwordType() === 'password'
                             ? 'SHOW'
                             : 'HIDE'}
                         onClick={handlePasswordChange}
                     />
                 }
-                onFocusOut={handleFocusOut('password')}
+                hasWarning={state.errors.password}
+                inputProps={{
+                    autocomplete: 'current-password',
+                    ref: setPasswordInputRef,
+                    type: passwordType(),
+                }}
+                label={getText(messages.formPasswordPlaceholder)}
+                validate={state.validation.password}
+                value={state.form.password}
                 onChange={handleChange('password')}
+                onFocusOut={handleFocusOut('password')}
             />
             <Button
                 class={styles.submit}
-                loaderClass={styles.submitLoader}
-                textClass={styles.submitText}
-                text={getText(messages.formSignIn)}
                 isLoading={state.isLoading}
+                loaderClass={styles.submitLoader}
+                text={getText(messages.formSignIn)}
+                textClass={styles.submitText}
             />
             <FormFooter />
         </form>

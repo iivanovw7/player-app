@@ -2,7 +2,7 @@
  * Module contains event tests
  */
 
-import { EventMap, onEvent, offEvent, noop } from '../../../../src/shared/utils';
+import { EventMap, noop, offEvent, onEvent } from '../../../../src/shared/utils';
 import { removeStub, resetStub, stubMethod, verifyCall } from '../../../_helper/utils';
 
 const {

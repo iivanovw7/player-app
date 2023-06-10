@@ -17,7 +17,7 @@ import { Form } from './ui';
  * @method
  * @name src/features/Login/Login
  * @param {ProfileProps} props - contains component props.
- * @return {JSXElement} React component with children.
+ * @returns Component with children.
  * @constructor
  */
 export const Login = withLoginStore(() => {
@@ -49,9 +49,9 @@ export const Login = withLoginStore(() => {
                                 <li class={styles.footerLinkItem}>
                                     <Link
                                         class={styles.footerLink}
-                                        textClass={styles.footerLinkText}
-                                        text={linkItem.label}
                                         target="_blank"
+                                        text={linkItem.label}
+                                        textClass={styles.footerLinkText}
                                     />
                                 </li>
                             )}

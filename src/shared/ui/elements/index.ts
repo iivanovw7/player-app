@@ -20,7 +20,7 @@ export type { SpinnerProps } from './Spinner';
 export type { ImgProps } from './Img';
 export type { IconProps } from './Icon';
 export type { DropdownMenuProps } from './DropdownMenu';
-export type { LinkProps, LinkButtonProps } from './Link';
+export type { LinkButtonProps, LinkProps } from './Link';
 export type { NavLinkProps } from './NavLink';
 export type { OverlayProps } from './Overlay';
 export type { InputProps } from './Input';

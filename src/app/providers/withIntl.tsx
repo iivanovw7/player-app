@@ -6,13 +6,13 @@
 import { IntlProvider } from '@cookbook/solid-intl';
 import { useAsyncState } from 'solidjs-use';
 
-import { importMessages, type LocaleMessages, settingsStore } from '@/shared';
+import { type LocaleMessages, importMessages, settingsStore } from '@/shared';
 
 /**
  * Application Intl HOC.
  * @constructor
- * @param {Component} Cmp - represents child component.
- * @return {Component} component with children.
+ * @param Cmp - represents child component.
+ * @returns component with children.
  */
 export const withIntl = (Cmp: Component) => (props) => {
     const { state: messages, isReady } = useAsyncState<LocaleMessages>(

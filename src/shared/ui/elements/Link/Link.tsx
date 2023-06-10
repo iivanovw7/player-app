@@ -6,7 +6,7 @@ import { Icon, type IconProps } from '../Icon';
 import { Img, type ImgProps } from '../Img';
 
 export type LinkProps = {
-    children?: JSXElement[] | JSXElement;
+    children?: JSXElement | JSXElement[];
     class?: string;
     dataActive?: boolean;
     dataId?: string;
@@ -17,31 +17,31 @@ export type LinkProps = {
     onKeyDown?: (eventData: KeyboardEvent) => void;
     setRef?: Accessor<HTMLAnchorElement | undefined>;
     style?: JSX.CSSProperties;
-    target?: '_self' | '_blank' | '_parent' | '_top';
+    target?: '_blank' | '_parent' | '_self' | '_top';
     text?: JSXElement;
     textClass?: string;
-} & Pick<JSX.HTMLElementTags['a'], 'download' | 'href' | 'title' | 'tabIndex'>;
+} & Pick<JSX.HTMLElementTags['a'], 'download' | 'href' | 'tabIndex' | 'title'>;
 
 /**
  * Creates `Link` component.
  * @name src/shared/ui/elements/Link
  * @method
  * @param {LinkProps} props - contains component props.
- * @return {JSXElement} React component with children.
+ * @returns Component with children.
  * @constructor
  */
 export const Link = (props: LinkProps) => (
     <a
-        class={props.class}
         ref={props.setRef}
-        href={props.href}
-        data-id={props.dataId}
+        class={props.class}
         data-active={props.dataActive || false}
         data-disabled={props.disabled || false}
-        title={props.title}
+        data-id={props.dataId}
         download={props.download}
-        tabIndex={props.tabIndex}
+        href={props.href}
         style={props.style}
+        tabIndex={props.tabIndex}
+        title={props.title}
         onKeyDown={(e) => props.onKeyDown?.(e)}
     >
         {props.text && (
@@ -55,7 +55,7 @@ export const Link = (props: LinkProps) => (
     </a>
 );
 
-export type LinkButtonProps = Omit<LinkProps, 'tag' | 'href' | 'ref' | 'download'> & {
+export type LinkButtonProps = Omit<LinkProps, 'download' | 'href' | 'ref' | 'tag'> & {
     onClick?: (eventData: Event) => void;
     setRef?: HTMLButtonElement;
 };
@@ -65,18 +65,18 @@ export type LinkButtonProps = Omit<LinkProps, 'tag' | 'href' | 'ref' | 'download
  * @name src/shared/ui/elements/Link/LinkButton
  * @method
  * @param {LinkButtonProps} props - contains component props.
- * @return {JSXElement} component with children.
+ * @returns Component with children.
  * @constructor
  */
 export const LinkButton = (props: LinkButtonProps) => (
     <button
-        class={props.class}
         ref={props.setRef}
-        data-id={props.dataId}
+        class={props.class}
         data-active={props.dataActive || false}
         data-disabled={props.disabled || false}
-        title={props.title}
+        data-id={props.dataId}
         tabIndex={props.tabIndex}
+        title={props.title}
         onClick={(e) => props.onClick?.(e)}
         onKeyDown={(e) => props.onKeyDown?.(e)}
     >

@@ -14,8 +14,8 @@ import { withWaitScreen } from './withWaitScreen';
 /**
  * Combines application providers.
  * @function
- * @param {Component} Component - represents child component.
- * @return {Component} all HOC`s combined.
+ * @param Component - represents child component.
+ * @returns all HOC`s combined.
  */
 export const withProviders = compose(
     withIntl,

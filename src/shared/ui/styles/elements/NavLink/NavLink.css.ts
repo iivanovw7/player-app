@@ -4,7 +4,7 @@
  */
 
 import { recipe } from '@vanilla-extract/recipes';
-import { ellipsis, rem, padding, transitions } from 'polished';
+import { ellipsis, padding, rem, transitions } from 'polished';
 
 import type { Color } from '#/styles';
 
@@ -14,7 +14,7 @@ import { vars } from '../../vars.css';
 /**
  * Gets navigation link full colors.
  * @param {Color} type - color scheme type.
- * @return {CSSStyleRule} - link color according to theme parameter.
+ * @returns {CSSStyleRule} - link color according to theme parameter.
  */
 const getLinkColor = (type: Color) => ({
     color: theme[type].linkText,
@@ -77,7 +77,7 @@ const link = recipe({
 /**
  * Gets navigation link text full colors.
  * @param {Color} type - color scheme type.
- * @return {CSSStyleRule} - link text color according to theme parameter.
+ * @returns {CSSStyleRule} - link text color according to theme parameter.
  */
 const getTextColor = (type: Color) => ({
     selectors: {

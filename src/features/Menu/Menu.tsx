@@ -5,13 +5,13 @@
 
 import type { TProfile } from '#/api/basic-api';
 import {
-    useBreakpoints,
     DropdownMenu,
     Icon,
     Img,
-    profilesStore,
-    authStore,
     type LinkButtonProps,
+    authStore,
+    profilesStore,
+    useBreakpoints,
 } from '@/shared';
 
 import { withAvatarPlaceholder } from './lib';
@@ -26,7 +26,7 @@ export type MenuProps = {
  * @method
  * @name src/features/Menu/Menu
  * @param {ProfileProps} props - contains component props.
- * @return {JSXElement} React component with children.
+ * @returns React component with children.
  * @constructor
  */
 export const Menu = (props: MenuProps) => {
@@ -49,6 +49,7 @@ export const Menu = (props: MenuProps) => {
 
     return (
         <DropdownMenu
+            withArrowFloating
             classes={{
                 arrowFloating: styles.menuArrowFloating,
                 arrowToggle: styles.menuArrowToggle,
@@ -57,6 +58,7 @@ export const Menu = (props: MenuProps) => {
                 menu: styles.menu,
                 toggle: styles.menuToggle,
             }}
+            gutter={6}
             items={[
                 ...profilesStore.state.availableOptions.map((profile: TProfile) => ({
                     children: (
@@ -103,11 +105,9 @@ export const Menu = (props: MenuProps) => {
                     type: DropdownMenu.ItemType.button,
                 }
             ]}
-            gutter={6}
-            shift={16}
             placement="bottom-start"
+            shift={16}
             withArrowToggle={mdUp()}
-            withArrowFloating
         >
             <Img
                 alt="avatar"

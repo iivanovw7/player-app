@@ -1,6 +1,6 @@
 /**
  * Module contains `ProfileUnlock` pin field component.
- * @module src/entities/ProfileLockModal/ui/PinField
+ * @module src/entities/ProfileLock/PinField/PinField
  */
 import { TextField } from '@kobalte/core';
 
@@ -23,10 +23,10 @@ export type PinFieldProps = {
 /**
  * `PinField` component.
  * @constructor
- * @name src/entities/Profiles/ProfileLock/PinField/PinField
+ * @name src/entities/ProfileLock/PinField/PinField
  * @method
  * @param {ProfileLockProps} props - component props.
- * @return {JSXElement} React component with children.
+ * @returns Component with children.
  */
 export const PinField = (props: PinFieldProps) => {
     /**
@@ -67,9 +67,9 @@ export const PinField = (props: PinFieldProps) => {
             <TextField.Input
                 ref={setInputRef}
                 autofocus={props.pinNumberIndex === 0}
-                type="tel"
-                maxLength={1}
                 class={styles.pinField}
+                maxLength={1}
+                type="tel"
             />
         </TextField.Root>
     );

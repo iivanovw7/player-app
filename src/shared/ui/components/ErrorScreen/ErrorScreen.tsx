@@ -29,7 +29,7 @@ const MESSAGES = {
  * @name src/shared/ui/components/ErrorScreen/ErrorScreen
  * @param {ErrorScreenProps} props - represents component properties.
  * @constructor
- * @return {JSXElement} React component with children.
+ * @returns Component with children.
  */
 export const ErrorScreen = (props: ErrorScreenProps) => {
     const navigate = useNavigate();

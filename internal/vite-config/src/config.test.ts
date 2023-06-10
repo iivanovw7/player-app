@@ -8,7 +8,7 @@ import { pathResolve } from './utils';
 
 /**
  * Creates test vite config instance.
- * @return {UserConfig} vite user config.
+ * @returns {UserConfig} vite user config.
  */
 export const getTestConfig = (): UserConfig => ({
     test: {

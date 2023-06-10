@@ -5,10 +5,10 @@
 import { useMatch } from '@solidjs/router';
 
 import {
-    useBreakpoints,
     DropdownMenu,
     NavLink,
-    menuItems
+    menuItems,
+    useBreakpoints
 } from '@/shared';
 
 import { styles } from './Navigation.css';
@@ -17,7 +17,7 @@ import { styles } from './Navigation.css';
  * Navigation component.
  * @method
  * @name src/features/Navigation/Navigation
- * @return {JSXElement} React component with children.
+ * @returns Component with children.
  * @constructor
  */
 export const Navigation = () => {
@@ -26,7 +26,7 @@ export const Navigation = () => {
     /**
      * Path matcher
      * @param {string} path - path to be matched with.
-     * @return {Accessor<PathMatch | undefined>} router match result.
+     * @returns {Accessor<PathMatch | undefined>} router match result.
      */
     const match = (path: string) => useMatch(() => path)();
 
@@ -34,6 +34,8 @@ export const Navigation = () => {
         <Switch>
             <Match when={lgDown()}>
                 <DropdownMenu
+                    withArrowFloating
+                    withArrowToggle
                     classes={{
                         arrowFloating: styles.menuArrowFloating,
                         arrowToggle: styles.menuArrowToggle,
@@ -42,6 +44,7 @@ export const Navigation = () => {
                         menu: styles.menu,
                         toggle: styles.menuToggle,
                     }}
+                    gutter={10}
                     items={menuItems.map(({ to, text, disabled }) => ({
                         'class': styles.menuItemLink,
                         href: to,
@@ -52,10 +55,7 @@ export const Navigation = () => {
                         type: DropdownMenu.ItemType.navLink,
                     }))}
                     placement="bottom"
-                    gutter={10}
                     shift={30}
-                    withArrowFloating
-                    withArrowToggle
                 >
                     Browse
                 </DropdownMenu>
@@ -67,9 +67,9 @@ export const Navigation = () => {
                             <NavLink
                                 class={styles.navLink}
                                 disabled={item.disabled}
+                                href={item.to}
                                 text={item.text}
                                 textClass={styles.navLinkText}
-                                href={item.to}
                             />
                         </div>
                     )}

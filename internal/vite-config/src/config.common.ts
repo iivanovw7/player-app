@@ -15,7 +15,7 @@ import { pathResolve, root } from './utils';
  * Creates common vite config instance.
  * @param {string} mode - current running mode.
  * @param {string} command - current command.
- * @return {UserConfig} vite user config.
+ * @returns {UserConfig} vite user config.
  */
 export const getCommonConfig = async (mode: string, command: string) => {
     const { VITE_ENABLE_ANALYZE, VITE_BUILD_COMPRESS } = loadEnv(mode, root);

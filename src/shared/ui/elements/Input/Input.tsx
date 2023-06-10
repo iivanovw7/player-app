@@ -6,7 +6,7 @@ import { TextField } from '@kobalte/core';
 import type { TextFieldInputProps, TextFieldRootProps } from '@kobalte/core/dist/types/text-field';
 
 import { useLocale } from '../../../hooks';
-import { isNumber, type Validate } from '../../../utils';
+import { type Validate, isNumber } from '../../../utils';
 
 export type InputProps = {
     caption?: string;
@@ -26,7 +26,7 @@ export type InputProps = {
     label?: string;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     validate?: Validate<any>;
-    value?: Maybe<string | number>;
+    value?: Maybe<number | string>;
 } & Pick<TextFieldRootProps, 'onChange' | 'onFocusOut'>;
 
 const EMPTY_VALIDATION_ERROR = {
@@ -38,7 +38,7 @@ const EMPTY_VALIDATION_ERROR = {
  * @name src/shared/ui/elements/Input
  * @method
  * @param {InputProps} props - contains component props.
- * @return {JSXElement} React component with children.
+ * @returns Component with children.
  * @constructor
  */
 export const Input = (props: InputProps) => {
@@ -59,16 +59,16 @@ export const Input = (props: InputProps) => {
     return (
         <TextField.Root
             class={props.classes?.container}
-            onChange={props.onChange}
+            validationState={hasValidationError()
+                ? 'invalid'
+                : 'valid'}
             value={
                 isNumber(props.value)
                     ? String(props.value)
                     : props.value ?? ''
             }
+            onChange={props.onChange}
             onFocusOut={props.onFocusOut}
-            validationState={hasValidationError()
-                ? 'invalid'
-                : 'valid'}
         >
             <div class={props.classes?.inputBox}>
                 <TextField.Label
@@ -78,8 +78,8 @@ export const Input = (props: InputProps) => {
                     {props.label}
                 </TextField.Label>
                 <TextField.Input
-                    data-warning={props.hasWarning}
                     class={props.classes?.input}
+                    data-warning={props.hasWarning}
                     {...props.inputProps}
                 />
                 {props.control && (
@@ -91,7 +91,7 @@ export const Input = (props: InputProps) => {
             <TextField.ErrorMessage
                 class={props.classes?.helper}
             >
-                <Show when={hasValidationError()} fallback="">
+                <Show fallback="" when={hasValidationError()}>
                     {getText(
                         validationError().messageDescriptor,
                         validationError()?.values

@@ -49,7 +49,6 @@ module.exports = {
                 'import/no-extraneous-dependencies': 'off',
                 'no-use-before-define': ['error', { 'variables': false } ],
                 'react/jsx-filename-extension': 'off',
-                'sort-keys': 'error',
             }
         }
     ],

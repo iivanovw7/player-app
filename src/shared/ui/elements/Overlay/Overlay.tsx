@@ -3,10 +3,10 @@
  * @module src/shared/ui/elements/Overlay/Overlay
  */
 
-import { getPlatform, env } from '../../../utils';
+import { env, getPlatform } from '../../../utils';
 
 export type OverlayProps = {
-    children?: JSXElement[] | JSXElement;
+    children?: JSXElement | JSXElement[];
     class?: string;
     lockScroll?: boolean;
     ref?: Accessor<HTMLDivElement | undefined>;
@@ -18,12 +18,12 @@ const IDENTIFIER = 'data-scroll-lock';
  * Provides base styling for a fixed overlay element.
  * @constructor
  * @param {OverlayProps} props - component properties.
- * @return {JSXElement} overlay element.
+ * @returns overlay element.
  */
 export const Overlay = (props: OverlayProps) => {
     /**
      *  Scrollbar `X`.
-     *  @return {number} size.
+     *  @returns {number} size.
      */
     const scrollbarX = () => {
         return Math.round(env.html.getBoundingClientRect().left) + env.html.scrollLeft;

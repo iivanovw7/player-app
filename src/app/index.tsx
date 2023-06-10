@@ -8,7 +8,8 @@ import { withProviders } from './providers';
 
 /**
  * Main application component.
+ * @category app
  * @constructor
- * @return {JSXElement} Component with children.
+ * @returns Component with children.
  */
 export const App = withProviders(Routing);

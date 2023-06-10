@@ -17,7 +17,7 @@ export type RouteProps<S extends string> = SolidRouteProps<S> & {
  * @method
  * @constructor
  * @param {RouteProps} props - route props.
- * @return {JSXElement} component with children.
+ * @returns Component with children.
  */
 export const Route = <S extends string>(props: RouteProps<S>) => {
     const navigate = useNavigate();

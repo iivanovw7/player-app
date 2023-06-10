@@ -3,9 +3,10 @@
  * @module src/entities/ProfileLock/ProfileLock
  */
 import type { TProfile } from '#/api/basic-api';
-import { KeyMap, Dialog } from '@/shared';
+import { Dialog, KeyMap, useLocale } from '@/shared';
 
 import { PIN_LENGTH } from './constants';
+import { messages } from './lib';
 import { useProfileState, withProfileStore } from './model';
 import { styles } from './ProfileLock.css';
 import { PinField } from './ui/PinField';
@@ -16,22 +17,17 @@ export type ProfileLockProps = {
     setProfile: (profile: Nullable<TProfile>) => void;
 };
 
-const MESSAGES = {
-    errorTitle: 'Whoops, wrong PIN. Please try again.',
-    status: 'Profile Lock is currently on.',
-    title: 'Enter your PIN to access this profile.',
-};
-
 /**
  * `ProfileLockModal` component.
  * @constructor
- * @name src/features/Profiles/ProfileLock/ProfileLock
+ * @name src/entities/ProfileLock/ProfileLock
  * @method
  * @param {ProfileLockProps} props - component props.
- * @return {JSXElement} React component with children.
+ * @returns React component with children.
  */
 export const ProfileLock = withProfileStore((props: ProfileLockProps) => {
     const { state, actions } = useProfileState();
+    const { getText } = useLocale();
 
     const [fieldRefs, setFieldsRefs] = createSignal<HTMLInputElement[]>([]);
 
@@ -58,7 +54,7 @@ export const ProfileLock = withProfileStore((props: ProfileLockProps) => {
     /**
      * Keydown handler creator.
      * @param {Accessor<number>} pinNumberIndex - pin reactive getter.
-     * @return {Function} keydown event handler.
+     * @returns keydown event handler.
      */
     const handleKeyDown = (pinNumberIndex: Accessor<number>) => (eventData) => {
         switch (eventData.key) {
@@ -92,6 +88,8 @@ export const ProfileLock = withProfileStore((props: ProfileLockProps) => {
 
     return (
         <Dialog
+            isModal
+            withCloseButton
             classes={{
                 close: styles.dialogClose,
                 closeIcon: styles.dialogCloseIcon,
@@ -101,16 +99,14 @@ export const ProfileLock = withProfileStore((props: ProfileLockProps) => {
             }}
             isOpen={!! props.profile}
             onClose={() => props.setProfile(null)}
-            withCloseButton
-            isModal
         >
             <p class={styles.dialogStatus}>
-                {MESSAGES.status}
+                {getText(messages.status)}
             </p>
             <h3 class={styles.dialogTitle({ error: state.isPinError })}>
-                {MESSAGES[state.isPinError
-                    ? 'errorTitle'
-                    : 'title']}
+                {getText(state.isPinError
+                    ? messages.errorTitle
+                    : messages.title)}
             </h3>
             <div class={styles.pinPad}>
                 <div class={styles.pinPadContainer({ error: state.isPinError })}>
@@ -118,9 +114,9 @@ export const ProfileLock = withProfileStore((props: ProfileLockProps) => {
                         {(pinNumber, pinNumberIndex) => (
                             <PinField
                                 fieldRefs={fieldRefs}
-                                setFieldsRefs={setFieldsRefs}
                                 pinNumber={pinNumber}
                                 pinNumberIndex={pinNumberIndex()}
+                                setFieldsRefs={setFieldsRefs}
                                 onKeyDown={handleKeyDown(pinNumberIndex)}
                                 onPinNumberChange={handlePinNumberChange}
                                 onSetPinValidation={actions.setPinValidation}

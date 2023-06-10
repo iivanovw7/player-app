@@ -15,7 +15,7 @@ export type TConfigEnv = {
 /**
  * Combines fallback config data with overrides.
  * @param {TConfigEnv} env - current environment.
- * @return {Object} application configuration.
+ * @returns {Object} application configuration.
  */
 export const getConfig = (env: TConfigEnv) => {
     const config = {

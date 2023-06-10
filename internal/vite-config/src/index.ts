@@ -3,10 +3,10 @@
  * @module internal/vite-config
  */
 import {
-    defineConfig,
-    mergeConfig,
+    type UserConfig,
     type UserConfigExport,
-    type UserConfig
+    defineConfig,
+    mergeConfig
 } from 'vite';
 
 import { getCommonConfig } from './config.common';
@@ -23,7 +23,7 @@ type DefineOptions = {
 /**
  * Main vite config getter.
  * @param {DefineOptions} [options] = options overrides.
- * @return {UserConfigExport} user config export instance.
+ * @returns {UserConfigExport} user config export instance.
  */
 export const getConfig = (options: DefineOptions = {}): UserConfigExport => {
     return defineConfig(async ({ mode, command }) => {

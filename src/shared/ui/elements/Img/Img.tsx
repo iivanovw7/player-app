@@ -14,17 +14,17 @@ export type ImageLoadEventData = Event & {
 export type ImgProps = {
     alt: string;
     class?: string;
-    dataId?: string | number;
-    height?: string | number;
+    dataId?: number | string;
+    height?: number | string;
     imageClass?: string;
     keepSize?: boolean;
-    maxWidth?: string | number;
+    maxWidth?: number | string;
     noFallback?: boolean;
     onLoad?: (eventData: ImageLoadEventData) => void;
     ref?: Accessor<HTMLImageElement | undefined>;
-    size?: string | number;
+    size?: number | string;
     src?: string;
-    width?: string | number;
+    width?: number | string;
 };
 
 /**
@@ -32,25 +32,25 @@ export type ImgProps = {
  * @name src/shared/ui/elements/Img
  * @method
  * @param {object} props - contains component props.
- * @return {JSXElement} React component with children.
+ * @returns Component with children.
  * @constructor
  */
 export const Img = (props: ImgProps) => {
     /**
      *  Image width prop.
-     *  @return {Maybe<number>} width prop.
+     *  @returns {Maybe<number>} width prop.
      */
     const width = () => props.width || props.size;
 
     /**
      *  Image height prop.
-     *  @return {Maybe<number>} height prop.
+     *  @returns {Maybe<number>} height prop.
      */
     const height = () => props.height || props.size;
 
     /**
      *  Image maxWidth prop.
-     *  @return {Maybe<number>} maxWidth prop.
+     *  @returns {Maybe<number>} maxWidth prop.
      */
     const maxWidth = () => props.maxWidth ?? width();
 

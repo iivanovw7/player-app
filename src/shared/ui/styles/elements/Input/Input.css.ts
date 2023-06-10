@@ -35,12 +35,12 @@ const input = recipe({
             lineHeight: '36px',
             outline: 'none',
             selectors: {
-                [`${container}:focus-within &`]: {
-                    backgroundColor: theme.primary.textFieldAccent,
-                },
                 '&[data-invalid], &[data-warning="true"]': {
                     borderBottomColor: theme.common.warning,
                     borderBottomWidth: 2,
+                },
+                [`${container}:focus-within &`]: {
+                    backgroundColor: theme.primary.textFieldAccent,
                 }
             },
             width: 200,

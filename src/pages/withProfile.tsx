@@ -12,8 +12,8 @@ import { ErrorFallback } from './ErrorFallback';
 /**
  * User profile check HOC.
  * @constructor
- * @param {Component} Cmp - represents child component.
- * @return {Component} component with children.
+ * @param Cmp - represents child component.
+ * @returns Component with children.
  */
 export const withProfile = (Cmp: Component) => (props) => {
     const { error, execute: loadProfiles } = useAsyncState(

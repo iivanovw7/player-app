@@ -18,7 +18,7 @@ export type ProfileProps = Pick<LinkButtonProps, 'onClick'> & {
  * @name src/features/Profiles/ui/Profile/Profile
  * @method
  * @param {ProfileProps} props - contains component props.
- * @return {JSXElement} React component with children.
+ * @returns component with children.
  */
 export const Profile = (props: ProfileProps) => {
     const [locked, setLocked] = createSignal(false);

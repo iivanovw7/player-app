@@ -16,7 +16,7 @@ type Result<Store extends AnyStore> = [
 /**
  * Creates local store hook and provider.
  * @param {Function} storeConstructor - local store constructor.
- * @return {Array} local store hook and provider.
+ * @returns {Array} local store hook and provider.
  */
 export const withLocalStore = <Store extends AnyStore>(storeConstructor: () => Store): Result<Store> => {
     const store = storeConstructor();
@@ -24,14 +24,14 @@ export const withLocalStore = <Store extends AnyStore>(storeConstructor: () => S
 
     /**
      * Local store hook.
-     * @return {Function} local store hook.
+     * @returns {Function} local store hook.
      */
     const useLocalStore = () => useContext<Store>(LocalStoreContext);
 
     /**
      * Creates local store provider.
-     * @param {Component} Cmp - component.
-     * @return {Component} component
+     * @param Cmp - component.
+     * @returns Component
      */
     const withLocalStoreProvider = (Cmp) => (props) => (
         <LocalStoreContext.Provider value={store}>

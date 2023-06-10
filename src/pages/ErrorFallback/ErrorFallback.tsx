@@ -2,7 +2,7 @@
  * Module contains `ErrorFallback` page.
  * @module src/pages/ErrorFallback/ErrorFallback
  */
-import { Page, ErrorScreen, type ErrorData } from '@/shared';
+import { type ErrorData, ErrorScreen, Page } from '@/shared';
 import { Header } from '@/widgets';
 
 const MESSAGES = {
@@ -19,7 +19,7 @@ export type ErrorFallbackProps = {
  * @method
  * @constructor
  * @param {ErrorFallbackProps} props - contains component props.
- * @return {JSXElement} component with children.
+ * @returns Component with children.
  */
 export const ErrorFallback = (props: ErrorFallbackProps) => (
     <Page>

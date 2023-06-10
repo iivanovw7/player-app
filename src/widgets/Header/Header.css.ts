@@ -5,9 +5,9 @@
 
 import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
-import { position, rem, padding } from 'polished';
+import { padding, position, rem } from 'polished';
 
-import { theme, vars, imgStyles, mixins } from '@/shared/ui/styles';
+import { imgStyles, mixins, theme, vars } from '@/shared/ui/styles';
 
 const header = recipe({
     base: [

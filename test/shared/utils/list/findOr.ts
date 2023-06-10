@@ -11,7 +11,7 @@ const LIST = [1, 2, 3, NaN];
 
 describe('shared/utils/list', () => {
     describe('findOr', () => {
-        const check = (predicate, assert: string | number = DEFAULT_VALUE) => {
+        const check = (predicate, assert: number | string = DEFAULT_VALUE) => {
             // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
             expect(findOr(DEFAULT_VALUE, predicate, LIST)).toBe(assert);
         };

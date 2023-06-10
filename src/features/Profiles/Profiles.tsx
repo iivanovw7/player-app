@@ -5,10 +5,10 @@
 import type { TProfile } from '#/api/basic-api';
 import { ProfileLock } from '@/entities';
 import {
-    isValidCode,
-    profilesStore,
     Button,
     type LinkButtonProps,
+    isValidCode,
+    profilesStore,
 } from '@/shared';
 
 import { styles } from './Profiles.css';
@@ -24,7 +24,7 @@ const MESSAGES = {
  * @constructor
  * @name src/features/Profiles/Profiles
  * @method
- * @return {JSXElement} React component with children.
+ * @returns Component with children.
  */
 export const Profiles = () => {
     const [loaded, setLoaded] = createSignal(false);
@@ -33,7 +33,7 @@ export const Profiles = () => {
     /**
      * Click handler
      * @param {TProfile} newProfile - new profile to unlock.
-     * @return {Function} profile unlock method.
+     * @returns {Function} profile unlock method.
      */
     const handleClick = (newProfile: TProfile): LinkButtonProps['onClick'] => async () => {
         const { lock } = newProfile;

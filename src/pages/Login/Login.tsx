@@ -11,7 +11,7 @@ import { Login as LoginForm } from '@/widgets';
  * `Login` page.
  * @method
  * @constructor
- * @return {JSXElement} component with children.
+ * @returns Component with children.
  */
 export const Login = () => {
     const navigate = useNavigate();

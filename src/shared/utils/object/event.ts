@@ -3,7 +3,7 @@
  * @module src/shared/utils/object/event
  */
 
-type TTarget = Window | Document | HTMLElement | EventTarget;
+type TTarget = Document | EventTarget | HTMLElement | Window;
 type TEventListener = Parameters<HTMLElement['addEventListener']>;
 
 /*
@@ -74,7 +74,7 @@ export type CustomValueEvent<Value, EventData extends Event = Event> = Omit<Even
  * Sets custom value to event data object.
  * @param {Event} eventData - target event.
  * @param {*} value to set.
- * @return {Event} new event.
+ * @returns {Event} new event.
  */
 export const setEventValue = <Value, EventData extends Event>(
     eventData: EventData,

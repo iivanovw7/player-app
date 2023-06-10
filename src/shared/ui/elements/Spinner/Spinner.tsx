@@ -4,7 +4,7 @@
  */
 
 export type SpinnerProps = {
-    children?: JSXElement[] | JSXElement;
+    children?: JSXElement | JSXElement[];
     class?: string;
     containerClass?: string;
     ref?: Accessor<HTMLDivElement | undefined>;
@@ -16,7 +16,7 @@ export type SpinnerProps = {
  * @name src/shared/ui/elements/Spinner
  * @method
  * @param {object} props - contains component props.
- * @return {JSXElement} React component with children.
+ * @returns Component with children.
  */
 export const Spinner = (props: SpinnerProps) => {
     return (
@@ -25,10 +25,10 @@ export const Spinner = (props: SpinnerProps) => {
                 class={props.class}
                 fill="none"
                 height="200"
+                preserveAspectRatio="xMidYMid meet"
                 view-box="0 0 200 200"
                 width="200"
                 xmlns="http://www.w3.org/2000/svg"
-                preserveAspectRatio="xMidYMid meet"
             >
                 <defs>
                     <linearGradient id="spinner-second-half">
