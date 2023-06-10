@@ -10,7 +10,7 @@ const vendorList = ['react', 'react-dom', 'react-router', 'react-router-dom'];
 
 /**
  * Creates production vite config instance.
- * @return {UserConfig} vite user config.
+ * @returns {UserConfig} vite user config.
  */
 export const getProductionConfig = (): UserConfig => ({
     build: {

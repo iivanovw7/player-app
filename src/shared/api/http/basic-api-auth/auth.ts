@@ -5,7 +5,7 @@
 
 import type { AxiosRequestConfig } from 'axios';
 
-import type { TLoginData, TBasicApiResult, TLoginResult } from '#/api/basic-api';
+import type { TBasicApiResult, TLoginData, TLoginResult } from '#/api/basic-api';
 
 import { http } from './http-client';
 

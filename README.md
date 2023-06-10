@@ -65,9 +65,25 @@ Technologies used
   `pnpm run bootstrap` <br />
 - Post-installing scripts: <br />
   `pnpm run postinstall` <br />
+- Update / setup git hooks <br />
+  `pnpm run prepare` <br />
 
 ---
 ### Development
+
+[Commitizen](https://github.com/commitizen/cz-cli) configuration
+
+#### Development Workflow
+
+1. [feature-branch] Stage modified files using `git add .`.
+2. [feature-branch] Commit the files using git-cz package `git commit` (should trigger `git-cz` via hook).
+   1. Choose the type of the commits (feat, refactor, fix, etc.).
+   2. Provides a short description of the commits.
+   3. (Optional) Provides a longer description.
+   4. Determine whether the commit is a BREAKING CHANGES or not (by answering ‘y’ and fill up BREAKING CHANGES descriptions in the CLI).
+   5. (Optional) Mentions the JIRA issue in (by answering ‘y’ and fill up the issue descriptions in the CLI).
+3. [feature-branch] Push remote branch `git push origin <feature-branch>`.
+4. [Github] Create a Pull Request to dev branch.
 
 - Running in dev mode: <br />
   `pnpm run dev` <br />
@@ -79,7 +95,8 @@ Technologies used
     username: 'user@email.com'
     password: 'user'
   ```
-
+- Generate typedoc documentation inside `./build/docs` folder <br />
+  `pnpm doc` <br />
 - Create production build: <br />
   `pnpm run build` <br />
 - Create production build with bundle analyzer report <br />
@@ -109,6 +126,21 @@ Technologies used
 - Install package in a workspace <br />
   `pnpm install --save-dev -E unbuild --filter vite-config` <br />
 
+#### Localization
+
+Localization messages location patterns:
+- `src/[Layer]/lib/messages`
+- `src/shared/translations/common.ts`
+
+##### Localization scripts
+
+- Extract messages and puts them into temp `src/shared/translations/lang.json` file <br />
+  `extract-messages` <br />
+- Compiles messages and into temp `src/shared/translations/[Locale].json` file <br />
+  `compile-messages` <br />
+- Combined localizations script with cleanup <br />
+  `create-translations` <br />
+
 ---
 ### Files
 
@@ -124,13 +156,13 @@ Contains information about main configuration files and folders.
 | `./internal/eslint-config` | Run ESLint and report styling error                                   |
 | `./src/**/*`               | Main application folder.                                              |
 | `./src/main.tsx`           | Entry point, renders application.                                     |
-| `./src/app`                | Initializing the application (context, providers, etc...).            |
-| `./src/pages`              | Contains application pages.                                           |
-| `./src/entities`           | Contains business entities.                                           |
+| `./src/app`                | `Layer` Initializing the application (context, providers, etc...).    |
+| `./src/pages`              | `Layer` Contains application pages.                                   |
 | `./src/pages/routing`      | Contains application routing config.                                  |
-| `./src/shared`             | Reusable infrastructure code (UIKit, libs, API, ...).                 |
-| `./src/widgets`            | Complex page widgets, composition of Entities and Features.           |                        |
-| `./src/features`           | Elements that enable users to use this feature.                       |
+| `./src/entities`           | `Layer` Contains business entities.                                   |
+| `./src/shared`             | `Layer` Reusable infrastructure code (UIKit, libs, API, ...).         |
+| `./src/widgets`            | `Layer` Complex page widgets, composition of Entities and Features.   |                        |
+| `./src/features`           | `Layer` Elements that enable users to use this feature.               |
 
 ---
 ### ToDo
@@ -163,6 +195,6 @@ Contains information about main configuration files and folders.
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
 
 - **[MIT license](http://opensource.org/licenses/mit-license.php)**
-- Copyright 2022 © <a href="https://github.com/iivanovw7/player-app" target="_blank">player-app</a>
+- Copyright 2023 © <a href="https://github.com/iivanovw7/player-app" target="_blank">player-app</a>
 
 

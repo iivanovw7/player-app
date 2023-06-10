@@ -6,19 +6,18 @@
 module.exports = {
     'extends': [
         '@player-app/eslint-config/solid',
-        './../.eslintrc-auto-import.json'
+        './../.eslintrc-auto-import.json',
     ],
     rules: {
         '@typescript-eslint/no-redeclare': 'off',
         'arrow-body-style': 'off',
-        'react/jsx-filename-extension': 'off',
-        'import/no-absolute-path': 'off'
+        'import/no-absolute-path': 'off',
     },
     'parserOptions': {
         'project': ['./../tsconfig.json'],
         tsconfigRootDir: __dirname,
         babelOptions: {
-            configFile: '../babelrc.js'
+            configFile: '../babelrc.js',
         },
     },
     ignorePatterns: ['.eslintrc.js'],
@@ -27,13 +26,13 @@ module.exports = {
         {
             files: ["main.tsx"],
             rules: {
-                'import/no-unresolved': 'off'
-            }
-        }
+                'import/no-unresolved': 'off',
+            },
+        },
     ],
     settings: {
         'import/resolver': {
-            typescript: {}
+            typescript: {},
         },
     },
 };

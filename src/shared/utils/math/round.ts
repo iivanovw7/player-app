@@ -11,7 +11,7 @@ import { bind, curryN } from 'ramda';
  * @name src/shared/utils/math/round
  * @category Math
  * @param {number} number The number to round
- * @return {number} The value of the given number rounded to the nearest integer
+ * @returns {number} The value of the given number rounded to the nearest integer
  * @example
  *      round(0.9); //=> 1
  *      round(5.95); //=> 6

@@ -7,7 +7,7 @@ import type { UserConfig } from 'vite';
 
 /**
  * Creates dev vite config instance.
- * @return {UserConfig} vite user config.
+ * @returns {UserConfig} vite user config.
  */
 export const getDevelopmentConfig = (): UserConfig => ({
     build: {

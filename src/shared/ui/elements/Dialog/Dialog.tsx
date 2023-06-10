@@ -27,10 +27,10 @@ export type DialogProps = {
  * @name src/shared/ui/elements/Dialog/Dialog
  * @method
  * @param {DialogProps} props - contains component props.
- * @return {JSXElement} React component with children.
+ * @returns Component with children.
  */
 export const Dialog = (props: DialogProps) => (
-    <BaseDialog.Root open={props.isOpen} modal={props.isModal}>
+    <BaseDialog.Root modal={props.isModal} open={props.isOpen}>
         <BaseDialog.Portal>
             <BaseDialog.Content class={props.classes.content}>
                 <div class={props.classes.paper}>

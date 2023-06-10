@@ -10,7 +10,7 @@ import { withProfile } from '../withProfile';
  * `Browse` page.
  * @method
  * @constructor
- * @return {JSXElement} component with children.
+ * @returns Component with children.
  */
 export const Browse = withProfile(() => {
     return (

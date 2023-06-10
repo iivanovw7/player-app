@@ -5,7 +5,7 @@
 import { style } from '@vanilla-extract/css';
 import { em, margin, padding } from 'polished';
 
-import { imgStyles, mixins, theme, vars, buttonStyles, linkStyles } from '@/shared/ui/styles';
+import { buttonStyles, imgStyles, linkStyles, mixins, theme, vars } from '@/shared/ui/styles';
 
 const form = style([
     padding(20, 0, 30),

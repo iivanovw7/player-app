@@ -2,7 +2,7 @@
  * Module contains `not found` page.
  * @module src/pages/NotFound/NotFound
  */
-import { Page, ErrorCodeMap, ErrorScreen } from '@/shared';
+import { ErrorCodeMap, ErrorScreen, Page } from '@/shared';
 import { Header } from '@/widgets';
 
 const { NOT_FOUND } = ErrorCodeMap;
@@ -16,7 +16,7 @@ const MESSAGES = {
  * `404` page.
  * @method
  * @constructor
- * @return {JSXElement} React component with children.
+ * @returns Ccomponent with children.
  */
 export const NotFound = () => (
     <Page>

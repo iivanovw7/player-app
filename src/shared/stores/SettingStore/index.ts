@@ -4,7 +4,7 @@
  */
 import type { TProfile } from '#/api/basic-api';
 
-import { getUserLocale, type Locale } from '../../translations';
+import { type Locale, getUserLocale } from '../../translations';
 
 declare global {
     interface IGlobalStore {
@@ -33,7 +33,7 @@ export type SettingsStore = {
 
 /**
  *  Creates settings store instance.
- *  @return {SettingsStore} store, containing state and action.
+ *  @returns {SettingsStore} store, containing state and action.
  */
 const createSettingsStore = (): SettingsStore => {
     const [state, setState] = createStore<SettingsSoreState>({

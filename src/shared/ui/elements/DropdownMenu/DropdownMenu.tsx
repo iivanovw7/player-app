@@ -10,7 +10,7 @@ import { CLOSE_DELAY, ItemType, OPEN_DELAY } from './constants';
 import { MenuItems, type TMenuItem } from './ui';
 
 export type DropdownMenuProps = {
-    children?: JSXElement[] | JSXElement;
+    children?: JSXElement | JSXElement[];
     classes?: {
         arrowFloating?: string,
         arrowToggle?: string,
@@ -24,7 +24,7 @@ export type DropdownMenuProps = {
     onClose?: () => void;
     withArrowFloating?: boolean;
     withArrowToggle?: boolean;
-} & Pick<DropdownMenuRootProps, 'shift' | 'placement' | 'gutter'>;
+} & Pick<DropdownMenuRootProps, 'gutter' | 'placement' | 'shift'>;
 
 /**
  * Creates `DropdownMenu` component.
@@ -32,7 +32,7 @@ export type DropdownMenuProps = {
  * @name src/shared/ui/elements/DropdownMenu/DropdownMenu
  * @method
  * @param {object} props - contains component props.
- * @return {JSXElement} React component with children.
+ * @returns Component with children.
  */
 export const DropdownMenu = (props: DropdownMenuProps) => {
     const [toggleRef, setToggleRef] = createSignal<HTMLButtonElement>();
@@ -61,16 +61,16 @@ export const DropdownMenu = (props: DropdownMenuProps) => {
 
     return (
         <Dropdown.Root
-            open={isOpen()}
-            shift={props.shift}
-            placement={props.placement}
             gutter={props.gutter}
-            onOpenChange={setIsOpen}
             modal={false}
+            open={isOpen()}
+            placement={props.placement}
+            shift={props.shift}
+            onOpenChange={setIsOpen}
         >
             <Dropdown.Trigger
-                class={props.classes?.toggle}
                 ref={setToggleRef}
+                class={props.classes?.toggle}
             >
                 {props.children}
                 <Show when={props.withArrowToggle}>

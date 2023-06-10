@@ -8,7 +8,7 @@ import { createHtmlPlugin } from 'vite-plugin-html';
 /**
  * Vite html config plugin configuration.
  * @param {boolean} isBuild - if running in build mode.
- * @return {Object} html plugin instance.
+ * @returns {Object} html plugin instance.
  */
 export const configHtmlPlugin = (isBuild: boolean) => {
     return createHtmlPlugin({

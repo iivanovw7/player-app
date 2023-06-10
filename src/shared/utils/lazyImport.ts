@@ -7,8 +7,8 @@ import { isString } from './lang';
 
 /**
  * Named lazy imports, wrapper around solid js `lazy`.
- * @param {Function} loader - component loader.
- * @return {Object} new Proxy object containing solid lazy loader method.
+ * @param loader - component loader.
+ * @returns new Proxy object containing solid lazy loader method.
  */
 export const lazyImport = <T extends AnyObject, U extends keyof T>(loader: (componentName?: string) => Promise<T>) => {
     return new Proxy({} as unknown as T, {

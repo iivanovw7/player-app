@@ -13,5 +13,4 @@ export const PIN_LENGTH = 4;
  * Default Pin Code.
  * @type {number}
  */
-export const DEFAULT_PIN = new Array(PIN_LENGTH)
-    .fill('');
+export const DEFAULT_PIN = new Array(PIN_LENGTH).fill('');

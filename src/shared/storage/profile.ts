@@ -4,7 +4,7 @@
  */
 import type { TProfile } from '#/api/basic-api';
 
-import { storage, setStorage, StorageKey } from './storage';
+import { StorageKey, setStorage, storage } from './storage';
 
 /**
  * Saves new user profile.
@@ -16,7 +16,7 @@ export const setLocalProfile = (profile: Nullable<TProfile>): void => {
 
 /**
  * Retrieves user profile out of local storage.
- * @return {Object | null} - user profile.
+ * @returns {Object | null} - user profile.
  */
 export const getLocalProfile = (): Nullable<TProfile> => {
     return (storage[StorageKey.profile] || null) as Nullable<TProfile>;

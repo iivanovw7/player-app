@@ -6,7 +6,7 @@ import { isNumber } from 'ramda-adjunct';
 
 import type { TProfile } from '#/api/basic-api';
 
-import { Img, Spinner, Overlay } from '../../elements';
+import { Img, Overlay, Spinner } from '../../elements';
 
 import { withAvatarPlaceholder } from './lib';
 import { styles } from './WaitScreen.css';
@@ -21,10 +21,10 @@ export type WaitScreenProps = {
  * @name src/shared/ui/components/WaitScreen/WaitScreen
  * @constructor
  * @param {WaitScreenProps} props - component properties.
- * @return {JSXElement} component with children.
+ * @returns component with children.
  */
 export const WaitScreen = (props: WaitScreenProps) => (
-    <Overlay class={styles.overlay} lockScroll>
+    <Overlay lockScroll class={styles.overlay}>
         <Spinner
             class={styles.spinner}
             containerClass={styles.spinnerContainer}

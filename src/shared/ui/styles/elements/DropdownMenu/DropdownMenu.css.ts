@@ -4,7 +4,7 @@
  */
 
 import { globalStyle, style } from '@vanilla-extract/css';
-import { rem, margin, padding, transitions, triangle } from 'polished';
+import { margin, padding, rem, transitions, triangle } from 'polished';
 
 import { theme } from '../../theme.css';
 import { vars } from '../../vars.css';

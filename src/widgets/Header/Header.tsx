@@ -5,7 +5,7 @@
 
 import type { TProfile } from '#/api/basic-api';
 import { ProfileLock } from '@/entities';
-import { Navigation, Notifications, Search, Menu } from '@/features';
+import { Menu, Navigation, Notifications, Search } from '@/features';
 import { Img, isValidCode, profilesStore } from '@/shared';
 
 import Logo from '../../../assets/img/logo-v7.png?w=200&png&imagetools';
@@ -22,7 +22,7 @@ export type HeaderProps = {
  * @method
  * @name src/widgets/Header/Header
  * @param {HeaderProps} props - contains component props.
- * @return {JSXElement} React component with children.
+ * @returns Component with children.
  * @constructor
  */
 export const Header = (props: HeaderProps) => {
@@ -30,20 +30,20 @@ export const Header = (props: HeaderProps) => {
 
     /**
      *  If header has no navigation or menu.
-     *  @return {boolean} is empty.
+     *  @returns {boolean} is empty.
      */
     const isEmpty = () => ! props.withNavigation && ! props.withMenu;
 
     /**
      *  If header has navigation block
-     *  @return {boolean} has navigation.
+     *  @returns {boolean} has navigation.
      */
     const hasNavigation = () => !! profilesStore.state.active && props.withNavigation;
 
     /**
      * Profile click handler.
      * @param {TProfile} newProfile - new profile to unlock.
-     * @return {Function} profile unlock method.
+     * @returns {Function} profile unlock method.
      */
     const handleClick = async (newProfile: TProfile) => {
         const { lock } = newProfile;

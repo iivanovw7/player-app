@@ -14,7 +14,7 @@ export type FormFieldProps = InputProps;
  * @method
  * @name src/features/Login/ui/FormField/FormField
  * @param {FormFieldProps} props - contains component props.
- * @return {JSXElement} React component with children.
+ * @returns Component with children.
  * @constructor
  */
 export const FormField = (props: FormFieldProps) => {
@@ -30,13 +30,13 @@ export const FormField = (props: FormFieldProps) => {
                     label: styles.label,
                 }}
                 control={props.control}
+                hasWarning={props.hasWarning}
                 inputProps={props.inputProps}
                 label={props.label}
-                value={props.value}
                 validate={props.validate}
-                hasWarning={props.hasWarning}
-                onFocusOut={props.onFocusOut}
+                value={props.value}
                 onChange={props.onChange}
+                onFocusOut={props.onFocusOut}
             />
         </div>
     );

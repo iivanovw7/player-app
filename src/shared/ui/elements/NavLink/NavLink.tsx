@@ -21,24 +21,24 @@ export type NavLinkProps = {
  * @method
  * @name src/shared/ui/elements/NavLink/NavLink
  * @param {object} props - contains component props.
- * @return {JSXElement} component with children.
+ * @returns Component with children.
  */
 export const NavLink = (props: NavLinkProps) => {
     /**
      * Path matcher
      * @param {string} path - path to be matched with.
-     * @return {Accessor<PathMatch | undefined>} router match result.
+     * @returns {Accessor<PathMatch | undefined>} router match result.
      */
     const match = (path: string) => useMatch(() => path)();
 
     return (
-        <Show when={! props.disabled} fallback={<NavLink.DisabledLink {...props} />}>
+        <Show fallback={<NavLink.DisabledLink {...props} />} when={! props.disabled}>
             <A
                 ref={props.ref}
                 class={props.class}
-                href={props.href}
                 data-active={!! match(props.href)}
                 data-disabled={props.disabled}
+                href={props.href}
                 style={props.style}
             >
                 <span class={props.textClass}>

@@ -8,7 +8,7 @@
  * @template Data
  * @param {Data} [data] - represents resolve data structure.
  * @param {number} [delay = 600] - timeout delay.
- * @return {Promise.<any>} promise object.
+ * @returns {Promise.<any>} promise object.
  */
 export const wait = async <Data>(data?: Data, delay = 600): Promise<unknown> => {
     // eslint-disable-next-line no-promise-executor-return

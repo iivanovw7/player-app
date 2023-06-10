@@ -5,7 +5,7 @@
 import { style } from '@vanilla-extract/css';
 import { em, margin, padding, position } from 'polished';
 
-import { imgStyles, mixins, theme, vars, linkStyles } from '@/shared/ui/styles';
+import { imgStyles, linkStyles, mixins, theme, vars } from '@/shared/ui/styles';
 
 const page = style([
     {
@@ -195,8 +195,8 @@ export const styles = {
     footer,
     footerLink,
     footerLinkItem,
-    footerLinks,
     footerLinkText,
+    footerLinks,
     footerTop,
     footerWrapper,
     header,

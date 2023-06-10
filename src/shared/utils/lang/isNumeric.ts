@@ -9,7 +9,7 @@ import { identical, not, pipe } from 'ramda';
  * Checks if input value is Numeric.
  * @func isNumeric
  * @category Lang
- * @return {boolean}
+ * @returns {boolean}
  */
 export const isNumeric = pipe(
     (value?: unknown) => Number(value),

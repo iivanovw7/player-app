@@ -26,19 +26,19 @@ export type CreateAxiosOptions = AxiosRequestConfig & {
 export abstract class AxiosTransform {
     public beforeRequestHook?: (config: AxiosRequestConfig, options: RequestOptions) => AxiosRequestConfig;
 
-    public transformResponseHook?: (res: AxiosResponse<Result>, options: RequestOptions) => any;
-
     public requestCatchHook?: (e: AxiosError, options: RequestOptions) => Promise<any>;
 
     public requestInterceptors?: (config: InternalAxiosRequestConfig,
         options: CreateAxiosOptions,
     ) => InternalAxiosRequestConfig;
 
-    public responseInterceptors?: (res: AxiosResponse<any>) => AxiosResponse<any>;
-
     public requestInterceptorsCatch?: (error: AxiosError) => void;
 
+    public responseInterceptors?: (res: AxiosResponse<any>) => AxiosResponse<any>;
+
     public responseInterceptorsCatch?: (axiosInstance: AxiosInstance, error: AxiosError) => any;
+
+    public transformResponseHook?: (res: AxiosResponse<Result>, options: RequestOptions) => any;
 }
 
 /* eslint-enable @typescript-eslint/no-explicit-any */

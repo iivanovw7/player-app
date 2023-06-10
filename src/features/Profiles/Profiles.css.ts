@@ -5,7 +5,7 @@
 
 import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
-import { animation, rem, margin, padding, position } from 'polished';
+import { animation, margin, padding, position, rem } from 'polished';
 
 import { buttonStyles, mixins, theme, vars } from '@/shared/ui/styles';
 

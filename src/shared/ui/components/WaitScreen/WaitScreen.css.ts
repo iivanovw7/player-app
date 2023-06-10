@@ -5,7 +5,7 @@
 
 import { style } from '@vanilla-extract/css';
 
-import { mixins, theme, imgStyles, vars, spinnerStyles } from '../../styles';
+import { imgStyles, mixins, spinnerStyles, theme, vars } from '../../styles';
 
 const overlay = style({
     background: theme.background.overlayDark,

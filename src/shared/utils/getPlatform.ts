@@ -17,7 +17,7 @@ export type NavigatorUAData = {
 
 /**
  *  Gets current platform.
- *  @return {string} platform name.
+ *  @returns {string} platform name.
  */
 export const getPlatform = (): string => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -34,7 +34,7 @@ export const getPlatform = (): string => {
 
 /**
  *  Gets current userAgent.
- *  @return {string} userAgent name.
+ *  @returns {string} userAgent name.
  */
 export const getUserAgent = (): string => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -3,13 +3,13 @@
  * @module src/app/providers/withWaitScreen
  */
 
-import { settingsStore, WaitScreen } from '@/shared';
+import { WaitScreen, settingsStore } from '@/shared';
 
 /**
  * Application wait screen HOC component.
  * @constructor
- * @param {Component} Cmp - represents child component.
- * @return {Component} component with children.
+ * @param Cmp - represents child component.
+ * @returns component with children.
  */
 export const withWaitScreen = (Cmp: Component) => (props) => (
     <>

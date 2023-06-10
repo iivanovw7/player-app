@@ -3,10 +3,10 @@
  */
 
 import {
+    VALIDATION_ERRORS,
+    VALIDATION_SCHEMAS,
     validateField,
     validateForm,
-    VALIDATION_SCHEMAS,
-    VALIDATION_ERRORS,
     yup
 } from '../../../src/shared/utils';
 

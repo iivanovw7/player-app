@@ -28,7 +28,7 @@ export type ValidateFieldParams<Value = unknown, Context = AnyObject> = {
  * @category Validation
  * @param {ValidateFieldParams} params - validation params.
  * @see {@link https://github.com/jquense/yup}
- * @return {string | null} validation error string or null.
+ * @returns {string | null} validation error string or null.
  */
 export const validateField = (params: ValidateFieldParams) => {
     const { schema, value, options } = params;
@@ -54,7 +54,7 @@ export const validateField = (params: ValidateFieldParams) => {
  * @see {@link https://github.com/jquense/yup}
  * @param {FormData} formData - object represents data to validate.
  * @param {ValidateOptions} options - validation options.
- * @return {string | null} validated data.
+ * @returns {string | null} validated data.
  */
 export const validateForm = <FormData>(
     schema: yup.AnySchema,
@@ -70,7 +70,7 @@ export const validateForm = <FormData>(
  * @func isValidationError
  * @param {unknown} error - error object.
  * @category Validation
- * @return {boolean} if error is validation error.
+ * @returns {boolean} if error is validation error.
  */
 export const isValidationError = (error: unknown): error is ValidationError => {
     return error instanceof yup.ValidationError;
@@ -108,7 +108,7 @@ export const VALIDATION_SCHEMAS = {
     /**
      * Creates string length validation schema with `min` and `max` length.
      * @function
-     * @return {yup.StringSchema} validation schema.
+     * @returns {yup.StringSchema} validation schema.
      */
     STRING_LENGTH_BETWEEN: (min: number, max: number) => {
         return yup

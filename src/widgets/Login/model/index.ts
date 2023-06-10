@@ -6,8 +6,8 @@
 import type { TBasicApiError } from '#/api/basic-api';
 import type { ErrorData, Validate } from '@/shared';
 import {
-    authStore,
     ErrorCodeMap,
+    authStore,
     getErrorCode,
     getLogger,
     makeApiRequest,
@@ -15,7 +15,7 @@ import {
     withLocalStore
 } from '@/shared';
 
-import { validateFormField, validateFormData } from '../lib/validation';
+import { validateFormData, validateFormField } from '../lib/validation';
 
 type LoginFormValidation = {
     password: Validate<'password'>;
@@ -70,7 +70,7 @@ const INITIAL_VALIDATION: LoginFormValidation = {
 
 /**
  *  Login store constructor.
- *  @return {Store} returns store instance.
+ *  @returns {Store} returns store instance.
  */
 export const createLoginStore = (): CreateLoginStore => {
     const [state, setState] = createStore<LoginState>({

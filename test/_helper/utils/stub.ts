@@ -12,12 +12,12 @@ import { toArray } from '../../../src/shared/utils';
  * @param {function | function[]} methods - method to stub or collection of methods.
  * @param {Object} target - reference to a target module.
  * @param {any | function} implementation - custom method implementation.
- * @return {Mock | Object.<string, Mock>} - single stub or object, containing stubs.
+ * @returns {Mock | Object.<string, Mock>} - single stub or object, containing stubs.
  */
 export const stubMethod = (
     methods: string | string[],
     target: any,
-    implementation?: unknown | (() => unknown)
+    implementation?: (() => unknown) | unknown
 ): any => {
     const methodList = toArray(methods);
     const stub: Record<string, AnyObject> = {};
@@ -84,7 +84,7 @@ export const verifyCall = (stub: Mock | Mock[], props: { args: unknown | unknown
 
 /**
  * Resets all stub methods.
- * @return {void}
+ * @returns {void}
  */
 export const resetStub: () => void = () => vi.resetAllMocks();
 

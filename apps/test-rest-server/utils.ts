@@ -21,7 +21,7 @@ export class Result {
     /**
      * Successful server response.
      * @param {*} data - result data.
-     * @return {Object} response - response data.
+     * @returns {Object} response - response data.
      */
     static success<Data>(data: Data): TBasicApiResult<Data> {
         return resultSuccess(data);
@@ -29,7 +29,7 @@ export class Result {
 
     /**
      * Not found Error.
-     * @return {Object} response - response data.
+     * @returns {Object} response - response data.
      */
     static notFoundError(message = 'Not Found'): TBasicApiResult<null> {
         return resultError(4004, {
@@ -39,7 +39,7 @@ export class Result {
 
     /**
      * Forbidden server error.
-     * @return {Object} response - response data.
+     * @returns {Object} response - response data.
      */
     static forbiddenError(message = 'Forbidden'): TBasicApiResult<null> {
         return resultError(4003, {
@@ -49,7 +49,7 @@ export class Result {
 
     /**
      * Authorization server error.
-     * @return {Object} response - response data.
+     * @returns {Object} response - response data.
      */
     static authorizationError(): TBasicApiResult<null> {
         return resultError(4001, {

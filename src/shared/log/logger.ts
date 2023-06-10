@@ -3,7 +3,7 @@
  * @module src/shared/log/logger
  */
 
-import type { Logger, LogLevel as LogLevelOptions, LogLevelDesc } from 'loglevel';
+import type { LogLevelDesc, LogLevel as LogLevelOptions, Logger } from 'loglevel';
 import logger from 'loglevel';
 
 /**
@@ -33,6 +33,6 @@ export const setLogLevel = (level: LogLevelDesc): void => {
 /**
  * Creates new logger object.
  * @param {string} [loggerName=''] - new logger name.
- * @return {Object} new logger object.
+ * @returns {Object} new logger object.
  */
 export const getLogger = (loggerName: string): Logger => logger.getLogger(loggerName || '');

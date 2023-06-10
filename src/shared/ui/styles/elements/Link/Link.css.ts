@@ -4,7 +4,7 @@
  */
 
 import { recipe } from '@vanilla-extract/recipes';
-import { ellipsis, rem, margin, transitions } from 'polished';
+import { ellipsis, margin, rem, transitions } from 'polished';
 
 import type { Color } from '#/styles';
 
@@ -15,7 +15,7 @@ import { vars } from '../../vars.css';
  * Gets link color styles.
  * @param {Color} type - color scheme type.
  * @param {boolean} noHoverAccent - if hover accent is enabled.
- * @return {CSSRule} returns color styles.
+ * @returns {CSSRule} returns color styles.
  */
 const getColor = (type: Color, noHoverAccent?: boolean) => ({
     color: theme[type].linkText,

@@ -11,8 +11,7 @@
             "jsdom",
             "ramda",
             "vite/client",
-            "vite-plugin-svg-icons",
-            "vitest/global"
+            "vitest/globals"
         ],
         "paths": {
             "/@/*": ["src/*"],

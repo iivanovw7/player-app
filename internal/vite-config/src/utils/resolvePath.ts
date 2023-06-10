@@ -10,7 +10,7 @@ export const root = process.cwd();
 /**
  * Path resolver.
  * @param {string} pathname - module path.
- * @return {string} resolved path.
+ * @returns {string} resolved path.
  */
 export const pathResolve = (pathname: string) => {
     return resolve(root, '.', pathname);

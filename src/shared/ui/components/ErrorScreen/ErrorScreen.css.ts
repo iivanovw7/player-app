@@ -6,7 +6,7 @@
 import { style } from '@vanilla-extract/css';
 import { em, padding } from 'polished';
 
-import { theme, buttonStyles, vars } from '../../styles';
+import { buttonStyles, theme, vars } from '../../styles';
 
 const title = style([
     {

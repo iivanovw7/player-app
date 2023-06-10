@@ -15,7 +15,7 @@ export type PageProps = {
  * @name src/shared/ui/components/Page/Page
  * @param {ErrorScreenProps} props - represents component properties.
  * @constructor
- * @return {JSXElement} React component with children.
+ * @returns Component with children.
  */
 export const Page = (props: PageProps) => (
     <div class={styles.page}>

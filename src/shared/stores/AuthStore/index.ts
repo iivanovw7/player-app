@@ -8,8 +8,8 @@ import type { TLoginData } from '#/api/basic-api';
 
 import { authApi } from '../../api/http/basic-api-auth';
 import { getLogger } from '../../log';
-import { setAccessToken, getAccessToken } from '../../storage';
-import { makeApiRequest, MILLISECONDS_IN_MINUTE } from '../../utils';
+import { getAccessToken, setAccessToken } from '../../storage';
+import { MILLISECONDS_IN_MINUTE, makeApiRequest } from '../../utils';
 
 declare global {
     interface IGlobalStore {
@@ -36,7 +36,7 @@ const logger = getLogger('AuthStore');
 
 /**
  *  Creates auth store instance.
- *  @return {AuthStore} store, containing state and action.
+ *  @returns {AuthStore} store, containing state and action.
  */
 const createAuthStore = (): AuthStore => {
     const [state, setState] = createStore<AuthStoreState>({

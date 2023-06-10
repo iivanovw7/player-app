@@ -34,7 +34,7 @@ const logger = getLogger('Profile lock store');
 
 /**
  *  Profile lock store constructor.
- *  @return {Store} returns store instance.
+ *  @returns {Store} returns store instance.
  */
 export const createProfileLockStore = (): CreateProfileLockStore => {
     const [state, setState] = createStore<ProfileLockState>({
@@ -46,13 +46,15 @@ export const createProfileLockStore = (): CreateProfileLockStore => {
 
     /**
      * Compares lock value and current pin, returns boolean value.
-     * @return {boolean} true is pin is correct.
+     * @returns {boolean} true is pin is correct.
      */
     const isCorrect = () => equals(state.lock, state.pin);
 
     const actions: ProfileLockActions = {
+
         /**
          *  Submits current pin code to verify result.
+         *  @returns async submit request.
          */
         onSubmit: async () => makeApiRequest({
             onRequestError: (errorData: unknown) => {

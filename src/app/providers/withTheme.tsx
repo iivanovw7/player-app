@@ -9,8 +9,8 @@ import { setThemeClassName } from './lib';
 /**
  * Application theme HOC component.
  * @constructor
- * @param {Component} Cmp - represents child component.
- * @return {Component} Component with children.
+ * @param Cmp - represents child component.
+ * @returns Component with children.
  */
 export const withTheme = (Cmp: Component) => (props) => {
     onMount(() => {

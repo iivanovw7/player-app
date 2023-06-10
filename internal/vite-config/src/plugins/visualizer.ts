@@ -8,7 +8,7 @@ import { type PluginOption } from 'vite';
 
 /**
  * Bundle visualizer configuration.
- * @return {Object} visualizer instance.
+ * @returns {Object} visualizer instance.
  */
 export const configVisualizerConfig = () => {
     return visualizer({

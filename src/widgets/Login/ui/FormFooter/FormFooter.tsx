@@ -12,7 +12,7 @@ import { styles } from './FormFooter.css';
  * FormFooter component.
  * @method
  * @name src/features/Login/ui/FormFooter/FormFooter
- * @return {JSXElement} React component with children.
+ * @returns Component with children.
  * @constructor
  */
 export const FormFooter = () => {

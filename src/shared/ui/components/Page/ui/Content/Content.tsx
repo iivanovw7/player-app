@@ -30,7 +30,7 @@ const background = cond([
  * @name src/shared/ui/components/Page/ui/Content/Content
  * @param {ContentProps} props - represents component properties.
  * @constructor
- * @return {JSXElement} React component with children.
+ * @returns Component with children.
  */
 export const Content = (props: ContentProps) => (
     <div

@@ -45,12 +45,12 @@ export class AxiosClient {
         this.setupInterceptors();
     }
 
-    private getTransform() {
-        return this.options.transform;
-    }
-
     private createAxios(config: CreateAxiosOptions): void {
         this.axiosInstance = axios.create(config);
+    }
+
+    private getTransform() {
+        return this.options.transform;
     }
 
     private setupInterceptors() {
@@ -100,10 +100,6 @@ export class AxiosClient {
         }
     }
 
-    public getAxios(): AxiosInstance {
-        return this.axiosInstance;
-    }
-
     /**
      * Reconfigure axios.
      * @param {CreateAxiosOptions} config - config instance.
@@ -112,52 +108,16 @@ export class AxiosClient {
         this.createAxios(config);
     }
 
-    public setHeader(headers: any): void {
-        if (this.axiosInstance) {
-            Object.assign(this.axiosInstance.defaults.headers, headers);
-        }
-    }
-
-    public uploadFile<T = any>(config: AxiosRequestConfig, params: UploadFileParams) {
-        const formData = new window.FormData();
-        const customFilename = params.name || 'file';
-
-        if (params.filename) {
-            formData.append(customFilename, params.file, params.filename);
-        }
-        else {
-            formData.append(customFilename, params.file);
-        }
-
-        if (params.data) {
-            Object.keys(params.data).forEach((key) => {
-                const value = params.data![key];
-
-                if (Array.isArray(value)) {
-                    value.forEach((item) => {
-                        formData.append(`${key}[]`, item as string | Blob);
-                    });
-
-                    return;
-                }
-
-                formData.append(key, params.data![key]);
-            });
-        }
-
-        return this.axiosInstance.request<T>({
-            ...config,
-            data: formData,
-            headers: {
-                'Content-type': ContentType.FORM_DATA,
-                ignoreCancelToken: true,
-            },
-            method: 'POST',
-        });
+    public delete<T = any>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
+        return this.request({ ...config, method: RequestMethod.DELETE }, options);
     }
 
     public get<T = any>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
         return this.request({ ...config, method: RequestMethod.GET }, options);
+    }
+
+    public getAxios(): AxiosInstance {
+        return this.axiosInstance;
     }
 
     public post<T = any>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
@@ -166,10 +126,6 @@ export class AxiosClient {
 
     public put<T = any>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
         return this.request({ ...config, method: RequestMethod.PUT }, options);
-    }
-
-    public delete<T = any>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
-        return this.request({ ...config, method: RequestMethod.DELETE }, options);
     }
 
     public request<T = any>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
@@ -211,7 +167,7 @@ export class AxiosClient {
                         resolve(res as unknown as Promise<T>);
                     }
                 })
-                .catch((errorData: Error | AxiosError) => {
+                .catch((errorData: AxiosError | Error) => {
                     if (requestCatchHook && isFunction(requestCatchHook)) {
                         reject(requestCatchHook(errorData as AxiosError, opt));
                     }
@@ -223,6 +179,50 @@ export class AxiosClient {
                         reject(errorData);
                     }
                 });
+        });
+    }
+
+    public setHeader(headers: any): void {
+        if (this.axiosInstance) {
+            Object.assign(this.axiosInstance.defaults.headers, headers);
+        }
+    }
+
+    public uploadFile<T = any>(config: AxiosRequestConfig, params: UploadFileParams) {
+        const formData = new window.FormData();
+        const customFilename = params.name || 'file';
+
+        if (params.filename) {
+            formData.append(customFilename, params.file, params.filename);
+        }
+        else {
+            formData.append(customFilename, params.file);
+        }
+
+        if (params.data) {
+            Object.keys(params.data).forEach((key) => {
+                const value = params.data![key];
+
+                if (Array.isArray(value)) {
+                    value.forEach((item) => {
+                        formData.append(`${key}[]`, item as Blob | string);
+                    });
+
+                    return;
+                }
+
+                formData.append(key, params.data![key]);
+            });
+        }
+
+        return this.axiosInstance.request<T>({
+            ...config,
+            data: formData,
+            headers: {
+                'Content-type': ContentType.FORM_DATA,
+                ignoreCancelToken: true,
+            },
+            method: 'POST',
         });
     }
 }

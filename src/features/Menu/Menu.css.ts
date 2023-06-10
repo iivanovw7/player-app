@@ -3,16 +3,16 @@
  * @module src/features/Menu/Menu.css.ts
  */
 import { style } from '@vanilla-extract/css';
-import { rem, padding, em, margin } from 'polished';
+import { em, margin, padding, rem } from 'polished';
 
 import {
-    imgStyles,
-    linkStyles,
     buttonStyles,
     dropdownMenuStyles,
-    vars,
     iconStyles,
-    theme
+    imgStyles,
+    linkStyles,
+    theme,
+    vars
 } from '@/shared/ui/styles';
 
 const menu = style([

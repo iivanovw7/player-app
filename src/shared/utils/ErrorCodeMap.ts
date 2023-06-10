@@ -30,7 +30,7 @@ export type ErrorData = Partial<Readonly<{
  * Returns error message code.
  * @param {module:util/ErrorData | number} error
  *      Объект, представляющий сведения об ошибке, или код ошибки.
- * @return {number} error code.
+ * @returns {number} error code.
  */
 export const getErrorCode = (error: ErrorData | number = ErrorCodeMap.UNKNOWN_ERROR) => {
     return isNumber(error)
@@ -51,7 +51,7 @@ export const ERROR_PREFIX: Readonly<string> = 'NSES';
  * @function
  * @category ErrorCodeMap
  * @param {Object | number} error - code or error object.
- * @return {string} error code message.
+ * @returns {string} error code message.
  */
 export const getErrorCodeString = (error: ErrorData | number = ErrorCodeMap.UNKNOWN_ERROR) => {
     return `${ERROR_PREFIX}-${getErrorCode(error as ErrorData)}`;

@@ -5,20 +5,20 @@
 
 import { Icon, type IconProps } from '../Icon';
 
-type ButtonAttributes = 'type'
-| 'id'
+type ButtonAttributes = 'id'
 | 'name'
-| 'title'
-| 'style'
+| 'onKeyDown'
 | 'onMouseEnter'
 | 'onMouseLeave'
-| 'onKeyDown';
+| 'style'
+| 'title'
+| 'type';
 
 export type ButtonProps = {
-    children?: JSXElement[] | JSXElement;
+    children?: JSXElement | JSXElement[];
     class?: string;
     customIcon?: JSXElement;
-    dataId?: string | number;
+    dataId?: number | string;
     disabled?: boolean;
     icon?: IconProps;
     iconClass?: string;
@@ -30,7 +30,7 @@ export type ButtonProps = {
     text?: JSXElement,
     textClass?: string;
     /** @default 'button' */
-    type?: 'button' | 'submit' | 'reset';
+    type?: 'button' | 'reset' | 'submit';
 } & Pick<JSX.HTMLElementTags['button'], ButtonAttributes>;
 
 /**
@@ -39,29 +39,29 @@ export type ButtonProps = {
  * @name src/shared/ui/elements/Button
  * @method
  * @param {ButtonProps} props - contains component props.
- * @return {JSXElement} React component with children.
+ * @returns Component with children.
  */
 export const Button = (props: ButtonProps) => {
     /**
      *  If button has text.
-     *  @return {boolean} hasText flag.
+     *  @returns {boolean} hasText flag.
      */
     const hasText = () => Boolean(props.text) || props.text === 0;
 
     return (
         <button
+            id={props.id}
             ref={props.setRef}
             class={props.class}
             data-id={props.dataId}
             disabled={props.disabled}
-            id={props.id}
             name={props.name}
+            style={props.style}
             title={props.title}
             type={props.type}
-            style={props.style}
             onClick={(eventData) => props.onClick?.(eventData)}
         >
-            <Show when={! props.isLoading} fallback={<span class={props.loaderClass} />}>
+            <Show fallback={<span class={props.loaderClass} />} when={! props.isLoading}>
                 {props.children}
                 {hasText() && (
                     <div class={props.textClass}>

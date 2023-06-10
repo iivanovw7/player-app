@@ -1,7 +1,7 @@
 /**
  * Module contains makeApiRequest tests
  */
-import { makeApiRequest, wait, noop } from '../../../src/shared/utils';
+import { makeApiRequest, noop, wait } from '../../../src/shared/utils';
 
 const onErrorMock = vi.fn();
 const onLoadingMock = vi.fn();

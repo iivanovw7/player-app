@@ -3,9 +3,9 @@
  * @module src/features/Navigation/Navigation.css
  */
 import { style } from '@vanilla-extract/css';
-import { rem, margin, padding } from 'polished';
+import { margin, padding, rem } from 'polished';
 
-import { buttonStyles, vars, navLinkStyles, dropdownMenuStyles } from '@/shared/ui/styles';
+import { buttonStyles, dropdownMenuStyles, navLinkStyles, vars } from '@/shared/ui/styles';
 
 const nav = style([
     {

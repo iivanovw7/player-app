@@ -6,7 +6,7 @@ import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 import { margin, rem, transitions } from 'polished';
 
-import { vars, theme, iconStyles, linkStyles, mixins } from '@/shared/ui/styles';
+import { iconStyles, linkStyles, mixins, theme, vars } from '@/shared/ui/styles';
 
 const profile = recipe({
     base: {
@@ -58,10 +58,10 @@ const profileImage = style({
     border: '2px solid transparent',
     borderRadius: vars.borderRadius['3x'],
     selectors: {
-        [`${profileLink}:hover &`]: {
+        [`${profileLink}:focus-visible &`]: {
             borderColor: vars.palette.white
         },
-        [`${profileLink}:focus-visible &`]: {
+        [`${profileLink}:hover &`]: {
             borderColor: vars.palette.white
         }
     },
@@ -95,10 +95,10 @@ const profileName = style([
         fontSize: '1.3vw',
         minHeight: rem(6),
         selectors: {
-            [`${profileLink}:hover &`]: {
+            [`${profileLink}:focus-visible &`]: {
                 color: vars.palette.white
             },
-            [`${profileLink}:focus-visible &`]: {
+            [`${profileLink}:hover &`]: {
                 color: vars.palette.white
             }
         },

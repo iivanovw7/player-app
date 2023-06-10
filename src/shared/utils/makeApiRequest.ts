@@ -26,7 +26,7 @@ const logger = getLogger('Request');
  * @func makeApiRequest
  * @category Request
  * @param {MakeApiRequestParams} params - object represents request parameters.
- * @return {Promise.<boolean | undefined>} The element found, or the default value.
+ * @returns {Promise.<boolean | undefined>} The element found, or the default value.
  */
 export const makeApiRequest = async <Req extends () => Promise<unknown>, Res = AsyncReturnType<Req>>(
     params: MakeApiRequestParams<Req>
@@ -46,7 +46,7 @@ export const makeApiRequest = async <Req extends () => Promise<unknown>, Res = A
 
         return await ((result ?? true) as unknown as Promise<Voidable<Res extends Maybe<void> ? true : Res>>);
     }
-    catch (errorData: any) { // eslint-disable-line @typescript-eslint/no-explicit-any
+    catch (errorData: unknown) {
         if (isValidationError(errorData)) {
             logger.error('[ValidationError]:', errorData.path, errorData.errors);
             onValidationError?.(errorData);

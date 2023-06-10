@@ -10,7 +10,7 @@ import { styles } from './Notifications.css';
  * Header Notifications component.
  * @method
  * @name src/features/Notifications/Notifications
- * @return {JSXElement} React component with children.
+ * @returns  Component with children.
  * @constructor
  */
 export const Notifications = () => (

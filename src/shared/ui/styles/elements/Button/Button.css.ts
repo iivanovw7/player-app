@@ -4,7 +4,7 @@
  */
 import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
-import { ellipsis, rem, padding, transitions } from 'polished';
+import { ellipsis, padding, rem, transitions } from 'polished';
 
 import type { Color } from '#/styles';
 
@@ -16,7 +16,7 @@ import { styles as iconStyles } from '../Icon';
 /**
  * Gets button full colors.
  * @param {Color} type - color scheme type.
- * @return {CSSStyleRule} - button color according to theme parameter.
+ * @returns {CSSStyleRule} - button color according to theme parameter.
  */
 const getFullColor = (type: Color) => ({
     backgroundColor: theme[type].button,
@@ -36,7 +36,7 @@ const getFullColor = (type: Color) => ({
 /**
  * Gets button fill none colors.
  * @param {Color} type - color scheme type.
- * @return {CSSStyleRule} - button color according to theme parameter.
+ * @returns {CSSStyleRule} - button color according to theme parameter.
  */
 const getFillNoneColor = (type: Color) => ({
     backgroundColor: 'transparent',
@@ -57,7 +57,7 @@ const getFillNoneColor = (type: Color) => ({
 /**
  * Gets button outlined color none colors.
  * @param {Color} type - color scheme type.
- * @return {CSSStyleRule} - button color according to theme parameter.
+ * @returns {CSSStyleRule} - button color according to theme parameter.
  */
 const getOutlinedColor = (type: Color) => ({
     backgroundColor: 'transparent',

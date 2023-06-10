@@ -40,14 +40,17 @@ const logger = getLogger('ProfilesStore');
 
 /**
  *  Creates profiles store instance.
- *  @return {ProfilesSore} store, containing state and action.
+ *  @returns {ProfilesSore} store, containing state and action.
  */
 const createProfilesStore = (): ProfilesSore => {
     let availableOptions: Accessor<TProfile[]>;
 
     const [state, setState] = createStore<ProfilesSoreState>({
         active: getLocalProfile(),
-        /** Available options getter. */
+        /**
+         * Available options getter.
+         * @returns {Array<TProfile>} available options.
+         */
         get availableOptions() {
             return availableOptions();
         },
@@ -70,7 +73,7 @@ const createProfilesStore = (): ProfilesSore => {
      *  Changes global loader state.
      *  @private
      *  @param {TProfile} profile - profiles list.
-     *  @return {Function} loader control function.
+     *  @returns loader control function.
      */
     const setProfileLoader = (profile: Nullable<TProfile>) => (isLoading: boolean) => {
         if (isLoading) {
@@ -130,6 +133,7 @@ const createProfilesStore = (): ProfilesSore => {
              * Fetches available user`s profiles.
              * @param {Function} [setLoading] - set loading method.
              * @param {Function} [onRequestError] - set loading method.
+             * @returns load user profiles request.
              */
             loadProfiles: async () => {
                 return makeApiRequest({

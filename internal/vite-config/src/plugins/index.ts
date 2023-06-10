@@ -25,9 +25,8 @@ export type CreatePluginsParams = {
 };
 
 /**
- * Creates list of vite plugin instances
- * @param {CreatePluginsParams} params - plugin parameters.
- * @return {(PluginOption | PluginOption[])[]} plugins - list of plugins.
+ * Creates list of vite plugin instances.
+ * @returns list of plugins.
  */
 export const createPlugins = async (params: CreatePluginsParams) => {
     const { mode, command, compress, enableAnalyze } = params;
@@ -35,9 +34,9 @@ export const createPlugins = async (params: CreatePluginsParams) => {
     const isTest = mode === 'test';
     const isBuild = command === 'build';
 
-    const plugins: (PluginOption | PluginOption[])[] = [
+    const plugins: PluginOption[] = [
         solidPlugin(),
-        dynamicImport(),
+        dynamicImport() as PluginOption,
         vanillaExtractPlugin(),
     ];
 
@@ -52,7 +51,7 @@ export const createPlugins = async (params: CreatePluginsParams) => {
         configSvgIconsPlugin(isBuild),
         imagetools({
             include: `${pathResolve('assets/img/**/*.{jpeg,jpg,png,webp,gif}?')}/`,
-        }),
+        }) as PluginOption,
         fonts({
             custom: {
                 display: 'auto',

@@ -25,15 +25,15 @@ export type MenuItemBase<Type extends ItemType> = {
 };
 
 export type MenuItemButton = MenuItemBase<'button'> & Omit<
-LinkButtonProps, 'onClick' | 'disabled' | 'dataActive'
+LinkButtonProps, 'dataActive' | 'disabled' | 'onClick'
 >;
 
 export type MenuItemDivider = Omit<
-MenuItemBase<'divider'>, 'onClick' | 'disabled' | 'active' | 'text'
+MenuItemBase<'divider'>, 'active' | 'disabled' | 'onClick' | 'text'
 >;
 
 export type MenuItemNavLink = MenuItemBase<'navLink'> & Omit<
-LinkProps, 'onClick' | 'disabled' | 'dataActive'
+LinkProps, 'dataActive' | 'disabled' | 'onClick'
 >;
 
 export type TMenuItem = MenuItemButton | MenuItemDivider | MenuItemNavLink;
@@ -51,14 +51,14 @@ export type MenuItemProps = {
  * @method
  * @name scr/shared/ui/elements/DropdownMenu/ui/MenuItem
  * @param {object} props - contains component props.
- * @return {JSXElement} React component with children.
+ * @returns Component with children.
  */
 export const MenuItem = (props: MenuItemProps) => {
     const navigate = useNavigate();
 
     /**
      * Is `not` divider item.
-     * @return {boolean} is current item is not divider.
+     * @returns {boolean} is current item is not divider.
      */
     const isNotDivider = () => props.item.type !== ItemType.divider;
 
@@ -77,14 +77,14 @@ export const MenuItem = (props: MenuItemProps) => {
 
     return (
         <Show
-            when={isNotDivider()}
             fallback={<Dropdown.Separator class={props.item.class} />}
+            when={isNotDivider()}
         >
             <Dropdown.Item
+                closeOnSelect
+                class={props.class}
                 disabled={props.item.isDisabled}
                 onSelect={handleSelect}
-                class={props.class}
-                closeOnSelect
             >
                 <Switch>
                     <Match when={props.item.type === ItemType.navLink}>
