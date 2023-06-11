@@ -1,0 +1,3 @@
+[build]
+    publish = "build/dist"
+    command = "pnpm bootstrap && pnpm build"
