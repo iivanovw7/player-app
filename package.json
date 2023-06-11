@@ -17,6 +17,7 @@
         "build": "NODE_ENV=production pnpm vite build",
         "build:analyze": "pnpm vite build --mode analyze",
         "build:view": "pnpm run build && pnpm run view",
+        "build:test-server": "pnpm run build && pnpm run view",
         "commit": "git-cz",
         "clean": "rimraf pnpm-lock.yaml && rimraf package.lock.json && rimraf node_modules",
         "dev": "pnpm vite",
