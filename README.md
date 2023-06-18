@@ -2,7 +2,6 @@
 
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 [![semantic-release: angular](https://img.shields.io/badge/semantic--release-angular-e10079?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/570e136e-4a9e-4fcd-b73d-db6f0fbd66ab/deploy-status)](https://app.netlify.com/sites/netlify-express/deploys)
 
 In development. Will contain OTT media service website.
 
