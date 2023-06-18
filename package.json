@@ -17,7 +17,6 @@
         "build": "NODE_ENV=production pnpm vite build",
         "build:analyze": "pnpm vite build --mode analyze",
         "build:view": "pnpm run build && pnpm run view",
-        "build:test-server": "pnpm run build && pnpm run view",
         "commit": "git-cz",
         "clean": "rimraf pnpm-lock.yaml && rimraf package.lock.json && rimraf node_modules",
         "dev": "pnpm vite",
@@ -108,11 +107,12 @@
     },
     "packageManager": "pnpm@8.1.0",
     "engines": {
-        "node": ">=16.15.1",
-        "pnpm": ">=8.1.0"
+        "node": "=18.16.0",
+        "pnpm": "=8.6.2"
     },
     "release": {
         "branches": ["main"],
+        "repositoryUrl": "https://github.com/iivanovw7/player-app.git",
         "plugins": [
             "@semantic-release/commit-analyzer",
             "@semantic-release/release-notes-generator",
@@ -120,13 +120,14 @@
             [
                 "@semantic-release/changelog",
                 {
-                    "changelogFile": "docs/CHANGELOG.md"
+                    "changelogFile": "./CHANGELOG.md",
+                    "changelogTitle": "# Semantic Versioning Changelog"
                 }
             ],
             [
                 "@semantic-release/git",
                 {
-                    "assets": ["docs/CHANGELOG.md"]
+                    "assets": ["./CHANGELOG.md"]
                 }
             ]
         ]

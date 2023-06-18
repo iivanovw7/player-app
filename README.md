@@ -1,5 +1,3 @@
-
-
 ## player-app
 
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
@@ -83,7 +81,7 @@ Technologies used
    4. Determine whether the commit is a BREAKING CHANGES or not (by answering ‘y’ and fill up BREAKING CHANGES descriptions in the CLI).
    5. (Optional) Mentions the JIRA issue in (by answering ‘y’ and fill up the issue descriptions in the CLI).
 3. [feature-branch] Push remote branch `git push origin <feature-branch>`.
-4. [Github] Create a Pull Request to dev branch.
+4. Create a Pull Request to dev branch.
 
 - Running in dev mode: <br />
   `pnpm run dev` <br />
