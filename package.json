@@ -107,11 +107,12 @@
     },
     "packageManager": "pnpm@8.1.0",
     "engines": {
-        "node": ">=16.15.1",
-        "pnpm": ">=8.1.0"
+        "node": "=18.16.0",
+        "pnpm": "=8.6.2"
     },
     "release": {
         "branches": ["main"],
+        "repositoryUrl": "https://github.com/iivanovw7/player-app.git",
         "plugins": [
             "@semantic-release/commit-analyzer",
             "@semantic-release/release-notes-generator",
@@ -119,7 +120,8 @@
             [
                 "@semantic-release/changelog",
                 {
-                    "changelogFile": "./CHANGELOG.md"
+                    "changelogFile": "./CHANGELOG.md",
+                    "changelogTitle": "# Semantic Versioning Changelog"
                 }
             ],
             [
